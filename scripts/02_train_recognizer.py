@@ -31,7 +31,7 @@ from peft import LoraConfig, get_peft_model, TaskType
 DEVICE          = 'cuda:0'
 USE_BF16        = True
 USE_TF32        = True
-USE_FLASH_ATTN  = True
+USE_FLASH_ATTN  = os.getenv('USE_FLASH_ATTN', 'auto').lower()
 GRAD_CHECKPT    = False   # 48GB đủ → tắt để tăng tốc 30%
 SAVE_LIMIT      = 2
 DL_WORKERS      = 4
@@ -48,6 +48,22 @@ LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
 # ===== MODEL =====
 MODEL_ID = os.getenv('MODEL_ID', 'Qwen/Qwen3-VL-8B-Instruct')
+
+
+def get_attention_implementation() -> str:
+    if USE_FLASH_ATTN in ('0', 'false', 'no', 'off', 'sdpa'):
+        return 'sdpa'
+    try:
+        import flash_attn  # noqa: F401
+        return 'flash_attention_2'
+    except Exception:
+        if USE_FLASH_ATTN in ('1', 'true', 'yes', 'on', 'flash_attention_2'):
+            raise RuntimeError(
+                'USE_FLASH_ATTN requested but flash_attn is not importable. '
+                'Install flash-attn or set USE_FLASH_ATTN=0.'
+            )
+        print('[model] flash_attn not found; using SDPA attention fallback')
+        return 'sdpa'
 
 # ===== HYPERPARAMS (L40 48GB) =====
 BATCH_SIZE    = int(os.getenv('BATCH_SIZE',    '4'))
@@ -488,9 +504,13 @@ def load_model_and_processor():
     if processor.tokenizer.pad_token is None:
         processor.tokenizer.pad_token = processor.tokenizer.eos_token
 
-    load_kwargs = {'torch_dtype': torch.bfloat16, 'device_map': {'': DEVICE}}
-    if USE_FLASH_ATTN:
-        load_kwargs['attn_implementation'] = 'flash_attention_2'
+    attn_impl = get_attention_implementation()
+    load_kwargs = {
+        'torch_dtype': torch.bfloat16,
+        'device_map': {'': DEVICE},
+        'attn_implementation': attn_impl,
+    }
+    print(f'[model] attention={attn_impl}')
 
     try:
         model = Qwen3VLForConditionalGeneration.from_pretrained(MODEL_ID, **load_kwargs)
@@ -498,7 +518,7 @@ def load_model_and_processor():
     except Exception as e:
         raise RuntimeError(
             f'Cannot load {MODEL_ID}. '
-            'Try: pip install "transformers>=4.57.0" qwen-vl-utils'
+            'Try: pip install "transformers==4.57.1" qwen-vl-utils'
         ) from e
 
     if USE_TF32:

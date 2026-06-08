@@ -41,10 +41,10 @@ python -m pip install -U pip wheel setuptools
 bash scripts/install_env.sh
 ```
 
-Qwen3-VL cần `transformers>=4.57.0`. Nếu gặp lỗi import `Qwen3VLForConditionalGeneration`, chạy:
+Qwen3-VL cần `transformers==4.57.1` trong pipeline này. Nếu gặp lỗi import `Qwen3VLForConditionalGeneration`, chạy:
 
 ```bash
-pip install -U "transformers>=4.57.0" qwen-vl-utils
+pip install -U "transformers==4.57.1" qwen-vl-utils
 ```
 
 ## 4. Cấu hình Kaggle token

@@ -17,9 +17,9 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 # 2. HuggingFace ecosystem
 echo "[2/8] Installing HuggingFace ecosystem..."
 pip install \
-    "transformers>=4.57.0" \
-    "peft>=0.13.0" \
-    "accelerate>=0.30.0" \
+    "transformers==4.57.1" \
+    "peft==0.17.1" \
+    "accelerate>=1.0.0,<2.0.0" \
     "datasets>=2.20.0" \
     "huggingface_hub>=0.24.0" \
     "tokenizers>=0.20.0"

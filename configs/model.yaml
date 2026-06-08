@@ -44,7 +44,7 @@ yolo:
 # ===== QWEN3-VL RECOGNIZER =====
 qwen3:
   model_id: Qwen/Qwen3-VL-8B-Instruct
-  transformers_min_version: 4.57.0
+  transformers_version: 4.57.1
 
   # Processor
   min_pixels: 200704    # 256 * 28 * 28

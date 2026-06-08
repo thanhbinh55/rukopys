@@ -200,7 +200,7 @@ max_hkr = 50000  # không dùng quá nhiều để không lấn át Ukrainian da
 ### Cài đặt
 
 ```bash
-pip install "transformers>=4.57.0" "peft>=0.13.0" qwen-vl-utils
+pip install "transformers==4.57.1" "peft==0.17.1" qwen-vl-utils
 pip install flash-attn --no-build-isolation  # FA2 — PHẢI install riêng
 
 # Download model (sẽ cache tự động khi load)
@@ -486,7 +486,7 @@ Page inference:
 
 # Deep learning core
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
-pip install "transformers>=4.57.0" "peft>=0.13.0" "accelerate>=0.30.0"
+pip install "transformers==4.57.1" "peft==0.17.1" "accelerate>=1.0.0,<2.0.0"
 
 # Flash Attention 2 (bắt buộc cho L40 Ada Lovelace)
 pip install flash-attn --no-build-isolation

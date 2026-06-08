@@ -75,6 +75,7 @@ def print_toggles(silver_rows):
     print(f'  USE_HKR:    {os.getenv("USE_HKR", "1")}')
     print(f'  USE_PSEUDO: {os.getenv("USE_PSEUDO", "0")}')
     print(f'  CURRICULUM: {os.getenv("CURRICULUM", "0")}')
+    print(f'  USE_FLASH_ATTN: {os.getenv("USE_FLASH_ATTN", "auto")}')
     print()
     print('EFFECT')
     if effective_silver:

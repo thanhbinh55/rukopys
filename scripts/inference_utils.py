@@ -25,6 +25,7 @@ OCR_BATCH_INIT = int(os.getenv('OCR_BATCH', '8'))
 DEFAULT_CONF   = float(os.getenv('YOLO_CONF', '0.25'))
 DEFAULT_IOU    = float(os.getenv('YOLO_IOU', '0.45'))
 CLASSES        = ['handwritten','printed','formula','table','annotation','image','graph']
+USE_FLASH_ATTN = os.getenv('USE_FLASH_ATTN', 'auto').lower()
 
 SYSTEM_PROMPT = (
     "You are a specialized Ukrainian handwritten text recognition system. "
@@ -38,6 +39,22 @@ SYSTEM_PROMPT = (
 )
 
 log = logging.getLogger(__name__)
+
+
+def get_attention_implementation() -> str:
+    if USE_FLASH_ATTN in ('0', 'false', 'no', 'off', 'sdpa'):
+        return 'sdpa'
+    try:
+        import flash_attn  # noqa: F401
+        return 'flash_attention_2'
+    except Exception:
+        if USE_FLASH_ATTN in ('1', 'true', 'yes', 'on', 'flash_attention_2'):
+            raise RuntimeError(
+                'USE_FLASH_ATTN requested but flash_attn is not importable. '
+                'Install flash-attn or set USE_FLASH_ATTN=0.'
+            )
+        log.warning('[ocr] flash_attn not found; using SDPA attention fallback')
+        return 'sdpa'
 
 
 # ─────────────────────────────────────────────
@@ -227,11 +244,13 @@ def load_qwen3_model(art: Path = ART):
         max_pixels=1280 * 28 * 28,
     )
 
+    attn_impl = get_attention_implementation()
     load_kw = dict(
         torch_dtype=torch.bfloat16,
-        attn_implementation='flash_attention_2',
+        attn_implementation=attn_impl,
         device_map={'': DEVICE},
     )
+    log.info(f'[ocr] attention={attn_impl}')
 
     try:
         model = Qwen3VLForConditionalGeneration.from_pretrained(model_id, **load_kw)
@@ -239,7 +258,7 @@ def load_qwen3_model(art: Path = ART):
     except Exception as e:
         raise RuntimeError(
             f'Cannot load Qwen3-VL model: {model_id}. '
-            'Install transformers>=4.57.0 and qwen-vl-utils.'
+            'Install transformers==4.57.1 and qwen-vl-utils.'
         ) from e
 
     # Merge LoRA
