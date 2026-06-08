@@ -144,6 +144,7 @@ export USE_HKR=${USE_HKR:-1}
 export USE_PSEUDO=${USE_PSEUDO:-0}
 export CURRICULUM=${CURRICULUM:-0}
 export USE_FLASH_ATTN=${USE_FLASH_ATTN:-auto}
+export PYTORCH_CUDA_ALLOC_CONF=${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}
 export TOKENIZERS_PARALLELISM=false
 export YOLO_CONFIG_DIR=$HOME/.config/Ultralytics
 export PYTHONPATH=$ROOT:$ROOT/scripts:\${PYTHONPATH:-}

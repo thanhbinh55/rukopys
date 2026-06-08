@@ -27,12 +27,14 @@ from transformers import (
 )
 from peft import LoraConfig, get_peft_model, TaskType
 
+Image.MAX_IMAGE_PIXELS = None
+
 # ===== HARDWARE CONSTANTS =====
 DEVICE          = 'cuda:0'
 USE_BF16        = True
 USE_TF32        = True
 USE_FLASH_ATTN  = os.getenv('USE_FLASH_ATTN', 'auto').lower()
-GRAD_CHECKPT    = False   # 48GB đủ → tắt để tăng tốc 30%
+GRAD_CHECKPT    = os.getenv('GRAD_CHECKPT', '1') == '1'
 SAVE_LIMIT      = 2
 DL_WORKERS      = 4
 
@@ -66,8 +68,8 @@ def get_attention_implementation() -> str:
         return 'sdpa'
 
 # ===== HYPERPARAMS (L40 48GB) =====
-BATCH_SIZE    = int(os.getenv('BATCH_SIZE',    '4'))
-GRAD_ACCUM    = int(os.getenv('GRAD_ACCUM',    '8'))
+BATCH_SIZE    = int(os.getenv('BATCH_SIZE',    '2'))
+GRAD_ACCUM    = int(os.getenv('GRAD_ACCUM',    '16'))
 NUM_EPOCHS    = float(os.getenv('NUM_EPOCHS',  '3'))
 LR            = float(os.getenv('LR',          '2e-4'))
 WARMUP_RATIO  = float(os.getenv('WARMUP_RATIO','0.05'))
@@ -291,9 +293,9 @@ class WeightedTrainer(Trainer):
         super().__init__(*args, **kwargs)
         self.train_sample_weights = train_sample_weights
 
-    def _get_train_sampler(self):
+    def _get_train_sampler(self, train_dataset=None):
         if self.train_sample_weights is None:
-            return super()._get_train_sampler()
+            return super()._get_train_sampler(train_dataset)
         return WeightedRandomSampler(
             self.train_sample_weights,
             num_samples=len(self.train_sample_weights),
@@ -529,6 +531,8 @@ def load_model_and_processor():
     if hasattr(model, 'generation_config'):
         if hasattr(model.generation_config, 'enable_thinking'):
             model.generation_config.enable_thinking = False
+    if hasattr(model, 'config'):
+        model.config.use_cache = False
 
     vram = torch.cuda.memory_allocated(0) / 1e9
     total = torch.cuda.get_device_properties(0).total_memory / 1e9
@@ -627,6 +631,7 @@ def train_one_stage(model, processor, train_df: pd.DataFrame,
         # Misc
         remove_unused_columns=False,
         gradient_checkpointing=GRAD_CHECKPT,
+        gradient_checkpointing_kwargs={'use_reentrant': False},
     )
 
     trainer = WeightedTrainer(
