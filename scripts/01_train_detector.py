@@ -12,6 +12,8 @@ import os, json, shutil, yaml
 from pathlib import Path
 from PIL import Image
 
+Image.MAX_IMAGE_PIXELS = None
+
 # ===== CONSTANTS =====
 DEVICE     = 'cuda:0'
 ROOT       = Path(os.getenv('PROJECT_ROOT', Path.cwd()))
@@ -189,7 +191,8 @@ def build_yolo_dataset():
                     pass
     for cls_id, cls_name in enumerate(CLASSES):
         count = counter.get(cls_id, 0)
-        bar = '█' * min(40, int(40 * count / max(counter.values(), 1)))
+        max_class_count = max(counter.values(), default=1)
+        bar = '█' * min(40, int(40 * count / max(max_class_count, 1)))
         print(f'  {cls_name:<15s}: {count:6,} {bar}')
 
     # cls weight recommendation

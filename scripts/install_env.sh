@@ -10,6 +10,8 @@ echo "RUKOPYS HTR — Environment Setup"
 echo "Hardware: L40 48GB / 8vCPU / 64GB RAM"
 echo "========================================"
 
+python -m pip install -U pip wheel setuptools packaging ninja
+
 # 1. PyTorch với CUDA 12.4
 echo "[1/8] Installing PyTorch (CUDA 12.4)..."
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
@@ -25,8 +27,10 @@ pip install \
     "tokenizers>=0.20.0"
 
 # 3. Flash Attention 2 (bắt buộc cho L40 Ada Lovelace)
-echo "[3/8] Installing Flash Attention 2..."
-pip install flash-attn --no-build-isolation
+echo "[3/8] Installing Flash Attention 2 (optional; SDPA fallback is supported)..."
+MAX_JOBS="${MAX_JOBS:-4}" pip install flash-attn --no-build-isolation || {
+    echo "[warn] Flash Attention install failed — continuing with USE_FLASH_ATTN=0 / SDPA fallback"
+}
 
 # 4. Qwen VL utilities
 echo "[4/8] Installing Qwen-VL utilities..."
