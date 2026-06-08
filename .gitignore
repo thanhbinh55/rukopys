@@ -1,0 +1,22 @@
+.DS_Store
+
+# Secrets
+kaggle.json
+.secrets/
+
+# Local data/cache/artifacts
+rukopys_raw/
+data/kaggle_input/
+local_working/
+htr_artifacts/
+submission.csv
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Model/tool caches
+.cache/

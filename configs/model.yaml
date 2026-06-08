@@ -1,0 +1,119 @@
+# configs/model.yaml
+# Hyperparameters cho tất cả models trong pipeline
+
+# ===== YOLO DETECTOR =====
+yolo:
+  base_model: yolov8x.pt
+  imgsz: 1280
+  batch: 12
+  epochs: 80
+  patience: 25
+  workers: 4
+  cache: false
+
+  optimizer: AdamW
+  lr0: 0.0005
+  lrf: 0.01
+  warmup_epochs: 5
+  cos_lr: true
+  close_mosaic: 20
+  weight_decay: 0.0005
+  save_period: 10
+
+  # Loss weights
+  cls: 0.7        # tăng để phân biệt tốt 7 classes
+  box: 7.5
+  dfl: 1.5
+
+  # Augmentation
+  flipud: 0.0     # PHẢI 0 — text sẽ ngược
+  fliplr: 0.0     # PHẢI 0 — text sẽ mirror
+  degrees: 2.0
+  translate: 0.1
+  scale: 0.3
+  mosaic: 0.5
+  copy_paste: 0.1
+  hsv_h: 0.015
+  hsv_s: 0.4
+  hsv_v: 0.3
+
+  # Inference thresholds (sẽ được tune bởi Phase 3)
+  default_conf: 0.25
+  default_iou: 0.45
+
+# ===== QWEN3-VL RECOGNIZER =====
+qwen3:
+  model_id: Qwen/Qwen3-VL-8B-Instruct
+  transformers_min_version: 4.57.0
+
+  # Processor
+  min_pixels: 200704    # 256 * 28 * 28
+  max_pixels: 1003520   # 1280 * 28 * 28
+
+  # Training
+  batch_size: 4
+  grad_accum: 8         # effective = 32
+  num_epochs: 3.0
+  lr: 0.0002            # 2e-4
+  lr_scheduler: cosine
+  warmup_ratio: 0.05
+  max_seq_len: 512
+  max_new_tokens: 256
+
+  # LoRA
+  lora:
+    r: 64
+    alpha: 128          # = 2r
+    use_rslora: true
+    dropout: 0.05
+    target_modules:
+      - q_proj
+      - k_proj
+      - v_proj
+      - o_proj
+      - gate_proj
+      - up_proj
+      - down_proj
+
+  # Generation (inference)
+  do_sample: false      # greedy decoding
+  use_cache: true
+  enable_thinking: false  # PHẢI tắt — waste tokens, no accuracy gain
+
+# ===== PADDLE OCR (FALLBACK) =====
+paddle:
+  lang: ru              # Russian Cyrillic ≈ Ukrainian
+  use_gpu: true
+  use_angle_cls: true
+  show_log: false
+  min_confidence: 0.5   # threshold để dùng PaddleOCR thay Qwen3
+
+# ===== READING ORDER =====
+reading_order:
+  bucket_size: 15       # PHẢI = 15 để mirror kaggle_metric._build_page_text()
+  # KHÔNG thay đổi giá trị này — sẽ gây mismatch với metric
+
+# ===== DATA WEIGHTS =====
+data_weights:
+  gold: 1.0
+  silver: 0.5
+  hkr: 0.5
+  synthetic_trdg: 0.3
+
+# ===== DATA LIMITS =====
+data_limits:
+  max_gold: 999999      # all
+  max_silver: 80000
+  max_hkr: 50000
+  max_synth: 100000
+
+# ===== AUGMENTATION (for OCR crops) =====
+augmentation:
+  prob: 0.5
+  contrast_range: [0.75, 1.25]
+  brightness_range: [0.85, 1.15]
+  blur_radius_range: [0.3, 0.8]
+  blur_prob: 0.15
+  rotate_range: [-3, 3]
+  rotate_prob: 0.25
+  sharpen_prob: 0.15

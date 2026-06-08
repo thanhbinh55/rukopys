@@ -1,0 +1,48 @@
+# configs/hardware.yaml
+# L40 48GB / 8 vCPU / 64GB RAM / 200GB Disk
+# Tất cả training scripts đọc file này để set constants
+
+gpu:
+  name: L40
+  vram_gb: 48
+  architecture: Ada Lovelace  # supports FA2, BF16, TF32 natively
+  device: cuda:0
+  count: 1                    # KHÔNG dùng multi-GPU / device_map="auto"
+
+cpu:
+  cores: 8
+  dataloader_workers: 4       # max 6; để 4 để tránh CPU bottleneck
+
+memory:
+  ram_gb: 64
+  # QUAN TRỌNG: Không cache ảnh vào RAM trong YOLO (cache: false)
+  # Không load toàn bộ dataset vào memory — dùng lazy loading
+
+disk:
+  total_gb: 200
+  min_free_gb: 10             # Guard threshold trước khi save checkpoint
+  save_total_limit: 2         # Giữ tối đa 2 HuggingFace checkpoints
+
+precision:
+  bf16: true                  # L40 Ada native BF16
+  tf32: true                  # Ada matmul TF32 (tăng tốc 19%)
+  flash_attention: true       # FA2 — PHẢI cài flash-attn trước
+
+training:
+  grad_checkpointing: false   # 48GB đủ → tắt để tăng tốc 30%
+
+yolo:
+  batch: 12
+  imgsz: 1280
+  workers: 4
+  cache: false                # 64GB RAM không đủ
+
+recognizer:
+  batch_size: 4               # per device
+  grad_accum: 8               # effective batch = 32
+  max_seq_len: 512
+  max_new_tokens: 256
+
+inference:
+  ocr_batch_init: 8           # crops/batch, tự giảm khi OOM
+  yolo_batch: 8               # pages/batch cho YOLO

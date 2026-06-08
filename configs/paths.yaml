@@ -1,0 +1,74 @@
+# configs/paths.yaml
+# Tất cả paths trong project.
+# Dataset mặc định được tải bằng setup_kaggle_dataset.sh từ:
+# https://www.kaggle.com/datasets/bnthanh/rukopys-dataset
+
+# ===== ROOT DIRECTORIES =====
+art_dir: ./local_working/htr_artifacts
+data_root: ./data/kaggle_input/rukopys-dataset/rukopys_raw
+
+# ===== INPUT DATA =====
+train:
+  images: ./data/kaggle_input/rukopys-dataset/rukopys_raw/train/images
+  metadata: ./data/kaggle_input/rukopys-dataset/rukopys_raw/train/metadata.jsonl
+
+test:
+  images: ./data/kaggle_input/rukopys-dataset/rukopys_raw/test/images
+  metadata: ./data/kaggle_input/rukopys-dataset/rukopys_raw/test/metadata.jsonl
+
+silver:
+  images: ./data/kaggle_input/rukopys-dataset/rukopys_raw/silver/images
+  metadata: ./data/kaggle_input/rukopys-dataset/rukopys_raw/silver/metadata.jsonl
+
+# ===== EXTERNAL DATASETS =====
+hkr:
+  root: ./data/kaggle_input/hkr
+  manifest: ./local_working/htr_artifacts/hkr_manifest.csv
+  annotation: ./data/kaggle_input/hkr/annotation.json
+
+fonts:
+  cyrillic_dir: ./fonts/cyrillic   # put .ttf/.otf Cyrillic fonts here
+
+word_lists:
+  ukr_words: ./data/kaggle_input/ukr_words/words.txt
+
+# ===== ARTIFACTS =====
+artifacts:
+  root: ./local_working/htr_artifacts
+  logs: ./local_working/htr_artifacts/logs
+  config: ./local_working/htr_artifacts/config.json
+  train_split: ./local_working/htr_artifacts/train_split.jsonl
+  valid_split: ./local_working/htr_artifacts/valid_split.jsonl
+  valid_gt_csv: ./local_working/htr_artifacts/valid_gt.csv
+  scorable_stats: ./local_working/htr_artifacts/scorable_stats.json
+  best_config: ./local_working/htr_artifacts/best_config.json
+  submission: ./submission.csv
+  grid_results: ./local_working/htr_artifacts/grid_search_results.csv
+
+detector:
+  root: ./local_working/htr_artifacts/det_yolo
+  best_pt: ./local_working/htr_artifacts/det_yolo/best.pt
+  last_pt: ./local_working/htr_artifacts/det_yolo/last.pt
+  engine: ./local_working/htr_artifacts/det_yolo/best.engine
+  data_yaml: ./local_working/htr_artifacts/det_yolo/data.yaml
+  dataset: ./local_working/htr_artifacts/det_yolo/dataset
+  runs: ./local_working/htr_artifacts/det_yolo/runs
+
+recognizer:
+  root: ./local_working/htr_artifacts/qwen3_lora
+  best_checkpoint: ./local_working/htr_artifacts/qwen3_lora/best_checkpoint
+  training_log: ./local_working/htr_artifacts/logs/phase2_training.json
+
+rec_data:
+  root: ./local_working/htr_artifacts/rec_data
+  crops: ./local_working/htr_artifacts/rec_data/crops
+  synthetic: ./local_working/htr_artifacts/rec_data/synthetic
+  train_manifest: ./local_working/htr_artifacts/rec_data/train_manifest.csv
+  valid_manifest: ./local_working/htr_artifacts/rec_data/valid_manifest.csv
+  synth_manifest: ./local_working/htr_artifacts/rec_data/synth_manifest.csv
+
+# ===== KAGGLE DATASET =====
+kaggle:
+  dataset_slug: bnthanh/rukopys-dataset
+  download_root: ./data/kaggle_input/rukopys-dataset
+  data_root: ./data/kaggle_input/rukopys-dataset/rukopys_raw
