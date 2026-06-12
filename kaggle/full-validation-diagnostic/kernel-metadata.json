@@ -1,0 +1,25 @@
+{
+  "id": "bnthanh/htr-full-validation-diagnostic",
+  "title": "[HTR] Full Validation Diagnostic",
+  "code_file": "full-validation-diagnostic.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [
+    "gpu",
+    "ocr",
+    "diagnostic"
+  ],
+  "dataset_sources": [
+    "bnthanh/htr-01-train-detector-output",
+    "ngovietan/htr-02-train-recognizer",
+    "bnthanh/rukopys-dataset"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}
