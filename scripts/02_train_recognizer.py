@@ -9,7 +9,7 @@ Cải tiến quan trọng:
 3. WeightedRandomSampler thay vì loss weighting
 4. Dynamic OCR resolution
 """
-import os, gc, json, random, re, time, shutil, logging, argparse
+import os, gc, json, random, time, shutil, logging, argparse
 from pathlib import Path
 from typing import Optional
 from functools import partial
@@ -23,20 +23,40 @@ from transformers import (
     Qwen3VLForConditionalGeneration,
     TrainingArguments,
     Trainer,
+    TrainerCallback,
     EarlyStoppingCallback,
 )
-from peft import LoraConfig, PeftModel, get_peft_model, TaskType
+from peft import (
+    LoraConfig,
+    PeftModel,
+    get_peft_model,
+    prepare_model_for_kbit_training,
+    TaskType,
+)
+from recognizer_contract import (
+    crop_region,
+    normalize_ocr_target,
+    prompts_for_type,
+    resize_crop_image,
+    type_balance_multipliers,
+)
 
 Image.MAX_IMAGE_PIXELS = None
 
 # ===== HARDWARE CONSTANTS =====
 DEVICE          = 'cuda:0'
-USE_BF16        = True
-USE_TF32        = True
+USE_BF16        = os.getenv('USE_BF16', '1') == '1'
+USE_TF32        = os.getenv('USE_TF32', '1') == '1'
 USE_FLASH_ATTN  = os.getenv('USE_FLASH_ATTN', 'auto').lower()
 GRAD_CHECKPT    = os.getenv('GRAD_CHECKPT', '1') == '1'
-SAVE_LIMIT      = 2
 DL_WORKERS      = 4
+QLORA_4BIT      = os.getenv('QLORA_4BIT', '0') == '1'
+OPTIMIZER       = os.getenv(
+    'OPTIM', 'paged_adamw_8bit' if QLORA_4BIT else 'adamw_torch_fused')
+MIN_PIXELS      = int(os.getenv('MIN_PIXELS', str(128 * 28 * 28)))
+MAX_PIXELS      = int(os.getenv('MAX_PIXELS', str(384 * 28 * 28)))
+GPU_MAX_MEMORY  = os.getenv('GPU_MAX_MEMORY', '13GiB')
+CPU_MAX_MEMORY  = os.getenv('CPU_MAX_MEMORY', '24GiB')
 
 # ===== PATHS =====
 ROOT     = Path(os.getenv('PROJECT_ROOT', Path.cwd()))
@@ -71,10 +91,15 @@ def get_attention_implementation() -> str:
 BATCH_SIZE    = int(os.getenv('BATCH_SIZE',    '2'))
 GRAD_ACCUM    = int(os.getenv('GRAD_ACCUM',    '16'))
 NUM_EPOCHS    = float(os.getenv('NUM_EPOCHS',  '3'))
-LR            = float(os.getenv('LR',          '2e-4'))
+LR            = float(os.getenv('LEARNING_RATE', os.getenv('LR', '2e-4')))
 WARMUP_RATIO  = float(os.getenv('WARMUP_RATIO','0.05'))
-MAX_NEW_TOKENS= 256
-MAX_SEQ_LEN   = 512
+MAX_SEQ_LEN   = int(os.getenv('MAX_SEQ_LEN', '512'))
+SAVE_STEPS    = int(os.getenv('SAVE_STEPS', '200'))
+EVAL_STEPS    = int(os.getenv('EVAL_STEPS', '200'))
+SAVE_LIMIT    = int(os.getenv('SAVE_LIMIT', '2'))
+PERIODIC_EVAL_MAX = int(os.getenv('PERIODIC_EVAL_MAX', '0'))
+MAX_STEPS      = int(os.getenv('MAX_STEPS', '-1'))
+TRAIN_TIME_BUDGET_HOURS = float(os.getenv('TRAIN_TIME_BUDGET_HOURS', '0'))
 
 # ===== LORA =====
 LORA_R     = int(os.getenv('LORA_R',     '64'))
@@ -91,32 +116,14 @@ USE_SYNTH  = os.getenv('USE_SYNTH',  '1') == '1'
 USE_HKR    = os.getenv('USE_HKR',    '1') == '1'
 USE_PSEUDO = os.getenv('USE_PSEUDO', '0') == '1'
 AUG_PROB   = float(os.getenv('AUG_PROB', '0.5'))
+CROP_JITTER_PX = int(os.getenv('CROP_JITTER_PX', '3'))
+CROP_JITTER_PROB = float(os.getenv('CROP_JITTER_PROB', '0.35'))
+TYPE_BALANCE = os.getenv('TYPE_BALANCE', '1') == '1'
+TYPE_WEIGHT_CAP = float(os.getenv('TYPE_WEIGHT_CAP', '4.0'))
+CLEANUP_CHECKPOINTS = os.getenv('CLEANUP_CHECKPOINTS', '0') == '1'
 
 # ===== CURRICULUM =====
 CURRICULUM = os.getenv('CURRICULUM', '0') == '1'  # Override bởi --curriculum flag
-
-# ===== PROMPTS =====
-SYSTEM_PROMPT = (
-    "You are a specialized Ukrainian handwritten text recognition system. "
-    "Your task: transcribe exactly what is handwritten in the provided image. "
-    "Rules:\n"
-    "1. Output ONLY the transcribed text — no explanations, no formatting\n"
-    "2. Preserve original Ukrainian spelling and punctuation exactly\n"
-    "3. For illegible characters, output your best guess\n"
-    "4. Use Cyrillic characters (not Latin lookalikes) for Ukrainian text\n"
-    "5. Keep numbers, punctuation, and special characters as written"
-)
-USER_PROMPT = "Transcribe the handwritten text in this image:"
-
-
-def normalize_ocr_target(text: str, region_type: str = 'handwritten') -> str:
-    import unicodedata
-    text = unicodedata.normalize('NFKC', str(text))
-    text = re.sub(r'~~.*?~~\{(.*?)\}', r'\1', text)  # strikethrough correction
-    text = re.sub(r'~~(.*?)~~', r'\1', text)           # plain strikethrough
-    text = re.sub(r'\s+', ' ', text.replace('\r', ' ').replace('\n', ' ')).strip()
-    return text
-
 
 # ─────────────────────────────────────────────
 # DATASET
@@ -136,21 +143,37 @@ class HTRCropDataset(Dataset):
     def __getitem__(self, idx):
         rec = self.records[idx]
         try:
-            img = Image.open(rec['image_path']).convert('RGB')
-            # Adaptive resize dựa trên text length
-            text_len = len(rec.get('text', ''))
-            target_h = 64 if text_len < 15 else (96 if text_len < 50 else 128)
-            if img.height != target_h:
-                ratio = target_h / max(1, img.height)
-                new_w = max(32, min(1920, int(img.width * ratio)))
-                img = img.resize((new_w, target_h), Image.LANCZOS)
+            use_jitter = (
+                self.augment
+                and CROP_JITTER_PX > 0
+                and random.random() < CROP_JITTER_PROB
+                and rec.get('source_image')
+                and rec.get('bbox')
+                and Path(rec['source_image']).exists()
+            )
+            if use_jitter:
+                page = Image.open(rec['source_image']).convert('RGB')
+                img = crop_region(
+                    page,
+                    rec['bbox'],
+                    pad=4,
+                    jitter=CROP_JITTER_PX,
+                    rng=random,
+                )
+            else:
+                img = resize_crop_image(Image.open(rec['image_path']).convert('RGB'))
         except Exception:
             img = Image.new('RGB', (256, 64), color=(255, 255, 255))
 
         if self.augment and random.random() < AUG_PROB:
             img = self._augment(img)
 
-        return {'image': img, 'text': rec.get('text', ''), 'weight': rec.get('weight', 1.0)}
+        return {
+            'image': img,
+            'text': rec.get('text', ''),
+            'type': rec.get('type', 'handwritten'),
+            'weight': rec.get('weight', 1.0),
+        }
 
     def _augment(self, img: Image.Image) -> Image.Image:
         if random.random() < 0.3:
@@ -185,11 +208,12 @@ def collate_fn(batch: list, processor) -> dict:
 
     messages_list = []
     for item in batch:
+        system_prompt, user_prompt = prompts_for_type(item.get('type'))
         messages = [
-            {"role": "system",    "content": SYSTEM_PROMPT},
+            {"role": "system",    "content": system_prompt},
             {"role": "user",      "content": [
                 {"type": "image", "image": item['image']},
-                {"type": "text",  "text":  USER_PROMPT},
+                {"type": "text",  "text":  user_prompt},
             ]},
             {"role": "assistant", "content": item['text']},
         ]
@@ -302,6 +326,32 @@ class WeightedTrainer(Trainer):
             num_samples=len(self.train_sample_weights),
             replacement=True,
         )
+
+
+class TimeBudgetCallback(TrainerCallback):
+    """Stop cleanly and request a checkpoint before the notebook hard limit."""
+
+    def __init__(self, hours: float):
+        self.budget_seconds = max(0.0, hours * 3600)
+        self.started_at = None
+
+    def on_train_begin(self, args, state, control, **kwargs):
+        self.started_at = time.monotonic()
+        return control
+
+    def on_step_end(self, args, state, control, **kwargs):
+        if (
+            self.budget_seconds
+            and self.started_at is not None
+            and time.monotonic() - self.started_at >= self.budget_seconds
+        ):
+            print(
+                f'[time-budget] Reached {self.budget_seconds / 3600:.2f}h '
+                f'at step {state.global_step}; requesting save and stop.'
+            )
+            control.should_save = True
+            control.should_training_stop = True
+        return control
 
 
 # ─────────────────────────────────────────────
@@ -436,6 +486,27 @@ def load_manifest(art: Path, curriculum_stage: int = 0) -> tuple:
     random.shuffle(train_records)
 
     print(f'\n[data] Total train: {len(train_records):,}  |  Valid: {len(valid_records):,}')
+    train_pages = {
+        str(record.get('source_image'))
+        for record in train_records
+        if record.get('source_image')
+    }
+    valid_pages = {
+        str(record.get('source_image'))
+        for record in valid_records
+        if record.get('source_image')
+    }
+    overlap = train_pages & valid_pages
+    if overlap:
+        examples = sorted(overlap)[:5]
+        raise RuntimeError(
+            f'Train/validation leakage: {len(overlap)} shared source pages. '
+            f'Examples: {examples}'
+        )
+    print(
+        f'[data] Leakage check passed: {len(train_pages):,} train pages, '
+        f'{len(valid_pages):,} validation pages, 0 shared.'
+    )
     if train_records:
         from collections import Counter
         source_counts = Counter(r.get('source', 'unknown') for r in train_records)
@@ -463,23 +534,7 @@ def extract_crops(manifest_df: pd.DataFrame, overwrite: bool = False):
         crop_path = Path(rec['image_path'])
         try:
             src = Image.open(rec['source_image']).convert('RGB')
-            W, H = src.size
-
-            x1, y1, x2, y2 = [int(v) for v in rec['bbox']]
-            pad = 4
-            x1 = max(0, x1 - pad);  y1 = max(0, y1 - pad)
-            x2 = min(W, x2 + pad);  y2 = min(H, y2 + pad)
-
-            if x2 - x1 < 5 or y2 - y1 < 5:
-                continue
-
-            crop = src.crop((x1, y1, x2, y2))
-
-            # Resize: max height 128px
-            if crop.height > 128:
-                ratio = 128 / crop.height
-                new_w = max(32, min(1920, int(crop.width * ratio)))
-                crop = crop.resize((new_w, 128), Image.LANCZOS)
+            crop = crop_region(src, rec['bbox'], pad=4)
 
             crop.save(str(crop_path), 'JPEG', quality=92)
             done += 1
@@ -501,19 +556,49 @@ def load_model_and_processor():
 
     processor = AutoProcessor.from_pretrained(
         MODEL_ID,
-        min_pixels=256 * 28 * 28,
-        max_pixels=1280 * 28 * 28,
+        min_pixels=MIN_PIXELS,
+        max_pixels=MAX_PIXELS,
     )
     if processor.tokenizer.pad_token is None:
         processor.tokenizer.pad_token = processor.tokenizer.eos_token
 
     attn_impl = get_attention_implementation()
+    bf16_available = (
+        torch.cuda.is_available()
+        and hasattr(torch.cuda, 'is_bf16_supported')
+        and torch.cuda.is_bf16_supported()
+    )
+    use_bf16_runtime = USE_BF16 and bf16_available
+    compute_dtype = torch.bfloat16 if use_bf16_runtime else torch.float16
     load_kwargs = {
-        'torch_dtype': torch.bfloat16,
-        'device_map': {'': DEVICE},
+        'dtype': compute_dtype,
         'attn_implementation': attn_impl,
     }
+    if QLORA_4BIT:
+        from transformers import BitsAndBytesConfig
+        load_kwargs.update({
+            'quantization_config': BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_quant_type='nf4',
+                bnb_4bit_compute_dtype=compute_dtype,
+                bnb_4bit_use_double_quant=True,
+            ),
+            'device_map': 'auto',
+            'max_memory': {
+                **{
+                    index: GPU_MAX_MEMORY
+                    for index in range(torch.cuda.device_count())
+                },
+                'cpu': CPU_MAX_MEMORY,
+            },
+        })
+    else:
+        load_kwargs['device_map'] = {'': DEVICE}
     print(f'[model] attention={attn_impl}')
+    print(
+        f'[model] qlora_4bit={QLORA_4BIT} dtype={compute_dtype} '
+        f'pixels={MIN_PIXELS}:{MAX_PIXELS}'
+    )
 
     try:
         model = Qwen3VLForConditionalGeneration.from_pretrained(MODEL_ID, **load_kwargs)
@@ -534,6 +619,9 @@ def load_model_and_processor():
             model.generation_config.enable_thinking = False
     if hasattr(model, 'config'):
         model.config.use_cache = False
+    if QLORA_4BIT:
+        model = prepare_model_for_kbit_training(
+            model, use_gradient_checkpointing=GRAD_CHECKPT)
 
     vram = torch.cuda.memory_allocated(0) / 1e9
     total = torch.cuda.get_device_properties(0).total_memory / 1e9
@@ -579,12 +667,52 @@ def train_one_stage(model, processor, train_df: pd.DataFrame,
     print(f'\n[train] Stage: {stage_name} | {len(train_df):,} train / {len(valid_df):,} valid')
 
     train_dataset = HTRCropDataset(train_df.to_dict('records'), processor, augment=True)
-    valid_dataset = HTRCropDataset(valid_df.to_dict('records'), processor, augment=False)
+    periodic_valid_df = valid_df
+    if PERIODIC_EVAL_MAX and len(valid_df) > PERIODIC_EVAL_MAX:
+        counts = valid_df['type'].value_counts().to_dict()
+        roots = {key: len_value ** 0.5 for key, len_value in counts.items()}
+        root_sum = sum(roots.values())
+        selected = []
+        used_indices = set()
+        for region_type, group in valid_df.groupby('type', sort=True):
+            quota = max(1, round(PERIODIC_EVAL_MAX * roots[region_type] / root_sum))
+            sampled = group.sample(n=min(quota, len(group)), random_state=42)
+            selected.append(sampled)
+            used_indices.update(sampled.index.tolist())
+        periodic_valid_df = pd.concat(selected)
+        remaining = PERIODIC_EVAL_MAX - len(periodic_valid_df)
+        if remaining > 0:
+            pool = valid_df.loc[~valid_df.index.isin(used_indices)]
+            if not pool.empty:
+                periodic_valid_df = pd.concat([
+                    periodic_valid_df,
+                    pool.sample(n=min(remaining, len(pool)), random_state=43),
+                ])
+        periodic_valid_df = periodic_valid_df.head(PERIODIC_EVAL_MAX)
+        print(
+            f'[eval] Periodic subset: {len(periodic_valid_df):,}/{len(valid_df):,} '
+            f'crops | types={periodic_valid_df["type"].value_counts().to_dict()}'
+        )
+    valid_dataset = HTRCropDataset(
+        periodic_valid_df.to_dict('records'), processor, augment=False)
 
     if 'weight' in train_df.columns:
         weight_values = train_df['weight'].astype(float).tolist()
     else:
         weight_values = [1.0] * len(train_df)
+    if TYPE_BALANCE and 'type' in train_df.columns:
+        type_multipliers, type_counts = type_balance_multipliers(
+            train_df['type'].tolist(), cap=TYPE_WEIGHT_CAP)
+        weight_values = [
+            base_weight * type_multipliers.get(region_type, 1.0)
+            for base_weight, region_type in zip(
+                weight_values, train_df['type'].tolist())
+        ]
+        print(f'[train] Type counts: {dict(type_counts)}')
+        print(
+            '[train] Type multipliers: '
+            f'{ {key: round(value, 3) for key, value in type_multipliers.items()} }'
+        )
     sample_weights = torch.tensor(weight_values, dtype=torch.float)
     print(f'[train] Weighted sampler enabled | '
           f'min={sample_weights.min():.2f} max={sample_weights.max():.2f}')
@@ -611,12 +739,15 @@ def train_one_stage(model, processor, train_df: pd.DataFrame,
         lr_scheduler_type='cosine',
         warmup_ratio=WARMUP_RATIO,
         num_train_epochs=n_epochs,
+        max_steps=MAX_STEPS,
 
         # Precision
-        bf16=USE_BF16, fp16=False, tf32=USE_TF32,
+        bf16=USE_BF16 and torch.cuda.is_bf16_supported(),
+        fp16=not (USE_BF16 and torch.cuda.is_bf16_supported()),
+        tf32=USE_TF32,
 
         # Optimizer
-        optim='adamw_torch_fused',
+        optim=OPTIMIZER,
 
         # DataLoader
         dataloader_num_workers=DL_WORKERS,
@@ -625,7 +756,7 @@ def train_one_stage(model, processor, train_df: pd.DataFrame,
 
         # Checkpointing
         save_strategy='steps',
-        save_steps=200,
+        save_steps=SAVE_STEPS,
         save_total_limit=SAVE_LIMIT,
         load_best_model_at_end=True,
         metric_for_best_model='eval_loss',
@@ -633,7 +764,7 @@ def train_one_stage(model, processor, train_df: pd.DataFrame,
 
         # Eval
         eval_strategy='steps',
-        eval_steps=200,
+        eval_steps=EVAL_STEPS,
 
         # Logging
         logging_dir=str(LOGS_DIR / 'tb'),
@@ -646,23 +777,30 @@ def train_one_stage(model, processor, train_df: pd.DataFrame,
         gradient_checkpointing_kwargs={'use_reentrant': False},
     )
 
+    callbacks = [EarlyStoppingCallback(early_stopping_patience=3)]
+    if TRAIN_TIME_BUDGET_HOURS > 0:
+        callbacks.append(TimeBudgetCallback(TRAIN_TIME_BUDGET_HOURS))
+
     trainer = WeightedTrainer(
         model=model,
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=valid_dataset,
         data_collator=collator,
-        callbacks=[EarlyStoppingCallback(early_stopping_patience=3)],
+        callbacks=callbacks,
         train_sample_weights=sample_weights,
     )
 
     trainer.train(resume_from_checkpoint=resume_from)
 
-    # Save best
-    best_dir = output_dir / 'best_checkpoint'
+    # This export is selected only by periodic eval_loss. The official
+    # full-validation diagnostic must choose the final production checkpoint.
+    best_dir = output_dir / 'best_eval_loss_checkpoint'
     trainer.save_model(str(best_dir))
     processor.save_pretrained(str(best_dir))
-    print(f'[train] Best checkpoint → {best_dir}')
+    print(f'[train] Best periodic eval_loss export → {best_dir}')
+    print('[train] Do not promote it to best_checkpoint until the official '
+          '143-page metric has compared all saved checkpoints.')
 
     return trainer.state.best_metric
 
@@ -733,11 +871,13 @@ def main():
         train_one_stage(model, processor, train_df, valid_df,
                        'Standard', n_epochs=NUM_EPOCHS, output_dir=OUTPUT)
 
-    # Cleanup intermediate checkpoints
-    for ckpt in OUTPUT.glob('checkpoint-*'):
-        if ckpt.is_dir() and ckpt.name != 'best_checkpoint':
-            shutil.rmtree(ckpt)
-            print(f'[cleanup] Removed {ckpt.name}')
+    # Keep checkpoints by default so the official 143-page metric can select
+    # the production adapter. Cleanup is opt-in only after that comparison.
+    if CLEANUP_CHECKPOINTS:
+        for ckpt in OUTPUT.glob('checkpoint-*'):
+            if ckpt.is_dir():
+                shutil.rmtree(ckpt)
+                print(f'[cleanup] Removed {ckpt.name}')
 
     # Save log
     json.dump({
@@ -750,7 +890,9 @@ def main():
 
     vram = torch.cuda.memory_allocated(0) / 1e9
     print(f'\n[DONE] Phase 2 complete! VRAM: {vram:.1f}GB / 48GB')
-    print(f'       Best checkpoint → {OUTPUT}/best_checkpoint')
+    print(f'       Periodic-loss export → {OUTPUT}/best_eval_loss_checkpoint')
+    print('       Next: score checkpoint-* on all 143 validation pages, then '
+          'promote the official winner to best_checkpoint.')
 
 
 if __name__ == '__main__':

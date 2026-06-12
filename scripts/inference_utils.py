@@ -15,28 +15,21 @@ from typing import Optional
 
 import torch
 from PIL import Image
+from recognizer_contract import (
+    crop_region,
+    generation_kwargs,
+    prompts_for_type,
+)
 
 # ===== CONSTANTS =====
 DEVICE         = os.getenv('DEVICE', 'cuda:0')
 ROOT           = Path(os.getenv('PROJECT_ROOT', Path.cwd()))
 ART            = Path(os.getenv('HTR_ART_DIR', ROOT / 'local_working' / 'htr_artifacts'))
-MAX_NEW_TOKENS = int(os.getenv('MAX_TOKENS', '256'))
 OCR_BATCH_INIT = int(os.getenv('OCR_BATCH', '8'))
 DEFAULT_CONF   = float(os.getenv('YOLO_CONF', '0.25'))
 DEFAULT_IOU    = float(os.getenv('YOLO_IOU', '0.45'))
 CLASSES        = ['handwritten','printed','formula','table','annotation','image','graph']
 USE_FLASH_ATTN = os.getenv('USE_FLASH_ATTN', 'auto').lower()
-
-SYSTEM_PROMPT = (
-    "You are a specialized Ukrainian handwritten text recognition system. "
-    "Your task: transcribe exactly what is handwritten in the provided image. "
-    "Rules:\n"
-    "1. Output ONLY the transcribed text — no explanations, no formatting\n"
-    "2. Preserve original Ukrainian spelling and punctuation exactly\n"
-    "3. For illegible characters, output your best guess\n"
-    "4. Use Cyrillic characters (not Latin lookalikes) for Ukrainian text\n"
-    "5. Keep numbers, punctuation, and special characters as written"
-)
 
 log = logging.getLogger(__name__)
 
@@ -283,6 +276,8 @@ def ocr_crops_batch(crops: list, model, processor, current_bs: int) -> tuple:
     Returns: (texts: list[str], final_batch_size: int)
     """
     images = [c[0] for c in crops]
+    region_type = (
+        crops[0][1].get('type', 'handwritten') if crops else 'handwritten')
 
     try:
         # Try qwen_vl_utils
@@ -292,16 +287,16 @@ def ocr_crops_batch(crops: list, model, processor, current_bs: int) -> tuple:
         except ImportError:
             _has_qvl = False
 
-        messages_list = [
-            [
-                {"role": "system", "content": SYSTEM_PROMPT},
+        messages_list = []
+        for img, region in crops:
+            system_prompt, user_prompt = prompts_for_type(region.get('type'))
+            messages_list.append([
+                {"role": "system", "content": system_prompt},
                 {"role": "user", "content": [
                     {"type": "image", "image": img},
-                    {"type": "text",  "text": "Transcribe:"},
+                    {"type": "text",  "text": user_prompt},
                 ]},
-            ]
-            for img in images
-        ]
+            ])
 
         texts_prompt = [
             processor.apply_chat_template(m, tokenize=False, add_generation_prompt=True)
@@ -327,9 +322,7 @@ def ocr_crops_batch(crops: list, model, processor, current_bs: int) -> tuple:
         with torch.no_grad():
             output_ids = model.generate(
                 **inputs,
-                max_new_tokens=MAX_NEW_TOKENS,
-                do_sample=False,
-                use_cache=True,
+                **generation_kwargs(region_type),
             )
 
         input_len = inputs['input_ids'].shape[1]
@@ -366,7 +359,6 @@ def ocr_regions(img_path: str, regions: list, model, processor,
 
     try:
         page_img = Image.open(img_path).convert('RGB')
-        W, H = page_img.size
     except Exception as e:
         log.error(f'[ocr] Cannot open {img_path}: {e}')
         return regions, batch_size
@@ -376,39 +368,25 @@ def ocr_regions(img_path: str, regions: list, model, processor,
     if not scorable_idx:
         return regions, batch_size
 
-    crops = []
+    crops_by_type = {}
     for idx in scorable_idx:
         r = regions[idx]
-        x1, y1, x2, y2 = r['bbox']
-        pad = 4
-        x1 = max(0, x1-pad);  y1 = max(0, y1-pad)
-        x2 = min(W, x2+pad);  y2 = min(H, y2+pad)
+        crop = crop_region(page_img, r['bbox'], pad=4)
+        crops_by_type.setdefault(r.get('type', 'handwritten'), []).append(
+            (idx, crop, r))
 
-        if x2-x1 < 5 or y2-y1 < 5:
-            crops.append((Image.new('RGB', (64, 32), 'white'), r))
-            continue
-
-        crop = page_img.crop((x1, y1, x2, y2))
-
-        # Adaptive resize based on region width/height ratio
-        if crop.height > 128:
-            ratio = 128 / crop.height
-            new_w = max(32, min(1920, int(crop.width * ratio)))
-            crop = crop.resize((new_w, 128), Image.LANCZOS)
-
-        crops.append((crop, r))
-
-    all_texts = []
-    i = 0
-    while i < len(crops):
-        batch = crops[i:i+batch_size]
-        texts, batch_size = ocr_crops_batch(batch, model, processor, batch_size)
-        all_texts.extend(texts)
-        i += len(batch)
-
-    for j, idx in enumerate(scorable_idx):
-        if j < len(all_texts):
-            regions[idx]['text'] = all_texts[j]
+    # Type-homogeneous batches allow prompts and generation budgets to match
+    # handwritten, printed, formula, table, and annotation regions.
+    for region_type, typed_crops in crops_by_type.items():
+        i = 0
+        while i < len(typed_crops):
+            chunk = typed_crops[i:i + batch_size]
+            batch = [(crop, region) for _, crop, region in chunk]
+            texts, batch_size = ocr_crops_batch(
+                batch, model, processor, batch_size)
+            for (region_idx, _, _), text in zip(chunk, texts):
+                regions[region_idx]['text'] = text
+            i += len(chunk)
 
     return regions, batch_size
 

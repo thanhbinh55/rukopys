@@ -73,6 +73,12 @@ HEIGHT_BINS = (
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--art", type=Path, default=ART)
+    parser.add_argument(
+        "--adapter-dir",
+        type=Path,
+        default=None,
+        help="LoRA adapter to evaluate; defaults to ART/qwen3_lora/best_checkpoint",
+    )
     parser.add_argument("--data-root", type=Path, default=None)
     parser.add_argument(
         "--output-dir",
@@ -252,7 +258,7 @@ def detect_page(
     return iu.reading_order_sort(regions)
 
 
-def load_qwen_qlora(art: Path):
+def load_qwen_qlora(art: Path, adapter_dir: Path | None = None):
     from peft import PeftModel
     from transformers import (
         AutoProcessor,
@@ -260,7 +266,13 @@ def load_qwen_qlora(art: Path):
         Qwen3VLForConditionalGeneration,
     )
 
-    lora_dir = art / "qwen3_lora" / "best_checkpoint"
+    lora_dir = (
+        adapter_dir.resolve()
+        if adapter_dir is not None
+        else art / "qwen3_lora" / "best_checkpoint"
+    )
+    if adapter_dir is not None and not lora_dir.exists():
+        raise FileNotFoundError(f"Requested adapter does not exist: {lora_dir}")
     if not lora_dir.exists():
         checkpoints = sorted(
             (art / "qwen3_lora").glob("checkpoint-*"),
@@ -811,9 +823,8 @@ def main() -> None:
     gt_progress = latest_progress(args.output_dir / "gt_ocr_progress.jsonl")
     e2e_progress = latest_progress(args.output_dir / "e2e_progress.jsonl")
     if ("gt_ocr" in modes or "e2e" in modes) and not deadline_reached(deadline):
-        model, processor = load_qwen_qlora(args.art)
+        model, processor = load_qwen_qlora(args.art, args.adapter_dir)
         iu.DEVICE = "cuda:0"
-        iu.MAX_NEW_TOKENS = int(os.getenv("MAX_TOKENS", "96"))
         if "gt_ocr" in modes:
             gt_progress = run_ocr_stage(
                 "gt_ocr",

@@ -87,7 +87,7 @@ Status values: `[ ] pending`, `[~] running`, `[x] passed`, `[!] blocked`,
 
 ### B. Full Baseline Diagnostic
 
-- [ ] B1. Stage detector and recognizer artifacts from Kaggle inputs.
+- [~] B1. Stage detector and recognizer artifacts from Kaggle inputs.
   - Required inputs:
     - `/kaggle/input/datasets/bnthanh/rukopys-dataset`
     - `/kaggle/input/datasets/bnthanh/htr-01-train-detector-output`
@@ -113,25 +113,36 @@ Status values: `[ ] pending`, `[~] running`, `[x] passed`, `[!] blocked`,
 
 ### C. Recognizer V2 Patch
 
-- [ ] C1. Add one shared type-aware prompt map.
-- [ ] C2. Preserve `type` through dataset, collator, and inference.
-- [ ] C3. Replace label-length resize with shared image-only preprocessing.
-- [ ] C4. Preserve formula/table newlines and PSV structure.
-- [ ] C5. Add per-type token budgets.
-- [ ] C6. Remove unsupported generation kwargs.
-- [ ] C7. Add capped type-balanced sampling.
-- [ ] C8. Add safe GT-box crop jitter for training only.
-- [ ] C9. Add unit/regression tests for all contracts.
+- [~] C1. Add one shared type-aware prompt map.
+  - Implementation prepared locally; pending baseline/V2 inference ablation.
+- [~] C2. Preserve `type` through dataset, collator, and inference.
+  - Implementation prepared locally; pending GPU smoke test.
+- [~] C3. Replace label-length resize with shared image-only preprocessing.
+  - Implementation prepared locally; pending GPU comparison.
+- [~] C4. Preserve formula/table newlines and PSV structure.
+  - Contract test passes; pending real formula/table CER.
+- [~] C5. Add per-type token budgets.
+  - Contract test passes; pending runtime and hallucination measurement.
+- [x] C6. Remove unsupported generation kwargs.
+  - Source no longer passes `enable_thinking` to `generate()`.
+- [~] C7. Add capped type-balanced sampling.
+  - Weight calculation test passes; pending training sampler report.
+- [~] C8. Add safe GT-box crop jitter for training only.
+  - Implementation prepared with environment-controlled probability/size.
+- [x] C9. Add unit/regression tests for all contracts.
+  - Seven local contract tests pass.
 - [ ] C10. Run no-training ablation on baseline checkpoint.
   - Compare old vs V2 inference on the same cached validation set.
   - This measures prompt/preprocessing/generation changes before training.
 
 ### D. Gold-Only Continuation Training
 
-- [ ] D1. Stage the existing baseline `best_checkpoint`.
-- [ ] D2. Verify `INIT_LORA_DIR` loads a trainable existing adapter.
+- [~] D1. Stage the existing baseline `best_checkpoint`.
+  - Staging script prepared; pending Kaggle execution.
+- [~] D2. Verify `INIT_LORA_DIR` loads a trainable existing adapter.
+  - Source path implemented; pending GPU smoke log.
 - [ ] D3. Verify no validation image/crop enters training.
-- [ ] D4. Train one gold-only continuation epoch.
+- [~] D4. Train one gold-only continuation epoch.
   - `USE_SILVER=0`
   - `USE_SYNTH=0`
   - `USE_HKR=0`
@@ -141,6 +152,8 @@ Status values: `[ ] pending`, `[~] running`, `[x] passed`, `[!] blocked`,
   - `SAVE_STEPS=50`
   - `EVAL_STEPS=200`
   - `SAVE_LIMIT=3`
+  - T4 plan: resumable targets around step 300, 600, then 691; do not try
+    to force the full epoch into one 12-hour session.
 - [ ] D5. Save checkpoint manifest and periodic backup bundle.
 - [ ] D6. Evaluate checkpoint 50/100/... using the same full diagnostic cache.
 - [ ] D7. Select the best checkpoint by official composite and PageCER.
@@ -160,6 +173,8 @@ Status values: `[ ] pending`, `[~] running`, `[x] passed`, `[!] blocked`,
 | 2026-06-12 | Inventory | Local checkout | No local model weights or ML runtime | Run real diagnostics on Kaggle |
 | 2026-06-12 | Existing eight-page validation audit | Baseline Phase 3 | Sample is dictation-only; rare types absent | Full 143-page validation is mandatory |
 | 2026-06-12 | Existing postprocess leaderboard comparison | V3 candidates | `text_strong=0.66754`; stronger bbox deletion is worse | OCR is higher priority than detector retraining |
+| 2026-06-12 | Baseline diagnostic launch | Kaggle commit `9c5897d` | Running on `bnthanh/htr-full-validation-diagnostic` | Do not interpret V2 changes until baseline report completes |
+| 2026-06-12 | Recognizer V2 contract tests | Local pure-Python tests | 7/7 passed | Proceed to GPU ablation after baseline report |
 
 ## Result Template For Each New Run
 
