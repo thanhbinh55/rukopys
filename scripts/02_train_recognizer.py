@@ -25,7 +25,7 @@ from transformers import (
     Trainer,
     EarlyStoppingCallback,
 )
-from peft import LoraConfig, get_peft_model, TaskType
+from peft import LoraConfig, PeftModel, get_peft_model, TaskType
 
 Image.MAX_IMAGE_PIXELS = None
 
@@ -79,6 +79,7 @@ MAX_SEQ_LEN   = 512
 # ===== LORA =====
 LORA_R     = int(os.getenv('LORA_R',     '64'))
 LORA_ALPHA = int(os.getenv('LORA_ALPHA', '128'))  # = 2r
+INIT_LORA_DIR = os.getenv('INIT_LORA_DIR', '').strip()
 
 # ===== DATA CONFIG =====
 MAX_GOLD   = int(os.getenv('MAX_GOLD',   '999999'))
@@ -539,18 +540,29 @@ def load_model_and_processor():
     params = sum(p.numel() for p in model.parameters()) / 1e9
     print(f'[model] {params:.2f}B params | VRAM: {vram:.1f}GB / {total:.0f}GB')
 
-    # LoRA
-    lora_config = LoraConfig(
-        task_type=TaskType.CAUSAL_LM,
-        r=LORA_R,
-        lora_alpha=LORA_ALPHA,
-        target_modules=['q_proj','k_proj','v_proj','o_proj',
-                        'gate_proj','up_proj','down_proj'],
-        lora_dropout=0.05,
-        bias='none',
-        use_rslora=True,  # RSLoRA stable với r=64
-    )
-    model = get_peft_model(model, lora_config)
+    # LoRA. If INIT_LORA_DIR points to a previous best_checkpoint, continue
+    # from that adapter instead of initializing a fresh LoRA from scratch.
+    if INIT_LORA_DIR:
+        init_lora_path = Path(INIT_LORA_DIR)
+        adapter_file = init_lora_path / 'adapter_model.safetensors'
+        if not init_lora_path.exists() or not adapter_file.exists():
+            raise FileNotFoundError(
+                f'INIT_LORA_DIR is set but adapter checkpoint is missing: {init_lora_path}'
+            )
+        print(f'[lora] Continuing from existing adapter: {init_lora_path}')
+        model = PeftModel.from_pretrained(model, str(init_lora_path), is_trainable=True)
+    else:
+        lora_config = LoraConfig(
+            task_type=TaskType.CAUSAL_LM,
+            r=LORA_R,
+            lora_alpha=LORA_ALPHA,
+            target_modules=['q_proj','k_proj','v_proj','o_proj',
+                            'gate_proj','up_proj','down_proj'],
+            lora_dropout=0.05,
+            bias='none',
+            use_rslora=True,  # RSLoRA stable với r=64
+        )
+        model = get_peft_model(model, lora_config)
 
     trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
     total_p   = sum(p.numel() for p in model.parameters())

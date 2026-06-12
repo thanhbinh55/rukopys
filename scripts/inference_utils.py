@@ -330,7 +330,6 @@ def ocr_crops_batch(crops: list, model, processor, current_bs: int) -> tuple:
                 max_new_tokens=MAX_NEW_TOKENS,
                 do_sample=False,
                 use_cache=True,
-                enable_thinking=False,
             )
 
         input_len = inputs['input_ids'].shape[1]
