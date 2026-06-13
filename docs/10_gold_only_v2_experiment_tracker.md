@@ -21,19 +21,33 @@ assumptions.
 
 ## Current Measured Baseline
 
-The only component metrics currently available were measured on the first
-eight validation pages:
+The baseline metrics measured on the full 143 validation pages (Kaggle commit `9c5897d`):
+
+### End-to-End Baseline (YOLO Detector -> Qwen3-VL Recognizer V1)
 
 | Metric | Value | Reliability |
 |---|---:|---|
-| Composite | 0.842659 | Low: only eight dictation pages |
-| Detector F1 | 0.966361 | Low: type/source coverage is incomplete |
-| Class accuracy | 0.987342 | Reconstructed from the metric formula |
-| Region CER | 0.218372 | Mostly handwritten dictation |
-| Page CER | 0.172301 | Mostly handwritten dictation |
+| Composite | 0.709221 | High: full 143 validation pages |
+| Detector F1 | 0.912793 | High: full 143 validation pages |
+| Class accuracy | 0.966914 | High: full 143 validation pages |
+| Region CER | 0.323964 | High: full 143 validation pages |
+| Page CER | 0.357710 | High: full 143 validation pages |
 
-The eight-page sample contains 159 handwritten, 3 printed, 3 image, and no
-formula/table/annotation regions. It cannot answer which rare type is weak.
+### Ground-Truth Box OCR Baseline (Isolates Recognizer Quality)
+
+| Metric | Value | Reliability |
+|---|---:|---|
+| Composite | 0.757555 | High: full 143 validation pages |
+| Region CER | 0.331693 | High: full 143 validation pages |
+| Page CER | 0.285874 | High: full 143 validation pages |
+
+Per-type Region CER in GT-box OCR:
+- handwritten: 0.3394 (2,323 regions)
+- formula: 0.2691 (376 regions)
+- annotation: 0.5443 (66 regions)
+- printed: 0.2037 (53 regions)
+- table: 0.2454 (13 regions)
+- graph/image: n/a
 
 Full validation contains:
 
@@ -48,6 +62,7 @@ Full validation contains:
 | graph | 11 |
 
 Sources: 35 dictation, 20 archive, 20 university, and 68 school pages.
+
 
 ## Root-Cause Register
 
@@ -87,29 +102,25 @@ Status values: `[ ] pending`, `[~] running`, `[x] passed`, `[!] blocked`,
 
 ### B. Full Baseline Diagnostic
 
-- [~] B1. Stage detector and recognizer artifacts from Kaggle inputs.
+- [x] B1. Stage detector and recognizer artifacts from Kaggle inputs.
   - Required inputs:
     - `/kaggle/input/datasets/bnthanh/rukopys-dataset`
     - `/kaggle/input/datasets/bnthanh/htr-01-train-detector-output`
     - `/kaggle/input/datasets/ngovietan/htr-02-train-recognizer`
-- [ ] B2. Detector-only inference on all 143 validation pages.
-  - Outputs: detector cache, F1/precision/recall, per-type recall, confusion
-    matrix, overlap report.
-  - Pass condition: complete 143/143 pages with no missing images.
-- [ ] B3. GT-box OCR on all scorable validation regions.
+- [x] B2. Detector-only inference on all 143 validation pages.
+  - Outputs: detector cache, F1/precision/recall, per-type recall, confusion matrix, overlap report.
+  - Result: Detector F1 = 0.912793, 93 overlap pairs.
+- [x] B3. GT-box OCR on all scorable validation regions.
   - Output: `valid_gt_box_ocr.csv` and resumable progress JSONL.
-  - Purpose: isolate recognizer quality from detector quality.
-- [ ] B4. End-to-end OCR using cached detector predictions.
+  - Result: Region CER = 0.331693, Page CER = 0.285874.
+- [x] B4. End-to-end OCR using cached detector predictions.
   - Output: `valid_end_to_end.csv`.
-  - Purpose: measure detector/crop/reading-order impact.
-- [ ] B5. Produce full diagnostic report.
-  - Required breakdowns: type, source, text-length bin, crop-size bin,
-    per-page PageCER, false positives/negatives, class confusion.
-- [ ] B6. Compare GT-box and end-to-end results.
-  - Decision:
-    - GT-box bad -> prioritize Recognizer V2.
-    - GT-box good but end-to-end bad -> prioritize crop/detector/order.
-    - Both bad -> fix recognizer first, then detector.
+  - Result: Region CER = 0.323964, Page CER = 0.357710, Composite = 0.709221.
+- [x] B5. Produce full diagnostic report.
+  - Saved under `analysis_outputs/full_validation_diagnostic/`.
+- [x] B6. Compare GT-box and end-to-end results.
+  - Decision: GT-box Region CER is extremely high (0.331693 vs target 0.12). We must prioritize Recognizer V2 prompt, normalization, and training changes first.
+
 
 ### C. Recognizer V2 Patch
 
@@ -175,32 +186,52 @@ Status values: `[ ] pending`, `[~] running`, `[x] passed`, `[!] blocked`,
 | 2026-06-12 | Existing postprocess leaderboard comparison | V3 candidates | `text_strong=0.66754`; stronger bbox deletion is worse | OCR is higher priority than detector retraining |
 | 2026-06-12 | Baseline diagnostic launch | Kaggle commit `9c5897d` | Running on `bnthanh/htr-full-validation-diagnostic` | Do not interpret V2 changes until baseline report completes |
 | 2026-06-12 | Recognizer V2 contract tests | Local pure-Python tests | 7/7 passed | Proceed to GPU ablation after baseline report |
+| 2026-06-13 | Baseline diagnostic report | Kaggle commit `9c5897d` | E2E Composite: 0.709221, GT Region CER: 0.331693 | Prioritize Recognizer V2; next is Stage 1 V2 ablation |
 
 ## Result Template For Each New Run
 
 ```text
-Experiment ID:
-Purpose:
-Checkpoint/source revision:
-Changed variables:
-Fixed variables:
+Experiment ID: EXP-01-BASELINE
+Purpose: Full validation diagnostic of the baseline system (YOLO detector and Qwen3-VL V1 recognizer) on 143 validation pages.
+Checkpoint/source revision: 9c5897d24b63cdcffb9c2fc8f7aeb5955729d53f
+Changed variables: none
+Fixed variables: default baseline thresholds (conf=0.20, iou=0.45), imgsz=1024, max_tokens=96, dataloader defaults
 Input artifacts:
-Runtime/hardware:
-Completion:
+  - bnthanh/rukopys-dataset
+  - bnthanh/htr-01-train-detector-output (detector)
+  - ngovietan/htr-02-train-recognizer (recognizer)
+Runtime/hardware: Kaggle GPU T4 x2
+Completion: Completed successfully (143/143 pages for detector, gt_ocr, e2e)
 
-Composite:
-Detector F1 / precision / recall:
-Class accuracy:
-Region CER:
-Page CER:
+Composite: 0.709221 (E2E) / 0.757555 (GT-box OCR)
+Detector F1 / precision / recall: 0.912793 / 0.884287 / 0.943198
+Class accuracy: 0.966914
+Region CER: 0.323964 (E2E) / 0.331693 (GT-box OCR)
+Page CER: 0.357710 (E2E) / 0.285874 (GT-box OCR)
 
-Per-type CER:
-Per-source PageCER:
+Per-type Region CER (GT-box OCR / E2E):
+- handwritten: 0.3394 / 0.3333
+- formula: 0.2691 / 0.2255
+- annotation: 0.5443 / 0.5127
+- printed: 0.2037 / 0.4929
+- table: 0.2454 / 0.2067
+
+Per-source PageCER (GT-box OCR / E2E):
+- archive: 0.3486 / 0.4016
+- dictation: 0.2761 / 0.2664
+- school: 0.2602 / 0.3497
+- university: 0.3275 / 0.5007
+
 Failure examples:
-Runtime:
-Disk/VRAM peak:
+- images/195812b7-a9bc-4cb1-b688-4d13261acc7a.jpg (university, E2E PageCER=1.2405, predicted regions=36/20, high class confusion and extra boxes)
+- images/3dd87640-0760-48cd-900c-a10d930b497b.jpg (dictation, GT-box PageCER=0.9388, E2E PageCER=1.2226, severe OCR errors)
+Runtime: ~2.5 hours total execution
+Disk/VRAM peak: Normal, within constraints
 
 Conclusion:
-Pass/fail:
-Next decision:
+Baseline successfully measured.
+The primary bottleneck is the recognizer (GT Region CER is 0.331693, far from target <=0.12).
+Detector class confusion (e.g. formula vs handwritten) and duplicate box overlaps (93 overlap pairs) also degrade PageCER.
+Pass/fail: Pass (baseline set)
+Next decision: Proceed to Stage 1 No-Training V2 Ablation on Kaggle to evaluate prompt/preprocessing/generation config improvements before training.
 ```

@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RUKOPYS Prediction Inspector</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef1f4;
+      --surface: #ffffff;
+      --line: #cbd2d9;
+      --ink: #182028;
+      --muted: #687480;
+      --accent: #006d77;
+      --danger: #b42318;
+      --warn: #ad5700;
+      --selected: #e8f5f5;
+      --toolbar-h: 58px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); overflow: hidden; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    .toolbar {
+      height: var(--toolbar-h);
+      display: grid;
+      grid-template-columns: auto minmax(180px, 310px) auto auto 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+      padding: 9px 14px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { font-weight: 750; white-space: nowrap; }
+    .control, .search {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 5px;
+      padding: 7px 10px;
+    }
+    .search { width: 100%; }
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 5px;
+      font-size: 20px;
+      line-height: 1;
+    }
+    .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .zoom-wrap { display: flex; align-items: center; gap: 7px; justify-self: end; }
+    .zoom-wrap input { width: 120px; }
+    .layout {
+      height: calc(100vh - var(--toolbar-h));
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr) 350px;
+    }
+    .sidebar, .details {
+      background: var(--surface);
+      overflow: auto;
+    }
+    .sidebar { border-right: 1px solid var(--line); }
+    .details { border-left: 1px solid var(--line); }
+    .sidebar-head, .details-head {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      padding: 11px 12px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+    .sidebar-head strong, .details-head strong { font-size: 13px; }
+    .summary { color: var(--muted); font-size: 12px; margin-top: 4px; }
+    .image-list { padding: 5px; }
+    .image-row {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 7px;
+      text-align: left;
+      padding: 9px;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      background: transparent;
+    }
+    .image-row:hover { background: #f4f7f8; }
+    .image-row.active { background: var(--selected); border-color: #81b8ba; }
+    .image-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+    .image-meta { color: var(--muted); font-size: 11px; margin-top: 3px; }
+    .count {
+      min-width: 26px;
+      text-align: center;
+      color: #fff;
+      background: #687480;
+      border-radius: 10px;
+      font-size: 11px;
+      padding: 2px 6px;
+      align-self: center;
+    }
+    .count.flagged { background: var(--danger); }
+    .stage {
+      overflow: auto;
+      position: relative;
+      padding: 18px;
+      background-color: #dfe4e8;
+      background-image:
+        linear-gradient(45deg, #d5dbe0 25%, transparent 25%),
+        linear-gradient(-45deg, #d5dbe0 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #d5dbe0 75%),
+        linear-gradient(-45deg, transparent 75%, #d5dbe0 75%);
+      background-size: 24px 24px;
+      background-position: 0 0, 0 12px, 12px -12px, -12px 0;
+    }
+    .canvas {
+      position: relative;
+      margin: 0 auto;
+      width: 100%;
+      max-width: none;
+      box-shadow: 0 2px 14px rgba(23, 32, 40, .20);
+      background: #fff;
+    }
+    .page-image { display: block; width: 100%; height: auto; }
+    .overlay { position: absolute; inset: 0; pointer-events: none; }
+    .bbox {
+      position: absolute;
+      border: 2px solid var(--box);
+      background: color-mix(in srgb, var(--box) 10%, transparent);
+      pointer-events: auto;
+      min-width: 4px;
+      min-height: 4px;
+    }
+    .bbox:hover, .bbox.active { border-width: 3px; z-index: 3; background: color-mix(in srgb, var(--box) 22%, transparent); }
+    .bbox.flagged { border-style: dashed; }
+    .bbox-label {
+      position: absolute;
+      left: -2px;
+      top: -21px;
+      max-width: 260px;
+      padding: 2px 5px;
+      color: #fff;
+      background: var(--box);
+      font-size: 10px;
+      line-height: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      pointer-events: none;
+    }
+    .labels-off .bbox-label { display: none; }
+    .details-body { padding: 12px; }
+    .section { padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--line); }
+    .section:last-child { border-bottom: 0; }
+    .section-title { font-weight: 700; font-size: 12px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .kv { display: grid; grid-template-columns: 90px 1fr; gap: 5px 8px; font-size: 12px; }
+    .kv span:nth-child(odd) { color: var(--muted); }
+    .text-box {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      padding: 9px;
+      background: #f4f6f7;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+      max-height: 260px;
+      overflow: auto;
+    }
+    .raw-text { margin-top: 8px; border-color: #e1a866; background: #fff8ee; }
+    .flags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    .flag {
+      padding: 2px 6px;
+      border-radius: 9px;
+      font-size: 10px;
+      color: #fff;
+      background: var(--warn);
+    }
+    .region-list { display: grid; gap: 5px; }
+    .region-row {
+      display: grid;
+      grid-template-columns: 10px 1fr auto;
+      gap: 7px;
+      align-items: start;
+      width: 100%;
+      padding: 7px;
+      text-align: left;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+    }
+    .region-row:hover, .region-row.active { background: var(--selected); border-color: #81b8ba; }
+    .swatch { width: 10px; height: 10px; margin-top: 3px; background: var(--box); }
+    .region-text { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 11px; }
+    .region-type { color: var(--muted); font-size: 10px; margin-top: 2px; }
+    .removed { color: var(--danger); }
+    .empty {
+      display: grid;
+      place-items: center;
+      height: 100%;
+      color: var(--muted);
+      text-align: center;
+      padding: 30px;
+    }
+    @media (max-width: 1050px) {
+      .toolbar { grid-template-columns: auto 1fr auto auto; }
+      .brand, .zoom-wrap, #sourceFilter { display: none; }
+      .layout { grid-template-columns: 210px minmax(0, 1fr); }
+      .details {
+        position: fixed;
+        z-index: 10;
+        right: 0;
+        top: var(--toolbar-h);
+        bottom: 0;
+        width: min(360px, 90vw);
+        box-shadow: -5px 0 16px rgba(0,0,0,.18);
+        transform: translateX(100%);
+        transition: transform .18s ease;
+      }
+      .details.open { transform: translateX(0); }
+    }
+    @media (max-width: 680px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar {
+        position: fixed;
+        z-index: 9;
+        left: 0;
+        top: var(--toolbar-h);
+        bottom: 0;
+        width: min(290px, 88vw);
+        transform: translateX(-100%);
+        transition: transform .18s ease;
+        box-shadow: 5px 0 16px rgba(0,0,0,.18);
+      }
+      .sidebar.open { transform: translateX(0); }
+      .stage { padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="toolbar">
+    <div class="brand">RUKOPYS Inspector</div>
+    <input id="search" class="search" type="search" placeholder="Tìm filename hoặc OCR">
+    <select id="candidate" class="control" aria-label="Candidate"></select>
+    <select id="sourceFilter" class="control" aria-label="Source">
+      <option value="all">Tất cả source</option>
+      <option value="dictation">dictation</option>
+      <option value="school">school</option>
+      <option value="university">university</option>
+      <option value="archive">archive</option>
+    </select>
+    <label class="control"><input id="flagOnly" type="checkbox"> Có cảnh báo</label>
+    <button id="labelsToggle" class="icon-btn" title="Ẩn/hiện nhãn bbox">T</button>
+    <div class="zoom-wrap"><span id="zoomValue">100%</span><input id="zoom" type="range" min="55" max="180" value="100"></div>
+  </header>
+
+  <main class="layout">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-head">
+        <strong>Ảnh test</strong>
+        <div id="listSummary" class="summary"></div>
+      </div>
+      <div id="imageList" class="image-list"></div>
+    </aside>
+
+    <section id="stage" class="stage">
+      <div id="canvas" class="canvas">
+        <img id="pageImage" class="page-image" alt="">
+        <div id="overlay" class="overlay"></div>
+      </div>
+    </section>
+
+    <aside id="details" class="details">
+      <div class="details-head">
+        <strong>Chi tiết dự đoán</strong>
+        <div id="pageSummary" class="summary"></div>
+      </div>
+      <div id="detailsBody" class="details-body"></div>
+    </aside>
+  </main>
+
+  <script>
+    const COLORS = {
+      handwritten: "#007a78",
+      printed: "#3156a3",
+      formula: "#bd5b00",
+      table: "#7a3e9d",
+      annotation: "#b42318",
+      image: "#52713b",
+      graph: "#6d4c41"
+    };
+    const LABELS = {
+      raw: "Raw baseline",
+      v2: "Postprocess V2",
+      v3_safe: "V3 Safe",
+      v3_balanced: "V3 Balanced",
+      v3_text_strong: "V3 Text Strong",
+      v3_dedup_strong: "V3 Dedup Strong"
+    };
+    const state = {
+      data: null,
+      candidate: "v3_text_strong",
+      currentImage: 0,
+      currentRegion: null,
+      labels: true,
+      search: "",
+      source: "all",
+      flagOnly: false,
+      filtered: []
+    };
+
+    const el = id => document.getElementById(id);
+    const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    })[c]);
+
+    async function init() {
+      state.data = await fetch("viewer_data.json").then(r => {
+        if (!r.ok) throw new Error("Không tải được viewer_data.json");
+        return r.json();
+      });
+      const select = el("candidate");
+      state.data.candidates.forEach(name => {
+        const option = document.createElement("option");
+        option.value = name;
+        option.textContent = LABELS[name] || name;
+        select.appendChild(option);
+      });
+      if (!state.data.candidates.includes(state.candidate)) state.candidate = state.data.candidates[0];
+      select.value = state.candidate;
+      bindEvents();
+      applyFilters();
+      selectImage(0);
+    }
+
+    function bindEvents() {
+      el("candidate").addEventListener("change", event => {
+        state.candidate = event.target.value;
+        state.currentRegion = null;
+        applyFilters();
+        renderCurrent();
+      });
+      el("search").addEventListener("input", event => {
+        state.search = event.target.value.trim().toLowerCase();
+        applyFilters();
+      });
+      el("sourceFilter").addEventListener("change", event => {
+        state.source = event.target.value;
+        applyFilters();
+      });
+      el("flagOnly").addEventListener("change", event => {
+        state.flagOnly = event.target.checked;
+        applyFilters();
+      });
+      el("labelsToggle").addEventListener("click", () => {
+        state.labels = !state.labels;
+        el("canvas").classList.toggle("labels-off", !state.labels);
+      });
+      el("zoom").addEventListener("input", event => {
+        const value = Number(event.target.value);
+        el("zoomValue").textContent = `${value}%`;
+        el("canvas").style.width = `${value}%`;
+      });
+      document.addEventListener("keydown", event => {
+        if (event.target.matches("input, select")) return;
+        if (event.key === "ArrowDown" || event.key === "ArrowRight") moveImage(1);
+        if (event.key === "ArrowUp" || event.key === "ArrowLeft") moveImage(-1);
+      });
+    }
+
+    function prediction(image) {
+      return image.predictions[state.candidate] || {regions: [], removed_from_raw: [], flag_count: 0};
+    }
+
+    function applyFilters() {
+      const query = state.search;
+      state.filtered = state.data.images
+        .map((image, index) => ({image, index}))
+        .filter(({image}) => {
+          if (state.source !== "all" && image.source !== state.source) return false;
+          const pred = prediction(image);
+          if (state.flagOnly && pred.flag_count === 0) return false;
+          if (!query) return true;
+          if (image.image.toLowerCase().includes(query)) return true;
+          return pred.regions.some(region =>
+            region.text.toLowerCase().includes(query) ||
+            region.type.toLowerCase().includes(query)
+          );
+        });
+      renderImageList();
+      el("listSummary").textContent = `${state.filtered.length} / ${state.data.images.length}`;
+    }
+
+    function renderImageList() {
+      const list = el("imageList");
+      list.innerHTML = "";
+      state.filtered.forEach(({image, index}) => {
+        const pred = prediction(image);
+        const button = document.createElement("button");
+        button.className = `image-row${index === state.currentImage ? " active" : ""}`;
+        button.innerHTML = `
+          <div>
+            <div class="image-name">${escapeHtml(image.image)}</div>
+            <div class="image-meta">${escapeHtml(image.source)} · ${pred.regions.length} vùng · -${pred.removed_from_raw.length}</div>
+          </div>
+          <span class="count${pred.flag_count ? " flagged" : ""}">${pred.flag_count}</span>
+        `;
+        button.addEventListener("click", () => selectImage(index));
+        list.appendChild(button);
+      });
+    }
+
+    function selectImage(index) {
+      state.currentImage = Math.max(0, Math.min(state.data.images.length - 1, index));
+      state.currentRegion = null;
+      renderImageList();
+      renderCurrent();
+      const active = el("imageList").querySelector(".active");
+      active?.scrollIntoView({block: "nearest"});
+    }
+
+    function moveImage(delta) {
+      const currentPosition = state.filtered.findIndex(item => item.index === state.currentImage);
+      if (currentPosition < 0 || !state.filtered.length) return;
+      const next = Math.max(0, Math.min(state.filtered.length - 1, currentPosition + delta));
+      selectImage(state.filtered[next].index);
+    }
+
+    function renderCurrent() {
+      const image = state.data.images[state.currentImage];
+      const pred = prediction(image);
+      const img = el("pageImage");
+      img.src = `../../rukopys_raw/test/images/${encodeURIComponent(image.image)}`;
+      img.alt = image.image;
+      el("pageSummary").textContent =
+        `${image.source} · ${image.width}×${image.height} · ${pred.regions.length} vùng`;
+      renderOverlay(image, pred);
+      renderDetails(image, pred);
+    }
+
+    function renderOverlay(image, pred) {
+      const overlay = el("overlay");
+      overlay.innerHTML = "";
+      pred.regions.forEach(region => {
+        const [x1, y1, x2, y2] = region.bbox;
+        const box = document.createElement("button");
+        box.className = `bbox${region.flags.length ? " flagged" : ""}${state.currentRegion === region.id ? " active" : ""}`;
+        box.style.setProperty("--box", COLORS[region.type] || "#555");
+        box.style.left = `${100 * x1 / image.width}%`;
+        box.style.top = `${100 * y1 / image.height}%`;
+        box.style.width = `${100 * (x2 - x1) / image.width}%`;
+        box.style.height = `${100 * (y2 - y1) / image.height}%`;
+        box.title = `${region.type}: ${region.text}`;
+        box.innerHTML = `<span class="bbox-label">#${region.id + 1} ${escapeHtml(region.text || region.type)}</span>`;
+        box.addEventListener("click", event => {
+          event.stopPropagation();
+          state.currentRegion = region.id;
+          renderOverlay(image, pred);
+          renderDetails(image, pred);
+          el("details").classList.add("open");
+        });
+        overlay.appendChild(box);
+      });
+    }
+
+    function renderDetails(image, pred) {
+      const selected = state.currentRegion == null ? null : pred.regions[state.currentRegion];
+      const details = el("detailsBody");
+      let html = `
+        <div class="section">
+          <div class="section-title">Trang</div>
+          <div class="kv">
+            <span>File</span><strong>${escapeHtml(image.image)}</strong>
+            <span>Source</span><strong>${escapeHtml(image.source)}</strong>
+            <span>Candidate</span><strong>${escapeHtml(LABELS[state.candidate] || state.candidate)}</strong>
+            <span>Regions</span><strong>${pred.regions.length}</strong>
+            <span>Đã loại</span><strong class="${pred.removed_from_raw.length ? "removed" : ""}">${pred.removed_from_raw.length}</strong>
+            <span>Cảnh báo</span><strong>${pred.flag_count}</strong>
+          </div>
+        </div>
+      `;
+
+      if (selected) {
+        html += `
+          <div class="section">
+            <div class="section-title">Region #${selected.id + 1}</div>
+            <div class="kv">
+              <span>Type</span><strong>${escapeHtml(selected.type)}</strong>
+              <span>Bbox</span><strong>[${selected.bbox.join(", ")}]</strong>
+              <span>Overlap</span><strong>${selected.overlap_with.length}</strong>
+              <span>Containment</span><strong>${selected.contained_with.length}</strong>
+            </div>
+            <div class="flags">${selected.flags.map(flag => `<span class="flag">${escapeHtml(flag)}</span>`).join("")}</div>
+            <div class="section-title" style="margin-top:12px">OCR hiện tại</div>
+            <div class="text-box">${escapeHtml(selected.text)}</div>
+            ${selected.raw_text != null && selected.raw_text !== selected.text ? `
+              <div class="section-title" style="margin-top:12px">OCR raw trước postprocess</div>
+              <div class="text-box raw-text">${escapeHtml(selected.raw_text)}</div>
+            ` : ""}
+          </div>
+        `;
+      }
+
+      html += `<div class="section"><div class="section-title">Danh sách regions</div><div class="region-list">`;
+      pred.regions.forEach(region => {
+        html += `
+          <button class="region-row${state.currentRegion === region.id ? " active" : ""}" data-region="${region.id}">
+            <span class="swatch" style="--box:${COLORS[region.type] || "#555"}"></span>
+            <span>
+              <span class="region-text">${escapeHtml(region.text || "(empty)")}</span>
+              <span class="region-type">#${region.id + 1} · ${escapeHtml(region.type)} · [${region.bbox.join(", ")}]</span>
+            </span>
+            <span class="count${region.flags.length ? " flagged" : ""}">${region.flags.length}</span>
+          </button>
+        `;
+      });
+      html += `</div></div>`;
+
+      if (pred.removed_from_raw.length) {
+        html += `<div class="section"><div class="section-title removed">Đã bị postprocess loại (${pred.removed_from_raw.length})</div><div class="region-list">`;
+        pred.removed_from_raw.forEach((region, index) => {
+          html += `
+            <div class="region-row">
+              <span class="swatch" style="--box:${COLORS[region.type] || "#555"}"></span>
+              <span>
+                <span class="region-text removed">${escapeHtml(region.text || "(empty)")}</span>
+                <span class="region-type">${escapeHtml(region.type)} · [${region.bbox.join(", ")}]</span>
+              </span>
+              <span class="removed">×</span>
+            </div>
+          `;
+        });
+        html += `</div></div>`;
+      }
+
+      details.innerHTML = html;
+      details.querySelectorAll("[data-region]").forEach(button => {
+        button.addEventListener("click", () => {
+          state.currentRegion = Number(button.dataset.region);
+          renderOverlay(image, pred);
+          renderDetails(image, pred);
+        });
+      });
+    }
+
+    init().catch(error => {
+      el("stage").innerHTML = `<div class="empty"><strong>${escapeHtml(error.message)}</strong></div>`;
+      console.error(error);
+    });
+  </script>
+</body>
+</html>

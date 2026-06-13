@@ -1,0 +1,4708 @@
+{
+  "target_pages": 143,
+  "completed_pages": {
+    "detector": 143,
+    "gt_ocr": 143,
+    "e2e": 143
+  },
+  "gt_ocr": {
+    "official_score": {
+      "composite_score": 0.7575552830592871,
+      "detection_f1": 1.0,
+      "detection_precision": 1.0,
+      "detection_recall": 1.0,
+      "classification_accuracy": 1.0,
+      "region_cer": 0.331692593862421,
+      "page_cer": 0.28587387756397314,
+      "n_images": 143,
+      "n_matched_regions": 2852,
+      "n_false_positives": 0,
+      "n_false_negatives": 0
+    },
+    "analysis": {
+      "completed_pages": 143,
+      "detection": {
+        "true_positive": 2852,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "class_accuracy": 1.0
+      },
+      "by_type": {
+        "annotation": {
+          "gt": 66,
+          "pred": 66,
+          "matched": 66,
+          "class_correct": 66,
+          "false_negative": 0,
+          "false_positive": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "class_accuracy": 1.0,
+          "region_cer": 0.5442975293468714,
+          "cer_regions": 60
+        },
+        "formula": {
+          "gt": 376,
+          "pred": 376,
+          "matched": 376,
+          "class_correct": 376,
+          "false_negative": 0,
+          "false_positive": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "class_accuracy": 1.0,
+          "region_cer": 0.2691319722615661,
+          "cer_regions": 370
+        },
+        "graph": {
+          "gt": 11,
+          "pred": 11,
+          "matched": 11,
+          "class_correct": 11,
+          "false_negative": 0,
+          "false_positive": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "class_accuracy": 1.0,
+          "region_cer": null,
+          "cer_regions": 0
+        },
+        "handwritten": {
+          "gt": 2323,
+          "pred": 2323,
+          "matched": 2323,
+          "class_correct": 2323,
+          "false_negative": 0,
+          "false_positive": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "class_accuracy": 1.0,
+          "region_cer": 0.3393875649723172,
+          "cer_regions": 2311
+        },
+        "image": {
+          "gt": 10,
+          "pred": 10,
+          "matched": 10,
+          "class_correct": 10,
+          "false_negative": 0,
+          "false_positive": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "class_accuracy": 1.0,
+          "region_cer": null,
+          "cer_regions": 0
+        },
+        "printed": {
+          "gt": 53,
+          "pred": 53,
+          "matched": 53,
+          "class_correct": 53,
+          "false_negative": 0,
+          "false_positive": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "class_accuracy": 1.0,
+          "region_cer": 0.20367649925790848,
+          "cer_regions": 51
+        },
+        "table": {
+          "gt": 13,
+          "pred": 13,
+          "matched": 13,
+          "class_correct": 13,
+          "false_negative": 0,
+          "false_positive": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "class_accuracy": 1.0,
+          "region_cer": 0.24538023917334262,
+          "cer_regions": 10
+        }
+      },
+      "by_source": {
+        "archive": {
+          "composite_score": 0.7086535113347712,
+          "detection_f1": 1.0,
+          "detection_precision": 1.0,
+          "detection_recall": 1.0,
+          "classification_accuracy": 1.0,
+          "region_cer": 0.390083819183419,
+          "page_cer": 0.3486426858204061,
+          "n_images": 20,
+          "n_matched_regions": 422,
+          "n_false_positives": 0,
+          "n_false_negatives": 0
+        },
+        "dictation": {
+          "composite_score": 0.7631480968204565,
+          "detection_f1": 1.0,
+          "detection_precision": 1.0,
+          "detection_recall": 1.0,
+          "classification_accuracy": 1.0,
+          "region_cer": 0.32927401936624767,
+          "page_cer": 0.2761393947393386,
+          "n_images": 35,
+          "n_matched_regions": 828,
+          "n_false_positives": 0,
+          "n_false_negatives": 0
+        },
+        "school": {
+          "composite_score": 0.7787613349349585,
+          "detection_f1": 1.0,
+          "detection_precision": 1.0,
+          "detection_recall": 1.0,
+          "classification_accuracy": 1.0,
+          "region_cer": 0.3038213534336394,
+          "page_cer": 0.2601845180698994,
+          "n_images": 68,
+          "n_matched_regions": 1094,
+          "n_false_positives": 0,
+          "n_false_negatives": 0
+        },
+        "university": {
+          "composite_score": 0.7320379700335115,
+          "detection_f1": 1.0,
+          "detection_precision": 1.0,
+          "detection_recall": 1.0,
+          "classification_accuracy": 1.0,
+          "region_cer": 0.3473997056707931,
+          "page_cer": 0.32748423653050135,
+          "n_images": 20,
+          "n_matched_regions": 508,
+          "n_false_positives": 0,
+          "n_false_negatives": 0
+        }
+      },
+      "by_text_length": {
+        "0-15": {
+          "n": 736,
+          "region_cer": 0.3537049755799756
+        },
+        "16-40": {
+          "n": 1354,
+          "region_cer": 0.31029713863028485
+        },
+        "41-96": {
+          "n": 707,
+          "region_cer": 0.3487637251526406
+        },
+        "97-180": {
+          "n": 5,
+          "region_cer": 0.4715013174637955
+        }
+      },
+      "by_crop_height": {
+        "129-256": {
+          "n": 1045,
+          "region_cer": 0.33545050800085763
+        },
+        "65-128": {
+          "n": 1171,
+          "region_cer": 0.3334733606021679
+        },
+        "257+": {
+          "n": 294,
+          "region_cer": 0.3931981047271099
+        },
+        "33-64": {
+          "n": 284,
+          "region_cer": 0.25080607562213103
+        },
+        "0-32": {
+          "n": 8,
+          "region_cer": 0.1912992012516469
+        }
+      },
+      "confusion": [
+        {
+          "gt": "handwritten",
+          "pred": "handwritten",
+          "n": 2323
+        },
+        {
+          "gt": "formula",
+          "pred": "formula",
+          "n": 376
+        },
+        {
+          "gt": "annotation",
+          "pred": "annotation",
+          "n": 66
+        },
+        {
+          "gt": "printed",
+          "pred": "printed",
+          "n": 53
+        },
+        {
+          "gt": "table",
+          "pred": "table",
+          "n": 13
+        },
+        {
+          "gt": "graph",
+          "pred": "graph",
+          "n": 11
+        },
+        {
+          "gt": "image",
+          "pred": "image",
+          "n": 10
+        }
+      ],
+      "page_errors": [
+        {
+          "image": "images/3dd87640-0760-48cd-900c-a10d930b497b.jpg",
+          "source": "dictation",
+          "page_cer": 0.9388029589778076,
+          "gt_chars": 1487,
+          "pred_chars": 2678,
+          "gt_regions": 37,
+          "pred_regions": 37
+        },
+        {
+          "image": "images/19e05d79-f994-4046-927b-ea43cbab55dd.jpg",
+          "source": "dictation",
+          "page_cer": 0.8664772727272727,
+          "gt_chars": 704,
+          "pred_chars": 1268,
+          "gt_regions": 26,
+          "pred_regions": 26
+        },
+        {
+          "image": "images/40cbd188-3b8c-4adb-afd0-cfce1bf2b88f.jpg",
+          "source": "dictation",
+          "page_cer": 0.8562231759656652,
+          "gt_chars": 1398,
+          "pred_chars": 2516,
+          "gt_regions": 33,
+          "pred_regions": 33
+        },
+        {
+          "image": "images/6f63c9f2-c961-5562-af68-5a96bd8614d8.jpg",
+          "source": "school",
+          "page_cer": 0.7657266811279827,
+          "gt_chars": 922,
+          "pred_chars": 1382,
+          "gt_regions": 24,
+          "pred_regions": 24
+        },
+        {
+          "image": "images/18af2afd-4107-4598-b314-93c6af313422.jpg",
+          "source": "dictation",
+          "page_cer": 0.7616580310880829,
+          "gt_chars": 1351,
+          "pred_chars": 2183,
+          "gt_regions": 37,
+          "pred_regions": 37
+        },
+        {
+          "image": "images/ec9dd609-3242-59f9-9403-0dcc1d1eea4c.jpg",
+          "source": "school",
+          "page_cer": 0.7581395348837209,
+          "gt_chars": 430,
+          "pred_chars": 712,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/22bc6edb-5bc7-4b39-a700-1f5e906ae7fd.jpg",
+          "source": "university",
+          "page_cer": 0.6461538461538462,
+          "gt_chars": 650,
+          "pred_chars": 839,
+          "gt_regions": 17,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/3279216f-a680-446e-9e13-14cd3618f718.jpg",
+          "source": "university",
+          "page_cer": 0.6364605543710021,
+          "gt_chars": 938,
+          "pred_chars": 1240,
+          "gt_regions": 35,
+          "pred_regions": 35
+        },
+        {
+          "image": "images/dbd41bf6-ac5e-5382-a0f9-07c323f10d13.jpg",
+          "source": "school",
+          "page_cer": 0.6161290322580645,
+          "gt_chars": 310,
+          "pred_chars": 349,
+          "gt_regions": 24,
+          "pred_regions": 24
+        },
+        {
+          "image": "images/5bbc8721-d32e-41ac-b1f6-5d452b3c3698.jpg",
+          "source": "dictation",
+          "page_cer": 0.5743691899070386,
+          "gt_chars": 1506,
+          "pred_chars": 1946,
+          "gt_regions": 38,
+          "pred_regions": 38
+        },
+        {
+          "image": "images/5656dd23-484d-5120-ae78-e4b59997b416.jpg",
+          "source": "school",
+          "page_cer": 0.5674074074074074,
+          "gt_chars": 675,
+          "pred_chars": 707,
+          "gt_regions": 25,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/d0273ef9-34ef-502b-b2b8-4dcc9992ca5e.jpg",
+          "source": "school",
+          "page_cer": 0.5410764872521246,
+          "gt_chars": 706,
+          "pred_chars": 890,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/410d65cc-de2e-5c29-acf8-015f0f2a57a4.jpg",
+          "source": "school",
+          "page_cer": 0.5238095238095238,
+          "gt_chars": 42,
+          "pred_chars": 38,
+          "gt_regions": 3,
+          "pred_regions": 3
+        },
+        {
+          "image": "images/1063ccb6-122f-4f58-8ca4-34898a45d2dd.jpg",
+          "source": "archive",
+          "page_cer": 0.507201646090535,
+          "gt_chars": 972,
+          "pred_chars": 1069,
+          "gt_regions": 24,
+          "pred_regions": 24
+        },
+        {
+          "image": "images/fe9ae2cf-47a3-5509-9d0e-68e518df903d.jpg",
+          "source": "school",
+          "page_cer": 0.4943820224719101,
+          "gt_chars": 89,
+          "pred_chars": 95,
+          "gt_regions": 10,
+          "pred_regions": 10
+        },
+        {
+          "image": "images/76f39d4a-393a-5ad8-9435-8547c9072f7f.jpg",
+          "source": "school",
+          "page_cer": 0.4858757062146893,
+          "gt_chars": 177,
+          "pred_chars": 146,
+          "gt_regions": 22,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/eb2163e8-34c6-4ae0-bcef-1bf937225449.jpg",
+          "source": "archive",
+          "page_cer": 0.48139255702280914,
+          "gt_chars": 833,
+          "pred_chars": 913,
+          "gt_regions": 27,
+          "pred_regions": 27
+        },
+        {
+          "image": "images/4147d461-2a04-4ed2-864c-10c9dc7c7092.jpg",
+          "source": "archive",
+          "page_cer": 0.4760705289672544,
+          "gt_chars": 397,
+          "pred_chars": 420,
+          "gt_regions": 22,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/3440f410-c95a-4624-90f0-d9c1a96cfaec.jpg",
+          "source": "university",
+          "page_cer": 0.46124031007751937,
+          "gt_chars": 1290,
+          "pred_chars": 1495,
+          "gt_regions": 29,
+          "pred_regions": 29
+        },
+        {
+          "image": "images/3d0acb86-1ebf-5ab8-882c-b9ce02d0f95b.jpg",
+          "source": "school",
+          "page_cer": 0.45993031358885017,
+          "gt_chars": 574,
+          "pred_chars": 710,
+          "gt_regions": 16,
+          "pred_regions": 16
+        },
+        {
+          "image": "images/55f4b72f-65f6-54e4-8b3f-6419542eaa37.jpg",
+          "source": "school",
+          "page_cer": 0.4528301886792453,
+          "gt_chars": 106,
+          "pred_chars": 62,
+          "gt_regions": 4,
+          "pred_regions": 4
+        },
+        {
+          "image": "images/af654da4-c9e3-472e-bcba-c4e9b7cf0b2f.jpg",
+          "source": "university",
+          "page_cer": 0.4435754189944134,
+          "gt_chars": 895,
+          "pred_chars": 1089,
+          "gt_regions": 31,
+          "pred_regions": 31
+        },
+        {
+          "image": "images/67a83f64-6e33-5a4a-9546-25a0cc2994f3.jpg",
+          "source": "school",
+          "page_cer": 0.4393939393939394,
+          "gt_chars": 66,
+          "pred_chars": 74,
+          "gt_regions": 2,
+          "pred_regions": 2
+        },
+        {
+          "image": "images/3f4abc35-7daa-53b2-8bc8-9f57bdcd390e.jpg",
+          "source": "school",
+          "page_cer": 0.4351851851851852,
+          "gt_chars": 108,
+          "pred_chars": 103,
+          "gt_regions": 1,
+          "pred_regions": 1
+        },
+        {
+          "image": "images/2c057dba-42fe-4363-bf3d-22dbef451437.jpg",
+          "source": "archive",
+          "page_cer": 0.4321223709369025,
+          "gt_chars": 523,
+          "pred_chars": 565,
+          "gt_regions": 22,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/a347eb41-ddcd-51b0-b83e-0a3f9d91a5c7.jpg",
+          "source": "school",
+          "page_cer": 0.42857142857142855,
+          "gt_chars": 35,
+          "pred_chars": 32,
+          "gt_regions": 7,
+          "pred_regions": 7
+        },
+        {
+          "image": "images/2d396e4b-5b55-4e86-a382-30c074ce4fd1.jpg",
+          "source": "archive",
+          "page_cer": 0.42274881516587676,
+          "gt_chars": 1055,
+          "pred_chars": 1101,
+          "gt_regions": 28,
+          "pred_regions": 28
+        },
+        {
+          "image": "images/4d42c64b-69a6-48b0-bf22-d25d16ee5848.jpg",
+          "source": "archive",
+          "page_cer": 0.42091152815013405,
+          "gt_chars": 373,
+          "pred_chars": 396,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/e1808133-425d-50ee-8461-fb18ba92a47d.jpg",
+          "source": "school",
+          "page_cer": 0.42066420664206644,
+          "gt_chars": 542,
+          "pred_chars": 507,
+          "gt_regions": 27,
+          "pred_regions": 27
+        },
+        {
+          "image": "images/e3404a2e-fe10-405c-a8ee-d5136d1a6da6.jpg",
+          "source": "archive",
+          "page_cer": 0.4153094462540717,
+          "gt_chars": 1228,
+          "pred_chars": 1266,
+          "gt_regions": 26,
+          "pred_regions": 26
+        },
+        {
+          "image": "images/07943539-2b53-4dae-8214-66907705e691.jpg",
+          "source": "university",
+          "page_cer": 0.4149746192893401,
+          "gt_chars": 788,
+          "pred_chars": 692,
+          "gt_regions": 31,
+          "pred_regions": 31
+        },
+        {
+          "image": "images/2bb89da4-f8e8-4726-afe1-a654976af35a.jpg",
+          "source": "archive",
+          "page_cer": 0.40471512770137524,
+          "gt_chars": 1018,
+          "pred_chars": 1060,
+          "gt_regions": 28,
+          "pred_regions": 28
+        },
+        {
+          "image": "images/1f58c72c-4616-4719-a4d3-bf1c6140eb08.jpg",
+          "source": "archive",
+          "page_cer": 0.4017857142857143,
+          "gt_chars": 112,
+          "pred_chars": 114,
+          "gt_regions": 5,
+          "pred_regions": 5
+        },
+        {
+          "image": "images/1b6d4d18-3861-5695-8e46-0f54babe1662.jpg",
+          "source": "school",
+          "page_cer": 0.39473684210526316,
+          "gt_chars": 38,
+          "pred_chars": 33,
+          "gt_regions": 6,
+          "pred_regions": 6
+        },
+        {
+          "image": "images/2205e385-71e3-4bae-a1b5-120af952ce97.jpg",
+          "source": "university",
+          "page_cer": 0.3851944792973651,
+          "gt_chars": 797,
+          "pred_chars": 979,
+          "gt_regions": 38,
+          "pred_regions": 38
+        },
+        {
+          "image": "images/195812b7-a9bc-4cb1-b688-4d13261acc7a.jpg",
+          "source": "university",
+          "page_cer": 0.3804841149773071,
+          "gt_chars": 1322,
+          "pred_chars": 1526,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/fb9043c7-a06a-4fb7-a745-e6913b17cfc6.jpg",
+          "source": "university",
+          "page_cer": 0.37992831541218636,
+          "gt_chars": 279,
+          "pred_chars": 290,
+          "gt_regions": 12,
+          "pred_regions": 12
+        },
+        {
+          "image": "images/15060d60-be4c-4c24-a1c6-59df4b55af4c.jpg",
+          "source": "archive",
+          "page_cer": 0.37435897435897436,
+          "gt_chars": 390,
+          "pred_chars": 407,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/b27814b0-272d-51b9-aaed-c88c345c208a.jpg",
+          "source": "school",
+          "page_cer": 0.3670886075949367,
+          "gt_chars": 79,
+          "pred_chars": 93,
+          "gt_regions": 8,
+          "pred_regions": 8
+        },
+        {
+          "image": "images/29809bc1-15a1-4943-ba8b-17ef7f9a4c91.jpg",
+          "source": "archive",
+          "page_cer": 0.36596385542168675,
+          "gt_chars": 1328,
+          "pred_chars": 1351,
+          "gt_regions": 28,
+          "pred_regions": 28
+        },
+        {
+          "image": "images/7bd45413-5209-4283-9bfe-119eadcf9f48.jpg",
+          "source": "university",
+          "page_cer": 0.3594890510948905,
+          "gt_chars": 1096,
+          "pred_chars": 1034,
+          "gt_regions": 22,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/4a6a960a-3951-436d-a4c9-67b17b162db0.jpg",
+          "source": "university",
+          "page_cer": 0.3560606060606061,
+          "gt_chars": 528,
+          "pred_chars": 517,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/08fbeebf-6111-4743-bfcf-9d01c11f1f7a.jpg",
+          "source": "archive",
+          "page_cer": 0.3532219570405728,
+          "gt_chars": 419,
+          "pred_chars": 438,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/e1b0696e-ca2d-5fb9-a470-c1e3c5dd4ff3.jpg",
+          "source": "school",
+          "page_cer": 0.35185185185185186,
+          "gt_chars": 54,
+          "pred_chars": 52,
+          "gt_regions": 6,
+          "pred_regions": 6
+        },
+        {
+          "image": "images/5ee2046f-1a0d-58b2-8997-ef1e17ba3f14.jpg",
+          "source": "school",
+          "page_cer": 0.3464566929133858,
+          "gt_chars": 254,
+          "pred_chars": 250,
+          "gt_regions": 8,
+          "pred_regions": 8
+        },
+        {
+          "image": "images/86b4010b-2b26-43b0-8c8f-8f1a1b67f28f.jpg",
+          "source": "university",
+          "page_cer": 0.34572072072072074,
+          "gt_chars": 1776,
+          "pred_chars": 2016,
+          "gt_regions": 30,
+          "pred_regions": 30
+        },
+        {
+          "image": "images/629c5464-2f1a-4405-975c-b7111ba3eb99.jpg",
+          "source": "archive",
+          "page_cer": 0.3318777292576419,
+          "gt_chars": 229,
+          "pred_chars": 222,
+          "gt_regions": 8,
+          "pred_regions": 8
+        },
+        {
+          "image": "images/32c40092-d3f2-4ccb-9508-abdb797f990b.jpg",
+          "source": "dictation",
+          "page_cer": 0.3317422434367542,
+          "gt_chars": 419,
+          "pred_chars": 447,
+          "gt_regions": 15,
+          "pred_regions": 15
+        },
+        {
+          "image": "images/92e591b7-35ce-5c36-81fa-fc57b6a5be58.jpg",
+          "source": "school",
+          "page_cer": 0.32916145181476847,
+          "gt_chars": 799,
+          "pred_chars": 838,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/1aab36d0-c219-42ec-b70b-38c177c48405.jpg",
+          "source": "dictation",
+          "page_cer": 0.32885431400282883,
+          "gt_chars": 1414,
+          "pred_chars": 1528,
+          "gt_regions": 26,
+          "pred_regions": 26
+        },
+        {
+          "image": "images/cada39de-727c-5969-a47b-0aa0a9323ae4.jpg",
+          "source": "school",
+          "page_cer": 0.32716927453769556,
+          "gt_chars": 703,
+          "pred_chars": 719,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/de44686f-e2ab-4e43-aefd-59d91f2fead2.jpg",
+          "source": "archive",
+          "page_cer": 0.3197278911564626,
+          "gt_chars": 588,
+          "pred_chars": 606,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/16e67602-0607-4afa-8c48-97e043292775.jpg",
+          "source": "archive",
+          "page_cer": 0.3160667251975417,
+          "gt_chars": 1139,
+          "pred_chars": 1163,
+          "gt_regions": 27,
+          "pred_regions": 27
+        },
+        {
+          "image": "images/e02c002f-a328-5fbe-adea-07157c6a977a.jpg",
+          "source": "school",
+          "page_cer": 0.30548302872062666,
+          "gt_chars": 383,
+          "pred_chars": 383,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/39c3eda8-e5d0-4566-a036-f002e92a91c6.jpg",
+          "source": "dictation",
+          "page_cer": 0.30497592295345105,
+          "gt_chars": 1246,
+          "pred_chars": 1403,
+          "gt_regions": 29,
+          "pred_regions": 29
+        },
+        {
+          "image": "images/c419ef79-92fc-4a03-be87-0a9b2f83efba.jpg",
+          "source": "archive",
+          "page_cer": 0.29335071707953064,
+          "gt_chars": 767,
+          "pred_chars": 767,
+          "gt_regions": 24,
+          "pred_regions": 24
+        },
+        {
+          "image": "images/b9caccf5-35e9-547a-ba85-c264360317c7.jpg",
+          "source": "school",
+          "page_cer": 0.2878787878787879,
+          "gt_chars": 198,
+          "pred_chars": 199,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/bae2015b-821a-4a69-9fd5-1ae270ec6941.jpg",
+          "source": "dictation",
+          "page_cer": 0.28599221789883267,
+          "gt_chars": 514,
+          "pred_chars": 545,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/b4e58ddb-3001-5a39-9596-845074add672.jpg",
+          "source": "school",
+          "page_cer": 0.28350515463917525,
+          "gt_chars": 194,
+          "pred_chars": 193,
+          "gt_regions": 7,
+          "pred_regions": 7
+        },
+        {
+          "image": "images/c30c3eba-5005-4a9b-9ebc-3c18d1d601d3.jpg",
+          "source": "university",
+          "page_cer": 0.28105906313645623,
+          "gt_chars": 982,
+          "pred_chars": 992,
+          "gt_regions": 30,
+          "pred_regions": 30
+        },
+        {
+          "image": "images/e0908a97-d067-4b38-aa98-dfbf98d476af.jpg",
+          "source": "dictation",
+          "page_cer": 0.2795321637426901,
+          "gt_chars": 855,
+          "pred_chars": 898,
+          "gt_regions": 29,
+          "pred_regions": 29
+        },
+        {
+          "image": "images/56b12561-08a8-43c4-b1af-afedede4127a.jpg",
+          "source": "dictation",
+          "page_cer": 0.2776831345826235,
+          "gt_chars": 587,
+          "pred_chars": 621,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/8773aeed-1297-5372-b537-1097a2030e26.jpg",
+          "source": "school",
+          "page_cer": 0.2756756756756757,
+          "gt_chars": 185,
+          "pred_chars": 187,
+          "gt_regions": 12,
+          "pred_regions": 12
+        },
+        {
+          "image": "images/e53dd9eb-c642-527b-b90b-e63b9da07d5e.jpg",
+          "source": "school",
+          "page_cer": 0.266304347826087,
+          "gt_chars": 184,
+          "pred_chars": 191,
+          "gt_regions": 7,
+          "pred_regions": 7
+        },
+        {
+          "image": "images/796420e3-566e-5f11-ae05-43b8e3d8792b.jpg",
+          "source": "school",
+          "page_cer": 0.2624113475177305,
+          "gt_chars": 141,
+          "pred_chars": 147,
+          "gt_regions": 9,
+          "pred_regions": 9
+        },
+        {
+          "image": "images/9ccd6671-4059-52cc-9000-bf3376738fc5.jpg",
+          "source": "school",
+          "page_cer": 0.25,
+          "gt_chars": 272,
+          "pred_chars": 301,
+          "gt_regions": 12,
+          "pred_regions": 12
+        },
+        {
+          "image": "images/d2df1b5e-ca2f-47a2-90cb-3d93a05b6efd.jpg",
+          "source": "dictation",
+          "page_cer": 0.2495511669658887,
+          "gt_chars": 557,
+          "pred_chars": 576,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/17cf22da-c437-4257-8d87-36586d20d127.jpg",
+          "source": "dictation",
+          "page_cer": 0.24129651860744297,
+          "gt_chars": 833,
+          "pred_chars": 851,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/4c530cdc-c0bf-5929-ab70-eaaaa2be2edf.jpg",
+          "source": "school",
+          "page_cer": 0.23786407766990292,
+          "gt_chars": 412,
+          "pred_chars": 436,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/73dacade-f753-49e4-a25a-c61472b9a638.jpg",
+          "source": "archive",
+          "page_cer": 0.23189983669025585,
+          "gt_chars": 1837,
+          "pred_chars": 1860,
+          "gt_regions": 32,
+          "pred_regions": 32
+        },
+        {
+          "image": "images/ca71bae8-a3ad-5472-86fe-659782a0e6ef.jpg",
+          "source": "school",
+          "page_cer": 0.2271186440677966,
+          "gt_chars": 295,
+          "pred_chars": 279,
+          "gt_regions": 13,
+          "pred_regions": 13
+        },
+        {
+          "image": "images/8b77afde-ad27-4d1a-bd2e-dc5c5138edc4.jpg",
+          "source": "archive",
+          "page_cer": 0.225,
+          "gt_chars": 480,
+          "pred_chars": 486,
+          "gt_regions": 15,
+          "pred_regions": 15
+        },
+        {
+          "image": "images/98ee683c-efa8-5bf0-8dc5-4a1417535b83.jpg",
+          "source": "school",
+          "page_cer": 0.2236024844720497,
+          "gt_chars": 161,
+          "pred_chars": 140,
+          "gt_regions": 7,
+          "pred_regions": 7
+        },
+        {
+          "image": "images/52bcd529-dde6-50bf-aa85-0cd0d54c6d5b.jpg",
+          "source": "school",
+          "page_cer": 0.22085889570552147,
+          "gt_chars": 489,
+          "pred_chars": 486,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/9ec4b2b0-d4d9-4024-8c30-7c648459e905.jpg",
+          "source": "dictation",
+          "page_cer": 0.220675944333996,
+          "gt_chars": 503,
+          "pred_chars": 511,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/8c725fca-e2d3-41b9-884d-3885014c0573.jpg",
+          "source": "university",
+          "page_cer": 0.21836228287841192,
+          "gt_chars": 403,
+          "pred_chars": 346,
+          "gt_regions": 9,
+          "pred_regions": 9
+        },
+        {
+          "image": "images/d161bcc4-6e95-5dca-815a-1da1b06e87e5.jpg",
+          "source": "school",
+          "page_cer": 0.2179930795847751,
+          "gt_chars": 289,
+          "pred_chars": 288,
+          "gt_regions": 16,
+          "pred_regions": 16
+        },
+        {
+          "image": "images/0c239b26-b0fb-418f-b246-0d21b7f2276d.jpg",
+          "source": "dictation",
+          "page_cer": 0.216255442670537,
+          "gt_chars": 689,
+          "pred_chars": 707,
+          "gt_regions": 17,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/37fd383e-3408-4f3f-a293-2bb95b3488f2.jpg",
+          "source": "dictation",
+          "page_cer": 0.21386138613861386,
+          "gt_chars": 1515,
+          "pred_chars": 1528,
+          "gt_regions": 29,
+          "pred_regions": 29
+        },
+        {
+          "image": "images/276f9e4a-cd02-5eac-b578-b8eeae89d4c9.jpg",
+          "source": "school",
+          "page_cer": 0.2112676056338028,
+          "gt_chars": 568,
+          "pred_chars": 620,
+          "gt_regions": 30,
+          "pred_regions": 30
+        },
+        {
+          "image": "images/23cbc409-0a74-4cd0-a211-1a6d655747a4.jpg",
+          "source": "university",
+          "page_cer": 0.21048387096774193,
+          "gt_chars": 1240,
+          "pred_chars": 1332,
+          "gt_regions": 25,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/b5222cba-efbf-5688-9d9f-12936599ee38.jpg",
+          "source": "school",
+          "page_cer": 0.20982142857142858,
+          "gt_chars": 224,
+          "pred_chars": 225,
+          "gt_regions": 15,
+          "pred_regions": 15
+        },
+        {
+          "image": "images/a148fed5-320e-59bc-a30d-12324def3390.jpg",
+          "source": "school",
+          "page_cer": 0.209351011863224,
+          "gt_chars": 1433,
+          "pred_chars": 1711,
+          "gt_regions": 27,
+          "pred_regions": 27
+        },
+        {
+          "image": "images/0a2dc009-ac8e-4026-8f37-81366481235f.jpg",
+          "source": "dictation",
+          "page_cer": 0.20839580209895053,
+          "gt_chars": 667,
+          "pred_chars": 695,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/17b5697c-80bd-48c4-94aa-df6942cdc6a0.jpg",
+          "source": "dictation",
+          "page_cer": 0.20679012345679013,
+          "gt_chars": 648,
+          "pred_chars": 683,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/cd4c4615-e65b-49d1-b29f-468aecff214e.jpg",
+          "source": "dictation",
+          "page_cer": 0.2021505376344086,
+          "gt_chars": 465,
+          "pred_chars": 508,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/485bdee9-b370-59ba-bc17-0eee547ffe6d.jpg",
+          "source": "school",
+          "page_cer": 0.1996615905245347,
+          "gt_chars": 591,
+          "pred_chars": 605,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/321cd11f-a645-4801-8b60-2bdd44a33831.jpg",
+          "source": "university",
+          "page_cer": 0.19504132231404958,
+          "gt_chars": 1210,
+          "pred_chars": 1186,
+          "gt_regions": 61,
+          "pred_regions": 61
+        },
+        {
+          "image": "images/26e0c337-b806-4a49-b9c2-456fb67708aa.jpg",
+          "source": "university",
+          "page_cer": 0.19413092550790068,
+          "gt_chars": 443,
+          "pred_chars": 442,
+          "gt_regions": 13,
+          "pred_regions": 13
+        },
+        {
+          "image": "images/d99d27db-5b8b-59a5-96d0-d6ea61ce9c22.jpg",
+          "source": "school",
+          "page_cer": 0.19382504288164665,
+          "gt_chars": 583,
+          "pred_chars": 601,
+          "gt_regions": 25,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/07c60185-8c2a-40a2-95ef-e5c97ce611a1.jpg",
+          "source": "dictation",
+          "page_cer": 0.19377162629757785,
+          "gt_chars": 578,
+          "pred_chars": 578,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/e51d2dd2-94a6-4bfb-81a4-a68ec2299724.jpg",
+          "source": "university",
+          "page_cer": 0.19313304721030042,
+          "gt_chars": 233,
+          "pred_chars": 227,
+          "gt_regions": 10,
+          "pred_regions": 10
+        },
+        {
+          "image": "images/e1d69a70-82f3-43a5-aab6-ceb3351bd95a.jpg",
+          "source": "archive",
+          "page_cer": 0.1918819188191882,
+          "gt_chars": 271,
+          "pred_chars": 273,
+          "gt_regions": 15,
+          "pred_regions": 15
+        },
+        {
+          "image": "images/a7964907-f53d-5851-9d7e-397bd8b1c542.jpg",
+          "source": "school",
+          "page_cer": 0.18360655737704917,
+          "gt_chars": 305,
+          "pred_chars": 305,
+          "gt_regions": 22,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/4e6b7184-8337-4523-82c4-bfe7fe5cd7cf.jpg",
+          "source": "dictation",
+          "page_cer": 0.1793372319688109,
+          "gt_chars": 513,
+          "pred_chars": 514,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/3f332428-607c-4a8a-9e95-5fbc658a0d25.jpg",
+          "source": "dictation",
+          "page_cer": 0.17504051863857376,
+          "gt_chars": 617,
+          "pred_chars": 634,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/8a8a6dd9-1040-5b11-9c3c-848571dfc1cd.jpg",
+          "source": "school",
+          "page_cer": 0.17391304347826086,
+          "gt_chars": 23,
+          "pred_chars": 23,
+          "gt_regions": 3,
+          "pred_regions": 3
+        },
+        {
+          "image": "images/84146287-d4b4-5e09-bba8-12a933148178.jpg",
+          "source": "school",
+          "page_cer": 0.1736842105263158,
+          "gt_chars": 380,
+          "pred_chars": 359,
+          "gt_regions": 31,
+          "pred_regions": 31
+        },
+        {
+          "image": "images/e28a17e5-7c12-5ed5-8841-c16e389943d7.jpg",
+          "source": "school",
+          "page_cer": 0.17325227963525835,
+          "gt_chars": 329,
+          "pred_chars": 339,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/0f920fea-18c9-4fb7-b520-b57c73fa6ca7.jpg",
+          "source": "dictation",
+          "page_cer": 0.1703958691910499,
+          "gt_chars": 581,
+          "pred_chars": 587,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/2d890d11-0e5d-4b5b-81e9-30d3359f36ef.jpg",
+          "source": "university",
+          "page_cer": 0.16891891891891891,
+          "gt_chars": 444,
+          "pred_chars": 431,
+          "gt_regions": 24,
+          "pred_regions": 24
+        },
+        {
+          "image": "images/b8bba564-71d9-57bf-8f90-d73373b47282.jpg",
+          "source": "school",
+          "page_cer": 0.16058394160583941,
+          "gt_chars": 137,
+          "pred_chars": 140,
+          "gt_regions": 7,
+          "pred_regions": 7
+        },
+        {
+          "image": "images/aaa48dd7-a21e-5e25-acae-cfa0f05e2eb6.jpg",
+          "source": "school",
+          "page_cer": 0.15789473684210525,
+          "gt_chars": 513,
+          "pred_chars": 490,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/bd13454a-6174-54b2-94f7-87e8542d543d.jpg",
+          "source": "school",
+          "page_cer": 0.1573373676248109,
+          "gt_chars": 661,
+          "pred_chars": 695,
+          "gt_regions": 27,
+          "pred_regions": 27
+        },
+        {
+          "image": "images/33b81934-8670-4bcd-8173-f8aa4eaf811f.jpg",
+          "source": "university",
+          "page_cer": 0.1539961013645224,
+          "gt_chars": 513,
+          "pred_chars": 539,
+          "gt_regions": 24,
+          "pred_regions": 24
+        },
+        {
+          "image": "images/46220e58-94d4-4c00-84a9-f5bed67f92bb.jpg",
+          "source": "dictation",
+          "page_cer": 0.1527027027027027,
+          "gt_chars": 1480,
+          "pred_chars": 1516,
+          "gt_regions": 33,
+          "pred_regions": 33
+        },
+        {
+          "image": "images/1809c0e4-44ed-4b0f-b905-5e99dc7a43cd.jpg",
+          "source": "dictation",
+          "page_cer": 0.15182186234817813,
+          "gt_chars": 494,
+          "pred_chars": 501,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/085b57e6-54e9-5fd0-99d0-d260c08bd9b9.jpg",
+          "source": "school",
+          "page_cer": 0.15151515151515152,
+          "gt_chars": 66,
+          "pred_chars": 68,
+          "gt_regions": 8,
+          "pred_regions": 8
+        },
+        {
+          "image": "images/4bb39692-5b12-545b-b505-921c9bd80afd.jpg",
+          "source": "school",
+          "page_cer": 0.1493411420204978,
+          "gt_chars": 683,
+          "pred_chars": 712,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/d969e0e1-a6a2-45d4-9d18-362f8106ecb8.jpg",
+          "source": "dictation",
+          "page_cer": 0.14708171206225681,
+          "gt_chars": 1285,
+          "pred_chars": 1303,
+          "gt_regions": 33,
+          "pred_regions": 33
+        },
+        {
+          "image": "images/f0150ca6-0a33-5abe-89b1-22203a0d581b.jpg",
+          "source": "school",
+          "page_cer": 0.14606741573033707,
+          "gt_chars": 178,
+          "pred_chars": 179,
+          "gt_regions": 8,
+          "pred_regions": 8
+        },
+        {
+          "image": "images/3505c735-4f78-482a-9685-699889340d84.jpg",
+          "source": "dictation",
+          "page_cer": 0.14533333333333334,
+          "gt_chars": 750,
+          "pred_chars": 727,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/904167a5-9215-4b8a-99ca-a61d20402f31.jpg",
+          "source": "dictation",
+          "page_cer": 0.1450381679389313,
+          "gt_chars": 524,
+          "pred_chars": 531,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/c99bbe02-7960-5bab-98d8-6cc1033a489d.jpg",
+          "source": "school",
+          "page_cer": 0.14492753623188406,
+          "gt_chars": 276,
+          "pred_chars": 267,
+          "gt_regions": 16,
+          "pred_regions": 16
+        },
+        {
+          "image": "images/c6279118-6e4d-53ef-9364-d765d9115e82.jpg",
+          "source": "school",
+          "page_cer": 0.14327485380116958,
+          "gt_chars": 342,
+          "pred_chars": 351,
+          "gt_regions": 22,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/2f0840d4-76b7-5436-8a0a-4d75262718c8.jpg",
+          "source": "school",
+          "page_cer": 0.14285714285714285,
+          "gt_chars": 210,
+          "pred_chars": 205,
+          "gt_regions": 9,
+          "pred_regions": 9
+        },
+        {
+          "image": "images/89548c27-a828-51d2-afdb-6f84ae2c7988.jpg",
+          "source": "school",
+          "page_cer": 0.1424968474148802,
+          "gt_chars": 793,
+          "pred_chars": 802,
+          "gt_regions": 51,
+          "pred_regions": 51
+        },
+        {
+          "image": "images/2cca6e5a-ae96-518b-82c7-4698dc4f0926.jpg",
+          "source": "school",
+          "page_cer": 0.140625,
+          "gt_chars": 192,
+          "pred_chars": 181,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/78327536-7faf-531b-bbad-7365b3795bea.jpg",
+          "source": "school",
+          "page_cer": 0.13953488372093023,
+          "gt_chars": 86,
+          "pred_chars": 82,
+          "gt_regions": 4,
+          "pred_regions": 4
+        },
+        {
+          "image": "images/4409e959-0539-5c8e-a7e3-9718b5cc39f2.jpg",
+          "source": "school",
+          "page_cer": 0.13865546218487396,
+          "gt_chars": 476,
+          "pred_chars": 492,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/4b35c5a4-d99d-526b-85ef-ac8f172cc88a.jpg",
+          "source": "school",
+          "page_cer": 0.13366336633663367,
+          "gt_chars": 606,
+          "pred_chars": 619,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/45d38ca7-ae56-4613-88a4-9fcbd232d160.jpg",
+          "source": "dictation",
+          "page_cer": 0.1267387944358578,
+          "gt_chars": 647,
+          "pred_chars": 644,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/155d7cae-48e4-534f-8711-20ce357d6e9d.jpg",
+          "source": "school",
+          "page_cer": 0.12556053811659193,
+          "gt_chars": 446,
+          "pred_chars": 449,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/35fd36d5-b0a5-41a3-a311-e439d73f451b.jpg",
+          "source": "university",
+          "page_cer": 0.12527716186252771,
+          "gt_chars": 902,
+          "pred_chars": 974,
+          "gt_regions": 26,
+          "pred_regions": 26
+        },
+        {
+          "image": "images/97a3c3d2-a680-5e95-9517-c7a2a8c19cab.jpg",
+          "source": "school",
+          "page_cer": 0.1216,
+          "gt_chars": 625,
+          "pred_chars": 603,
+          "gt_regions": 28,
+          "pred_regions": 28
+        },
+        {
+          "image": "images/beee85cf-3272-5dd4-b644-9ae6e0e829ae.jpg",
+          "source": "school",
+          "page_cer": 0.11567164179104478,
+          "gt_chars": 536,
+          "pred_chars": 537,
+          "gt_regions": 16,
+          "pred_regions": 16
+        },
+        {
+          "image": "images/2a40e968-9d79-5272-9e10-4c3d1eeabcd6.jpg",
+          "source": "school",
+          "page_cer": 0.11244979919678715,
+          "gt_chars": 249,
+          "pred_chars": 255,
+          "gt_regions": 11,
+          "pred_regions": 11
+        },
+        {
+          "image": "images/127c0dd2-85ab-53bb-b492-51058f15422c.jpg",
+          "source": "school",
+          "page_cer": 0.11214953271028037,
+          "gt_chars": 428,
+          "pred_chars": 459,
+          "gt_regions": 11,
+          "pred_regions": 11
+        },
+        {
+          "image": "images/b1f7c6b6-29dc-5692-905d-b9e4386d1c9f.jpg",
+          "source": "school",
+          "page_cer": 0.11073825503355705,
+          "gt_chars": 298,
+          "pred_chars": 291,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/d1988833-b296-594a-bf4c-455669aec004.jpg",
+          "source": "school",
+          "page_cer": 0.10723860589812333,
+          "gt_chars": 373,
+          "pred_chars": 362,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/527f12c0-43dc-5593-8b4b-426229bf482f.jpg",
+          "source": "school",
+          "page_cer": 0.10714285714285714,
+          "gt_chars": 28,
+          "pred_chars": 28,
+          "gt_regions": 5,
+          "pred_regions": 5
+        },
+        {
+          "image": "images/7a719234-cf2c-5a07-9986-c134871da299.jpg",
+          "source": "school",
+          "page_cer": 0.10526315789473684,
+          "gt_chars": 703,
+          "pred_chars": 712,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/a1055d8e-925d-4d51-86ce-b5dc3252df78.jpg",
+          "source": "dictation",
+          "page_cer": 0.10174418604651163,
+          "gt_chars": 688,
+          "pred_chars": 697,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/3718ed45-c8ad-409b-b174-7e90c05b5c3f.jpg",
+          "source": "dictation",
+          "page_cer": 0.09925925925925926,
+          "gt_chars": 675,
+          "pred_chars": 687,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/a111d6d7-056b-5bd7-b359-c457ae1e4f7b.jpg",
+          "source": "school",
+          "page_cer": 0.09523809523809523,
+          "gt_chars": 399,
+          "pred_chars": 398,
+          "gt_regions": 15,
+          "pred_regions": 15
+        },
+        {
+          "image": "images/1577fab4-e890-5825-90bb-390e8e7e493b.jpg",
+          "source": "school",
+          "page_cer": 0.09375,
+          "gt_chars": 224,
+          "pred_chars": 225,
+          "gt_regions": 9,
+          "pred_regions": 9
+        },
+        {
+          "image": "images/019035a0-682b-409a-9951-ed2af6555213.jpg",
+          "source": "dictation",
+          "page_cer": 0.09298245614035087,
+          "gt_chars": 570,
+          "pred_chars": 570,
+          "gt_regions": 22,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/511d1cef-ff01-5043-8449-bc6badcb3d05.jpg",
+          "source": "school",
+          "page_cer": 0.0880281690140845,
+          "gt_chars": 284,
+          "pred_chars": 274,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/1a08aa19-6b02-4d80-9977-9932971e930f.jpg",
+          "source": "dictation",
+          "page_cer": 0.07957559681697612,
+          "gt_chars": 754,
+          "pred_chars": 764,
+          "gt_regions": 25,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/93b9e5e7-c844-4abf-8cce-87c2d3e99f4d.jpg",
+          "source": "dictation",
+          "page_cer": 0.07898089171974522,
+          "gt_chars": 785,
+          "pred_chars": 793,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/19dd4844-2338-4b7b-aa21-40893c4f96a4.jpg",
+          "source": "dictation",
+          "page_cer": 0.05978705978705979,
+          "gt_chars": 1221,
+          "pred_chars": 1232,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/c7f116b6-f582-5d98-ba13-f23590079de8.jpg",
+          "source": "school",
+          "page_cer": 0.05627705627705628,
+          "gt_chars": 231,
+          "pred_chars": 237,
+          "gt_regions": 12,
+          "pred_regions": 12
+        },
+        {
+          "image": "images/77735e58-463f-4283-ba61-21dd3177d187.jpg",
+          "source": "archive",
+          "page_cer": 0.007246376811594203,
+          "gt_chars": 414,
+          "pred_chars": 415,
+          "gt_regions": 12,
+          "pred_regions": 12
+        }
+      ],
+      "iou80_overlap_pairs": 0
+    }
+  },
+  "e2e": {
+    "official_score": {
+      "composite_score": 0.7092207038933593,
+      "detection_f1": 0.9127926705123856,
+      "detection_precision": 0.8842866535174227,
+      "detection_recall": 0.9431977559607293,
+      "classification_accuracy": 0.966914498141264,
+      "region_cer": 0.3239638991773975,
+      "page_cer": 0.357709503674685,
+      "n_images": 143,
+      "n_matched_regions": 2690,
+      "n_false_positives": 352,
+      "n_false_negatives": 162
+    },
+    "analysis": {
+      "completed_pages": 143,
+      "detection": {
+        "true_positive": 2690,
+        "false_positive": 352,
+        "false_negative": 162,
+        "precision": 0.8842866535174227,
+        "recall": 0.9431977559607293,
+        "f1": 0.9127926705123856,
+        "class_accuracy": 0.966914498141264
+      },
+      "by_type": {
+        "annotation": {
+          "gt": 66,
+          "pred": 63,
+          "matched": 50,
+          "class_correct": 40,
+          "false_negative": 16,
+          "false_positive": 18,
+          "recall": 0.7575757575757576,
+          "precision": 0.7352941176470589,
+          "class_accuracy": 0.8,
+          "region_cer": 0.5127475412014886,
+          "cer_regions": 44
+        },
+        "formula": {
+          "gt": 376,
+          "pred": 492,
+          "matched": 355,
+          "class_correct": 346,
+          "false_negative": 21,
+          "false_positive": 83,
+          "recall": 0.9441489361702128,
+          "precision": 0.8105022831050228,
+          "class_accuracy": 0.9746478873239437,
+          "region_cer": 0.22548490596966358,
+          "cer_regions": 349
+        },
+        "graph": {
+          "gt": 11,
+          "pred": 8,
+          "matched": 5,
+          "class_correct": 5,
+          "false_negative": 6,
+          "false_positive": 3,
+          "recall": 0.45454545454545453,
+          "precision": 0.625,
+          "class_accuracy": 1.0,
+          "region_cer": null,
+          "cer_regions": 0
+        },
+        "handwritten": {
+          "gt": 2323,
+          "pred": 2400,
+          "matched": 2226,
+          "class_correct": 2160,
+          "false_negative": 97,
+          "false_positive": 220,
+          "recall": 0.9582436504520018,
+          "precision": 0.9100572363041701,
+          "class_accuracy": 0.9703504043126685,
+          "region_cer": 0.333323999769072,
+          "cer_regions": 2217
+        },
+        "image": {
+          "gt": 10,
+          "pred": 9,
+          "matched": 6,
+          "class_correct": 5,
+          "false_negative": 4,
+          "false_positive": 4,
+          "recall": 0.6,
+          "precision": 0.6,
+          "class_accuracy": 0.8333333333333334,
+          "region_cer": null,
+          "cer_regions": 0
+        },
+        "printed": {
+          "gt": 53,
+          "pred": 59,
+          "matched": 38,
+          "class_correct": 35,
+          "false_negative": 15,
+          "false_positive": 24,
+          "recall": 0.7169811320754716,
+          "precision": 0.6129032258064516,
+          "class_accuracy": 0.9210526315789473,
+          "region_cer": 0.4928649355413642,
+          "cer_regions": 37
+        },
+        "table": {
+          "gt": 13,
+          "pred": 11,
+          "matched": 10,
+          "class_correct": 10,
+          "false_negative": 3,
+          "false_positive": 0,
+          "recall": 0.7692307692307693,
+          "precision": 1.0,
+          "class_accuracy": 1.0,
+          "region_cer": 0.2067147770811564,
+          "cer_regions": 8
+        }
+      },
+      "by_source": {
+        "archive": {
+          "composite_score": 0.676859137696092,
+          "detection_f1": 0.9498249708284714,
+          "detection_precision": 0.9356321839080459,
+          "detection_recall": 0.9644549763033176,
+          "classification_accuracy": 0.9877149877149877,
+          "region_cer": 0.3806940592345912,
+          "page_cer": 0.4015842790871016,
+          "n_images": 20,
+          "n_matched_regions": 407,
+          "n_false_positives": 28,
+          "n_false_negatives": 15
+        },
+        "dictation": {
+          "composite_score": 0.7643953929543166,
+          "detection_f1": 0.9593199757134184,
+          "detection_precision": 0.9645909645909646,
+          "detection_recall": 0.9541062801932367,
+          "classification_accuracy": 0.9886075949367089,
+          "region_cer": 0.3190999085532323,
+          "page_cer": 0.2664060211671239,
+          "n_images": 35,
+          "n_matched_regions": 790,
+          "n_false_positives": 29,
+          "n_false_negatives": 38
+        },
+        "school": {
+          "composite_score": 0.7144090090454904,
+          "detection_f1": 0.8878260869565217,
+          "detection_precision": 0.8466003316749585,
+          "detection_recall": 0.93327239488117,
+          "classification_accuracy": 0.9618021547502449,
+          "region_cer": 0.30661253727748755,
+          "page_cer": 0.3497425011045076,
+          "n_images": 68,
+          "n_matched_regions": 1021,
+          "n_false_positives": 185,
+          "n_false_negatives": 73
+        },
+        "university": {
+          "composite_score": 0.6294134929496384,
+          "detection_f1": 0.8660550458715597,
+          "detection_precision": 0.8109965635738832,
+          "detection_recall": 0.9291338582677166,
+          "classification_accuracy": 0.923728813559322,
+          "region_cer": 0.32109796304836663,
+          "page_cer": 0.5007036313891035,
+          "n_images": 20,
+          "n_matched_regions": 472,
+          "n_false_positives": 110,
+          "n_false_negatives": 36
+        }
+      },
+      "by_text_length": {
+        "0-15": {
+          "n": 664,
+          "region_cer": 0.33674262066581345
+        },
+        "16-40": {
+          "n": 1316,
+          "region_cer": 0.2886478927042728
+        },
+        "41-96": {
+          "n": 671,
+          "region_cer": 0.37946451473019505
+        },
+        "97-180": {
+          "n": 4,
+          "region_cer": 0.5114340027765863
+        }
+      },
+      "by_crop_height": {
+        "129-256": {
+          "n": 1003,
+          "region_cer": 0.31674011462574875
+        },
+        "65-128": {
+          "n": 1117,
+          "region_cer": 0.33728414566419024
+        },
+        "33-64": {
+          "n": 253,
+          "region_cer": 0.2939776501767898
+        },
+        "257+": {
+          "n": 277,
+          "region_cer": 0.3191940901188372
+        },
+        "0-32": {
+          "n": 5,
+          "region_cer": 0.5788636363636364
+        }
+      },
+      "confusion": [
+        {
+          "gt": "handwritten",
+          "pred": "handwritten",
+          "n": 2160
+        },
+        {
+          "gt": "formula",
+          "pred": "formula",
+          "n": 346
+        },
+        {
+          "gt": "handwritten",
+          "pred": "formula",
+          "n": 62
+        },
+        {
+          "gt": "annotation",
+          "pred": "annotation",
+          "n": 40
+        },
+        {
+          "gt": "printed",
+          "pred": "printed",
+          "n": 35
+        },
+        {
+          "gt": "table",
+          "pred": "table",
+          "n": 10
+        },
+        {
+          "gt": "annotation",
+          "pred": "handwritten",
+          "n": 9
+        },
+        {
+          "gt": "formula",
+          "pred": "handwritten",
+          "n": 8
+        },
+        {
+          "gt": "image",
+          "pred": "image",
+          "n": 5
+        },
+        {
+          "gt": "graph",
+          "pred": "graph",
+          "n": 5
+        },
+        {
+          "gt": "handwritten",
+          "pred": "annotation",
+          "n": 4
+        },
+        {
+          "gt": "printed",
+          "pred": "handwritten",
+          "n": 2
+        },
+        {
+          "gt": "printed",
+          "pred": "annotation",
+          "n": 1
+        },
+        {
+          "gt": "image",
+          "pred": "handwritten",
+          "n": 1
+        },
+        {
+          "gt": "annotation",
+          "pred": "formula",
+          "n": 1
+        },
+        {
+          "gt": "formula",
+          "pred": "table",
+          "n": 1
+        }
+      ],
+      "page_errors": [
+        {
+          "image": "images/195812b7-a9bc-4cb1-b688-4d13261acc7a.jpg",
+          "source": "university",
+          "page_cer": 1.2405446293494704,
+          "gt_chars": 1322,
+          "pred_chars": 2761,
+          "gt_regions": 20,
+          "pred_regions": 36
+        },
+        {
+          "image": "images/3dd87640-0760-48cd-900c-a10d930b497b.jpg",
+          "source": "dictation",
+          "page_cer": 1.222595830531271,
+          "gt_chars": 1487,
+          "pred_chars": 3061,
+          "gt_regions": 37,
+          "pred_regions": 32
+        },
+        {
+          "image": "images/1f58c72c-4616-4719-a4d3-bf1c6140eb08.jpg",
+          "source": "archive",
+          "page_cer": 1.0982142857142858,
+          "gt_chars": 112,
+          "pred_chars": 199,
+          "gt_regions": 5,
+          "pred_regions": 9
+        },
+        {
+          "image": "images/a148fed5-320e-59bc-a30d-12324def3390.jpg",
+          "source": "school",
+          "page_cer": 0.9755757152826239,
+          "gt_chars": 1433,
+          "pred_chars": 2768,
+          "gt_regions": 27,
+          "pred_regions": 27
+        },
+        {
+          "image": "images/5bbc8721-d32e-41ac-b1f6-5d452b3c3698.jpg",
+          "source": "dictation",
+          "page_cer": 0.8665338645418327,
+          "gt_chars": 1506,
+          "pred_chars": 2284,
+          "gt_regions": 38,
+          "pred_regions": 34
+        },
+        {
+          "image": "images/5ee2046f-1a0d-58b2-8997-ef1e17ba3f14.jpg",
+          "source": "school",
+          "page_cer": 0.8267716535433071,
+          "gt_chars": 254,
+          "pred_chars": 360,
+          "gt_regions": 8,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/fe9ae2cf-47a3-5509-9d0e-68e518df903d.jpg",
+          "source": "school",
+          "page_cer": 0.797752808988764,
+          "gt_chars": 89,
+          "pred_chars": 132,
+          "gt_regions": 10,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/a111d6d7-056b-5bd7-b359-c457ae1e4f7b.jpg",
+          "source": "school",
+          "page_cer": 0.7969924812030075,
+          "gt_chars": 399,
+          "pred_chars": 695,
+          "gt_regions": 15,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/e1808133-425d-50ee-8461-fb18ba92a47d.jpg",
+          "source": "school",
+          "page_cer": 0.7675276752767528,
+          "gt_chars": 542,
+          "pred_chars": 755,
+          "gt_regions": 27,
+          "pred_regions": 44
+        },
+        {
+          "image": "images/8a8a6dd9-1040-5b11-9c3c-848571dfc1cd.jpg",
+          "source": "school",
+          "page_cer": 0.7391304347826086,
+          "gt_chars": 23,
+          "pred_chars": 13,
+          "gt_regions": 3,
+          "pred_regions": 3
+        },
+        {
+          "image": "images/6f63c9f2-c961-5562-af68-5a96bd8614d8.jpg",
+          "source": "school",
+          "page_cer": 0.710412147505423,
+          "gt_chars": 922,
+          "pred_chars": 1271,
+          "gt_regions": 24,
+          "pred_regions": 29
+        },
+        {
+          "image": "images/26e0c337-b806-4a49-b9c2-456fb67708aa.jpg",
+          "source": "university",
+          "page_cer": 0.6862302483069977,
+          "gt_chars": 443,
+          "pred_chars": 623,
+          "gt_regions": 13,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/3f4abc35-7daa-53b2-8bc8-9f57bdcd390e.jpg",
+          "source": "school",
+          "page_cer": 0.6296296296296297,
+          "gt_chars": 108,
+          "pred_chars": 133,
+          "gt_regions": 1,
+          "pred_regions": 28
+        },
+        {
+          "image": "images/7bd45413-5209-4283-9bfe-119eadcf9f48.jpg",
+          "source": "university",
+          "page_cer": 0.6186131386861314,
+          "gt_chars": 1096,
+          "pred_chars": 1337,
+          "gt_regions": 22,
+          "pred_regions": 30
+        },
+        {
+          "image": "images/276f9e4a-cd02-5eac-b578-b8eeae89d4c9.jpg",
+          "source": "school",
+          "page_cer": 0.6161971830985915,
+          "gt_chars": 568,
+          "pred_chars": 774,
+          "gt_regions": 30,
+          "pred_regions": 37
+        },
+        {
+          "image": "images/22bc6edb-5bc7-4b39-a700-1f5e906ae7fd.jpg",
+          "source": "university",
+          "page_cer": 0.6061538461538462,
+          "gt_chars": 650,
+          "pred_chars": 775,
+          "gt_regions": 17,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/c30c3eba-5005-4a9b-9ebc-3c18d1d601d3.jpg",
+          "source": "university",
+          "page_cer": 0.6028513238289206,
+          "gt_chars": 982,
+          "pred_chars": 1252,
+          "gt_regions": 30,
+          "pred_regions": 31
+        },
+        {
+          "image": "images/3440f410-c95a-4624-90f0-d9c1a96cfaec.jpg",
+          "source": "university",
+          "page_cer": 0.5821705426356589,
+          "gt_chars": 1290,
+          "pred_chars": 1732,
+          "gt_regions": 29,
+          "pred_regions": 35
+        },
+        {
+          "image": "images/dbd41bf6-ac5e-5382-a0f9-07c323f10d13.jpg",
+          "source": "school",
+          "page_cer": 0.5806451612903226,
+          "gt_chars": 310,
+          "pred_chars": 344,
+          "gt_regions": 24,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/c7f116b6-f582-5d98-ba13-f23590079de8.jpg",
+          "source": "school",
+          "page_cer": 0.5670995670995671,
+          "gt_chars": 231,
+          "pred_chars": 350,
+          "gt_regions": 12,
+          "pred_regions": 13
+        },
+        {
+          "image": "images/5656dd23-484d-5120-ae78-e4b59997b416.jpg",
+          "source": "school",
+          "page_cer": 0.562962962962963,
+          "gt_chars": 675,
+          "pred_chars": 696,
+          "gt_regions": 25,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/485bdee9-b370-59ba-bc17-0eee547ffe6d.jpg",
+          "source": "school",
+          "page_cer": 0.5617597292724196,
+          "gt_chars": 591,
+          "pred_chars": 826,
+          "gt_regions": 18,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/fb9043c7-a06a-4fb7-a745-e6913b17cfc6.jpg",
+          "source": "university",
+          "page_cer": 0.5591397849462365,
+          "gt_chars": 279,
+          "pred_chars": 359,
+          "gt_regions": 12,
+          "pred_regions": 16
+        },
+        {
+          "image": "images/8c725fca-e2d3-41b9-884d-3885014c0573.jpg",
+          "source": "university",
+          "page_cer": 0.5533498759305211,
+          "gt_chars": 403,
+          "pred_chars": 466,
+          "gt_regions": 9,
+          "pred_regions": 11
+        },
+        {
+          "image": "images/18af2afd-4107-4598-b314-93c6af313422.jpg",
+          "source": "dictation",
+          "page_cer": 0.537379718726869,
+          "gt_chars": 1351,
+          "pred_chars": 1819,
+          "gt_regions": 37,
+          "pred_regions": 31
+        },
+        {
+          "image": "images/76f39d4a-393a-5ad8-9435-8547c9072f7f.jpg",
+          "source": "school",
+          "page_cer": 0.5310734463276836,
+          "gt_chars": 177,
+          "pred_chars": 147,
+          "gt_regions": 22,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/2c057dba-42fe-4363-bf3d-22dbef451437.jpg",
+          "source": "archive",
+          "page_cer": 0.5239005736137667,
+          "gt_chars": 523,
+          "pred_chars": 580,
+          "gt_regions": 22,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/1063ccb6-122f-4f58-8ca4-34898a45d2dd.jpg",
+          "source": "archive",
+          "page_cer": 0.5164609053497943,
+          "gt_chars": 972,
+          "pred_chars": 1057,
+          "gt_regions": 24,
+          "pred_regions": 24
+        },
+        {
+          "image": "images/cd4c4615-e65b-49d1-b29f-468aecff214e.jpg",
+          "source": "dictation",
+          "page_cer": 0.49032258064516127,
+          "gt_chars": 465,
+          "pred_chars": 638,
+          "gt_regions": 19,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/07943539-2b53-4dae-8214-66907705e691.jpg",
+          "source": "university",
+          "page_cer": 0.4873096446700508,
+          "gt_chars": 788,
+          "pred_chars": 772,
+          "gt_regions": 31,
+          "pred_regions": 34
+        },
+        {
+          "image": "images/c99bbe02-7960-5bab-98d8-6cc1033a489d.jpg",
+          "source": "school",
+          "page_cer": 0.4855072463768116,
+          "gt_chars": 276,
+          "pred_chars": 340,
+          "gt_regions": 16,
+          "pred_regions": 14
+        },
+        {
+          "image": "images/3d0acb86-1ebf-5ab8-882c-b9ce02d0f95b.jpg",
+          "source": "school",
+          "page_cer": 0.4843205574912892,
+          "gt_chars": 574,
+          "pred_chars": 742,
+          "gt_regions": 16,
+          "pred_regions": 16
+        },
+        {
+          "image": "images/e51d2dd2-94a6-4bfb-81a4-a68ec2299724.jpg",
+          "source": "university",
+          "page_cer": 0.47639484978540775,
+          "gt_chars": 233,
+          "pred_chars": 303,
+          "gt_regions": 10,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/e3404a2e-fe10-405c-a8ee-d5136d1a6da6.jpg",
+          "source": "archive",
+          "page_cer": 0.4714983713355049,
+          "gt_chars": 1228,
+          "pred_chars": 1425,
+          "gt_regions": 26,
+          "pred_regions": 28
+        },
+        {
+          "image": "images/67a83f64-6e33-5a4a-9546-25a0cc2994f3.jpg",
+          "source": "school",
+          "page_cer": 0.4696969696969697,
+          "gt_chars": 66,
+          "pred_chars": 76,
+          "gt_regions": 2,
+          "pred_regions": 3
+        },
+        {
+          "image": "images/af654da4-c9e3-472e-bcba-c4e9b7cf0b2f.jpg",
+          "source": "university",
+          "page_cer": 0.464804469273743,
+          "gt_chars": 895,
+          "pred_chars": 1104,
+          "gt_regions": 31,
+          "pred_regions": 31
+        },
+        {
+          "image": "images/40cbd188-3b8c-4adb-afd0-cfce1bf2b88f.jpg",
+          "source": "dictation",
+          "page_cer": 0.45493562231759654,
+          "gt_chars": 1398,
+          "pred_chars": 1901,
+          "gt_regions": 33,
+          "pred_regions": 33
+        },
+        {
+          "image": "images/4147d461-2a04-4ed2-864c-10c9dc7c7092.jpg",
+          "source": "archive",
+          "page_cer": 0.44836272040302266,
+          "gt_chars": 397,
+          "pred_chars": 405,
+          "gt_regions": 22,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/3279216f-a680-446e-9e13-14cd3618f718.jpg",
+          "source": "university",
+          "page_cer": 0.4466950959488273,
+          "gt_chars": 938,
+          "pred_chars": 1022,
+          "gt_regions": 35,
+          "pred_regions": 40
+        },
+        {
+          "image": "images/2205e385-71e3-4bae-a1b5-120af952ce97.jpg",
+          "source": "university",
+          "page_cer": 0.4454203262233375,
+          "gt_chars": 797,
+          "pred_chars": 961,
+          "gt_regions": 38,
+          "pred_regions": 39
+        },
+        {
+          "image": "images/8773aeed-1297-5372-b537-1097a2030e26.jpg",
+          "source": "school",
+          "page_cer": 0.44324324324324327,
+          "gt_chars": 185,
+          "pred_chars": 209,
+          "gt_regions": 12,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/d0273ef9-34ef-502b-b2b8-4dcc9992ca5e.jpg",
+          "source": "school",
+          "page_cer": 0.43626062322946174,
+          "gt_chars": 706,
+          "pred_chars": 796,
+          "gt_regions": 18,
+          "pred_regions": 24
+        },
+        {
+          "image": "images/55f4b72f-65f6-54e4-8b3f-6419542eaa37.jpg",
+          "source": "school",
+          "page_cer": 0.4339622641509434,
+          "gt_chars": 106,
+          "pred_chars": 64,
+          "gt_regions": 4,
+          "pred_regions": 6
+        },
+        {
+          "image": "images/2d396e4b-5b55-4e86-a382-30c074ce4fd1.jpg",
+          "source": "archive",
+          "page_cer": 0.42748815165876775,
+          "gt_chars": 1055,
+          "pred_chars": 1136,
+          "gt_regions": 28,
+          "pred_regions": 29
+        },
+        {
+          "image": "images/98ee683c-efa8-5bf0-8dc5-4a1417535b83.jpg",
+          "source": "school",
+          "page_cer": 0.422360248447205,
+          "gt_chars": 161,
+          "pred_chars": 169,
+          "gt_regions": 7,
+          "pred_regions": 9
+        },
+        {
+          "image": "images/321cd11f-a645-4801-8b60-2bdd44a33831.jpg",
+          "source": "university",
+          "page_cer": 0.41735537190082644,
+          "gt_chars": 1210,
+          "pred_chars": 1379,
+          "gt_regions": 61,
+          "pred_regions": 64
+        },
+        {
+          "image": "images/86b4010b-2b26-43b0-8c8f-8f1a1b67f28f.jpg",
+          "source": "university",
+          "page_cer": 0.4132882882882883,
+          "gt_chars": 1776,
+          "pred_chars": 1933,
+          "gt_regions": 30,
+          "pred_regions": 27
+        },
+        {
+          "image": "images/b9caccf5-35e9-547a-ba85-c264360317c7.jpg",
+          "source": "school",
+          "page_cer": 0.4090909090909091,
+          "gt_chars": 198,
+          "pred_chars": 210,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/629c5464-2f1a-4405-975c-b7111ba3eb99.jpg",
+          "source": "archive",
+          "page_cer": 0.40611353711790393,
+          "gt_chars": 229,
+          "pred_chars": 253,
+          "gt_regions": 8,
+          "pred_regions": 7
+        },
+        {
+          "image": "images/410d65cc-de2e-5c29-acf8-015f0f2a57a4.jpg",
+          "source": "school",
+          "page_cer": 0.40476190476190477,
+          "gt_chars": 42,
+          "pred_chars": 34,
+          "gt_regions": 3,
+          "pred_regions": 3
+        },
+        {
+          "image": "images/eb2163e8-34c6-4ae0-bcef-1bf937225449.jpg",
+          "source": "archive",
+          "page_cer": 0.4009603841536615,
+          "gt_chars": 833,
+          "pred_chars": 894,
+          "gt_regions": 27,
+          "pred_regions": 27
+        },
+        {
+          "image": "images/a347eb41-ddcd-51b0-b83e-0a3f9d91a5c7.jpg",
+          "source": "school",
+          "page_cer": 0.4,
+          "gt_chars": 35,
+          "pred_chars": 31,
+          "gt_regions": 7,
+          "pred_regions": 7
+        },
+        {
+          "image": "images/19e05d79-f994-4046-927b-ea43cbab55dd.jpg",
+          "source": "dictation",
+          "page_cer": 0.3991477272727273,
+          "gt_chars": 704,
+          "pred_chars": 871,
+          "gt_regions": 26,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/2bb89da4-f8e8-4726-afe1-a654976af35a.jpg",
+          "source": "archive",
+          "page_cer": 0.3948919449901768,
+          "gt_chars": 1018,
+          "pred_chars": 1058,
+          "gt_regions": 28,
+          "pred_regions": 27
+        },
+        {
+          "image": "images/35fd36d5-b0a5-41a3-a311-e439d73f451b.jpg",
+          "source": "university",
+          "page_cer": 0.3858093126385809,
+          "gt_chars": 902,
+          "pred_chars": 1195,
+          "gt_regions": 26,
+          "pred_regions": 36
+        },
+        {
+          "image": "images/4d42c64b-69a6-48b0-bf22-d25d16ee5848.jpg",
+          "source": "archive",
+          "page_cer": 0.38337801608579086,
+          "gt_chars": 373,
+          "pred_chars": 399,
+          "gt_regions": 19,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/c419ef79-92fc-4a03-be87-0a9b2f83efba.jpg",
+          "source": "archive",
+          "page_cer": 0.3820078226857888,
+          "gt_chars": 767,
+          "pred_chars": 868,
+          "gt_regions": 24,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/ec9dd609-3242-59f9-9403-0dcc1d1eea4c.jpg",
+          "source": "school",
+          "page_cer": 0.3744186046511628,
+          "gt_chars": 430,
+          "pred_chars": 525,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/08fbeebf-6111-4743-bfcf-9d01c11f1f7a.jpg",
+          "source": "archive",
+          "page_cer": 0.36515513126491644,
+          "gt_chars": 419,
+          "pred_chars": 458,
+          "gt_regions": 20,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/16e67602-0607-4afa-8c48-97e043292775.jpg",
+          "source": "archive",
+          "page_cer": 0.36435469710272167,
+          "gt_chars": 1139,
+          "pred_chars": 1196,
+          "gt_regions": 27,
+          "pred_regions": 28
+        },
+        {
+          "image": "images/15060d60-be4c-4c24-a1c6-59df4b55af4c.jpg",
+          "source": "archive",
+          "page_cer": 0.36153846153846153,
+          "gt_chars": 390,
+          "pred_chars": 424,
+          "gt_regions": 19,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/b27814b0-272d-51b9-aaed-c88c345c208a.jpg",
+          "source": "school",
+          "page_cer": 0.35443037974683544,
+          "gt_chars": 79,
+          "pred_chars": 83,
+          "gt_regions": 8,
+          "pred_regions": 6
+        },
+        {
+          "image": "images/92e591b7-35ce-5c36-81fa-fc57b6a5be58.jpg",
+          "source": "school",
+          "page_cer": 0.34167709637046306,
+          "gt_chars": 799,
+          "pred_chars": 830,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/e1b0696e-ca2d-5fb9-a470-c1e3c5dd4ff3.jpg",
+          "source": "school",
+          "page_cer": 0.3333333333333333,
+          "gt_chars": 54,
+          "pred_chars": 54,
+          "gt_regions": 6,
+          "pred_regions": 6
+        },
+        {
+          "image": "images/aaa48dd7-a21e-5e25-acae-cfa0f05e2eb6.jpg",
+          "source": "school",
+          "page_cer": 0.3313840155945419,
+          "gt_chars": 513,
+          "pred_chars": 591,
+          "gt_regions": 19,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/2d890d11-0e5d-4b5b-81e9-30d3359f36ef.jpg",
+          "source": "university",
+          "page_cer": 0.3310810810810811,
+          "gt_chars": 444,
+          "pred_chars": 493,
+          "gt_regions": 24,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/b5222cba-efbf-5688-9d9f-12936599ee38.jpg",
+          "source": "school",
+          "page_cer": 0.33035714285714285,
+          "gt_chars": 224,
+          "pred_chars": 251,
+          "gt_regions": 15,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/cada39de-727c-5969-a47b-0aa0a9323ae4.jpg",
+          "source": "school",
+          "page_cer": 0.33001422475106684,
+          "gt_chars": 703,
+          "pred_chars": 663,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/29809bc1-15a1-4943-ba8b-17ef7f9a4c91.jpg",
+          "source": "archive",
+          "page_cer": 0.3230421686746988,
+          "gt_chars": 1328,
+          "pred_chars": 1369,
+          "gt_regions": 28,
+          "pred_regions": 30
+        },
+        {
+          "image": "images/73dacade-f753-49e4-a25a-c61472b9a638.jpg",
+          "source": "archive",
+          "page_cer": 0.321720195971693,
+          "gt_chars": 1837,
+          "pred_chars": 1875,
+          "gt_regions": 32,
+          "pred_regions": 33
+        },
+        {
+          "image": "images/84146287-d4b4-5e09-bba8-12a933148178.jpg",
+          "source": "school",
+          "page_cer": 0.32105263157894737,
+          "gt_chars": 380,
+          "pred_chars": 420,
+          "gt_regions": 31,
+          "pred_regions": 33
+        },
+        {
+          "image": "images/1b6d4d18-3861-5695-8e46-0f54babe1662.jpg",
+          "source": "school",
+          "page_cer": 0.3157894736842105,
+          "gt_chars": 38,
+          "pred_chars": 36,
+          "gt_regions": 6,
+          "pred_regions": 6
+        },
+        {
+          "image": "images/56b12561-08a8-43c4-b1af-afedede4127a.jpg",
+          "source": "dictation",
+          "page_cer": 0.3151618398637138,
+          "gt_chars": 587,
+          "pred_chars": 647,
+          "gt_regions": 19,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/de44686f-e2ab-4e43-aefd-59d91f2fead2.jpg",
+          "source": "archive",
+          "page_cer": 0.3129251700680272,
+          "gt_chars": 588,
+          "pred_chars": 606,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/4a6a960a-3951-436d-a4c9-67b17b162db0.jpg",
+          "source": "university",
+          "page_cer": 0.29924242424242425,
+          "gt_chars": 528,
+          "pred_chars": 518,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/37fd383e-3408-4f3f-a293-2bb95b3488f2.jpg",
+          "source": "dictation",
+          "page_cer": 0.2891089108910891,
+          "gt_chars": 1515,
+          "pred_chars": 1681,
+          "gt_regions": 29,
+          "pred_regions": 29
+        },
+        {
+          "image": "images/1aab36d0-c219-42ec-b70b-38c177c48405.jpg",
+          "source": "dictation",
+          "page_cer": 0.2842998585572843,
+          "gt_chars": 1414,
+          "pred_chars": 1428,
+          "gt_regions": 26,
+          "pred_regions": 26
+        },
+        {
+          "image": "images/9ccd6671-4059-52cc-9000-bf3376738fc5.jpg",
+          "source": "school",
+          "page_cer": 0.28308823529411764,
+          "gt_chars": 272,
+          "pred_chars": 302,
+          "gt_regions": 12,
+          "pred_regions": 14
+        },
+        {
+          "image": "images/e53dd9eb-c642-527b-b90b-e63b9da07d5e.jpg",
+          "source": "school",
+          "page_cer": 0.2826086956521739,
+          "gt_chars": 184,
+          "pred_chars": 188,
+          "gt_regions": 7,
+          "pred_regions": 7
+        },
+        {
+          "image": "images/32c40092-d3f2-4ccb-9508-abdb797f990b.jpg",
+          "source": "dictation",
+          "page_cer": 0.2744630071599045,
+          "gt_chars": 419,
+          "pred_chars": 442,
+          "gt_regions": 15,
+          "pred_regions": 15
+        },
+        {
+          "image": "images/d2df1b5e-ca2f-47a2-90cb-3d93a05b6efd.jpg",
+          "source": "dictation",
+          "page_cer": 0.27289048473967686,
+          "gt_chars": 557,
+          "pred_chars": 592,
+          "gt_regions": 21,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/52bcd529-dde6-50bf-aa85-0cd0d54c6d5b.jpg",
+          "source": "school",
+          "page_cer": 0.2719836400817996,
+          "gt_chars": 489,
+          "pred_chars": 474,
+          "gt_regions": 18,
+          "pred_regions": 15
+        },
+        {
+          "image": "images/8b77afde-ad27-4d1a-bd2e-dc5c5138edc4.jpg",
+          "source": "archive",
+          "page_cer": 0.26875,
+          "gt_chars": 480,
+          "pred_chars": 492,
+          "gt_regions": 15,
+          "pred_regions": 15
+        },
+        {
+          "image": "images/c6279118-6e4d-53ef-9364-d765d9115e82.jpg",
+          "source": "school",
+          "page_cer": 0.26608187134502925,
+          "gt_chars": 342,
+          "pred_chars": 365,
+          "gt_regions": 22,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/e02c002f-a328-5fbe-adea-07157c6a977a.jpg",
+          "source": "school",
+          "page_cer": 0.26109660574412535,
+          "gt_chars": 383,
+          "pred_chars": 379,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/d161bcc4-6e95-5dca-815a-1da1b06e87e5.jpg",
+          "source": "school",
+          "page_cer": 0.2560553633217993,
+          "gt_chars": 289,
+          "pred_chars": 278,
+          "gt_regions": 16,
+          "pred_regions": 16
+        },
+        {
+          "image": "images/155d7cae-48e4-534f-8711-20ce357d6e9d.jpg",
+          "source": "school",
+          "page_cer": 0.24439461883408073,
+          "gt_chars": 446,
+          "pred_chars": 463,
+          "gt_regions": 19,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/d99d27db-5b8b-59a5-96d0-d6ea61ce9c22.jpg",
+          "source": "school",
+          "page_cer": 0.24356775300171526,
+          "gt_chars": 583,
+          "pred_chars": 628,
+          "gt_regions": 25,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/17cf22da-c437-4257-8d87-36586d20d127.jpg",
+          "source": "dictation",
+          "page_cer": 0.23289315726290516,
+          "gt_chars": 833,
+          "pred_chars": 836,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/b4e58ddb-3001-5a39-9596-845074add672.jpg",
+          "source": "school",
+          "page_cer": 0.23195876288659795,
+          "gt_chars": 194,
+          "pred_chars": 198,
+          "gt_regions": 7,
+          "pred_regions": 7
+        },
+        {
+          "image": "images/e0908a97-d067-4b38-aa98-dfbf98d476af.jpg",
+          "source": "dictation",
+          "page_cer": 0.22690058479532163,
+          "gt_chars": 855,
+          "pred_chars": 880,
+          "gt_regions": 29,
+          "pred_regions": 29
+        },
+        {
+          "image": "images/97a3c3d2-a680-5e95-9517-c7a2a8c19cab.jpg",
+          "source": "school",
+          "page_cer": 0.2224,
+          "gt_chars": 625,
+          "pred_chars": 674,
+          "gt_regions": 28,
+          "pred_regions": 30
+        },
+        {
+          "image": "images/4c530cdc-c0bf-5929-ab70-eaaaa2be2edf.jpg",
+          "source": "school",
+          "page_cer": 0.220873786407767,
+          "gt_chars": 412,
+          "pred_chars": 442,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/39c3eda8-e5d0-4566-a036-f002e92a91c6.jpg",
+          "source": "dictation",
+          "page_cer": 0.2174959871589085,
+          "gt_chars": 1246,
+          "pred_chars": 1272,
+          "gt_regions": 29,
+          "pred_regions": 29
+        },
+        {
+          "image": "images/bae2015b-821a-4a69-9fd5-1ae270ec6941.jpg",
+          "source": "dictation",
+          "page_cer": 0.21595330739299612,
+          "gt_chars": 514,
+          "pred_chars": 531,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/796420e3-566e-5f11-ae05-43b8e3d8792b.jpg",
+          "source": "school",
+          "page_cer": 0.2127659574468085,
+          "gt_chars": 141,
+          "pred_chars": 142,
+          "gt_regions": 9,
+          "pred_regions": 9
+        },
+        {
+          "image": "images/9ec4b2b0-d4d9-4024-8c30-7c648459e905.jpg",
+          "source": "dictation",
+          "page_cer": 0.21272365805168986,
+          "gt_chars": 503,
+          "pred_chars": 506,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/23cbc409-0a74-4cd0-a211-1a6d655747a4.jpg",
+          "source": "university",
+          "page_cer": 0.21048387096774193,
+          "gt_chars": 1240,
+          "pred_chars": 1262,
+          "gt_regions": 25,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/b1f7c6b6-29dc-5692-905d-b9e4386d1c9f.jpg",
+          "source": "school",
+          "page_cer": 0.20469798657718122,
+          "gt_chars": 298,
+          "pred_chars": 316,
+          "gt_regions": 23,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/e1d69a70-82f3-43a5-aab6-ceb3351bd95a.jpg",
+          "source": "archive",
+          "page_cer": 0.2029520295202952,
+          "gt_chars": 271,
+          "pred_chars": 272,
+          "gt_regions": 15,
+          "pred_regions": 15
+        },
+        {
+          "image": "images/2a40e968-9d79-5272-9e10-4c3d1eeabcd6.jpg",
+          "source": "school",
+          "page_cer": 0.20080321285140562,
+          "gt_chars": 249,
+          "pred_chars": 251,
+          "gt_regions": 11,
+          "pred_regions": 11
+        },
+        {
+          "image": "images/ca71bae8-a3ad-5472-86fe-659782a0e6ef.jpg",
+          "source": "school",
+          "page_cer": 0.2,
+          "gt_chars": 295,
+          "pred_chars": 284,
+          "gt_regions": 13,
+          "pred_regions": 11
+        },
+        {
+          "image": "images/085b57e6-54e9-5fd0-99d0-d260c08bd9b9.jpg",
+          "source": "school",
+          "page_cer": 0.19696969696969696,
+          "gt_chars": 66,
+          "pred_chars": 69,
+          "gt_regions": 8,
+          "pred_regions": 8
+        },
+        {
+          "image": "images/89548c27-a828-51d2-afdb-6f84ae2c7988.jpg",
+          "source": "school",
+          "page_cer": 0.19419924337957126,
+          "gt_chars": 793,
+          "pred_chars": 848,
+          "gt_regions": 51,
+          "pred_regions": 51
+        },
+        {
+          "image": "images/127c0dd2-85ab-53bb-b492-51058f15422c.jpg",
+          "source": "school",
+          "page_cer": 0.19158878504672897,
+          "gt_chars": 428,
+          "pred_chars": 472,
+          "gt_regions": 11,
+          "pred_regions": 11
+        },
+        {
+          "image": "images/17b5697c-80bd-48c4-94aa-df6942cdc6a0.jpg",
+          "source": "dictation",
+          "page_cer": 0.18981481481481483,
+          "gt_chars": 648,
+          "pred_chars": 665,
+          "gt_regions": 19,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/0a2dc009-ac8e-4026-8f37-81366481235f.jpg",
+          "source": "dictation",
+          "page_cer": 0.1874062968515742,
+          "gt_chars": 667,
+          "pred_chars": 690,
+          "gt_regions": 23,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/33b81934-8670-4bcd-8173-f8aa4eaf811f.jpg",
+          "source": "university",
+          "page_cer": 0.1871345029239766,
+          "gt_chars": 513,
+          "pred_chars": 530,
+          "gt_regions": 24,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/527f12c0-43dc-5593-8b4b-426229bf482f.jpg",
+          "source": "school",
+          "page_cer": 0.17857142857142858,
+          "gt_chars": 28,
+          "pred_chars": 30,
+          "gt_regions": 5,
+          "pred_regions": 7
+        },
+        {
+          "image": "images/0c239b26-b0fb-418f-b246-0d21b7f2276d.jpg",
+          "source": "dictation",
+          "page_cer": 0.17851959361393324,
+          "gt_chars": 689,
+          "pred_chars": 693,
+          "gt_regions": 17,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/4e6b7184-8337-4523-82c4-bfe7fe5cd7cf.jpg",
+          "source": "dictation",
+          "page_cer": 0.17543859649122806,
+          "gt_chars": 513,
+          "pred_chars": 522,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/3f332428-607c-4a8a-9e95-5fbc658a0d25.jpg",
+          "source": "dictation",
+          "page_cer": 0.17504051863857376,
+          "gt_chars": 617,
+          "pred_chars": 637,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/07c60185-8c2a-40a2-95ef-e5c97ce611a1.jpg",
+          "source": "dictation",
+          "page_cer": 0.17474048442906576,
+          "gt_chars": 578,
+          "pred_chars": 587,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/3505c735-4f78-482a-9685-699889340d84.jpg",
+          "source": "dictation",
+          "page_cer": 0.17466666666666666,
+          "gt_chars": 750,
+          "pred_chars": 738,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/f0150ca6-0a33-5abe-89b1-22203a0d581b.jpg",
+          "source": "school",
+          "page_cer": 0.17415730337078653,
+          "gt_chars": 178,
+          "pred_chars": 187,
+          "gt_regions": 8,
+          "pred_regions": 10
+        },
+        {
+          "image": "images/46220e58-94d4-4c00-84a9-f5bed67f92bb.jpg",
+          "source": "dictation",
+          "page_cer": 0.17297297297297298,
+          "gt_chars": 1480,
+          "pred_chars": 1480,
+          "gt_regions": 33,
+          "pred_regions": 33
+        },
+        {
+          "image": "images/0f920fea-18c9-4fb7-b520-b57c73fa6ca7.jpg",
+          "source": "dictation",
+          "page_cer": 0.1703958691910499,
+          "gt_chars": 581,
+          "pred_chars": 588,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/b8bba564-71d9-57bf-8f90-d73373b47282.jpg",
+          "source": "school",
+          "page_cer": 0.1678832116788321,
+          "gt_chars": 137,
+          "pred_chars": 134,
+          "gt_regions": 7,
+          "pred_regions": 5
+        },
+        {
+          "image": "images/a7964907-f53d-5851-9d7e-397bd8b1c542.jpg",
+          "source": "school",
+          "page_cer": 0.16721311475409836,
+          "gt_chars": 305,
+          "pred_chars": 300,
+          "gt_regions": 22,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/e28a17e5-7c12-5ed5-8841-c16e389943d7.jpg",
+          "source": "school",
+          "page_cer": 0.16717325227963525,
+          "gt_chars": 329,
+          "pred_chars": 337,
+          "gt_regions": 18,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/78327536-7faf-531b-bbad-7365b3795bea.jpg",
+          "source": "school",
+          "page_cer": 0.16279069767441862,
+          "gt_chars": 86,
+          "pred_chars": 82,
+          "gt_regions": 4,
+          "pred_regions": 4
+        },
+        {
+          "image": "images/4b35c5a4-d99d-526b-85ef-ac8f172cc88a.jpg",
+          "source": "school",
+          "page_cer": 0.1617161716171617,
+          "gt_chars": 606,
+          "pred_chars": 618,
+          "gt_regions": 20,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/d969e0e1-a6a2-45d4-9d18-362f8106ecb8.jpg",
+          "source": "dictation",
+          "page_cer": 0.15408560311284047,
+          "gt_chars": 1285,
+          "pred_chars": 1288,
+          "gt_regions": 33,
+          "pred_regions": 33
+        },
+        {
+          "image": "images/019035a0-682b-409a-9951-ed2af6555213.jpg",
+          "source": "dictation",
+          "page_cer": 0.15263157894736842,
+          "gt_chars": 570,
+          "pred_chars": 595,
+          "gt_regions": 22,
+          "pred_regions": 26
+        },
+        {
+          "image": "images/4bb39692-5b12-545b-b505-921c9bd80afd.jpg",
+          "source": "school",
+          "page_cer": 0.15080527086383602,
+          "gt_chars": 683,
+          "pred_chars": 718,
+          "gt_regions": 19,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/1809c0e4-44ed-4b0f-b905-5e99dc7a43cd.jpg",
+          "source": "dictation",
+          "page_cer": 0.14979757085020243,
+          "gt_chars": 494,
+          "pred_chars": 497,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/904167a5-9215-4b8a-99ca-a61d20402f31.jpg",
+          "source": "dictation",
+          "page_cer": 0.14885496183206107,
+          "gt_chars": 524,
+          "pred_chars": 527,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/2f0840d4-76b7-5436-8a0a-4d75262718c8.jpg",
+          "source": "school",
+          "page_cer": 0.14761904761904762,
+          "gt_chars": 210,
+          "pred_chars": 211,
+          "gt_regions": 9,
+          "pred_regions": 9
+        },
+        {
+          "image": "images/bd13454a-6174-54b2-94f7-87e8542d543d.jpg",
+          "source": "school",
+          "page_cer": 0.14674735249621784,
+          "gt_chars": 661,
+          "pred_chars": 673,
+          "gt_regions": 27,
+          "pred_regions": 24
+        },
+        {
+          "image": "images/7a719234-cf2c-5a07-9986-c134871da299.jpg",
+          "source": "school",
+          "page_cer": 0.14366998577524892,
+          "gt_chars": 703,
+          "pred_chars": 708,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/4409e959-0539-5c8e-a7e3-9718b5cc39f2.jpg",
+          "source": "school",
+          "page_cer": 0.1407563025210084,
+          "gt_chars": 476,
+          "pred_chars": 487,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/2cca6e5a-ae96-518b-82c7-4698dc4f0926.jpg",
+          "source": "school",
+          "page_cer": 0.140625,
+          "gt_chars": 192,
+          "pred_chars": 184,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/beee85cf-3272-5dd4-b644-9ae6e0e829ae.jpg",
+          "source": "school",
+          "page_cer": 0.13805970149253732,
+          "gt_chars": 536,
+          "pred_chars": 551,
+          "gt_regions": 16,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/45d38ca7-ae56-4613-88a4-9fcbd232d160.jpg",
+          "source": "dictation",
+          "page_cer": 0.13292117465224113,
+          "gt_chars": 647,
+          "pred_chars": 637,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/3718ed45-c8ad-409b-b174-7e90c05b5c3f.jpg",
+          "source": "dictation",
+          "page_cer": 0.12296296296296297,
+          "gt_chars": 675,
+          "pred_chars": 684,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/511d1cef-ff01-5043-8449-bc6badcb3d05.jpg",
+          "source": "school",
+          "page_cer": 0.11267605633802817,
+          "gt_chars": 284,
+          "pred_chars": 273,
+          "gt_regions": 19,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/1577fab4-e890-5825-90bb-390e8e7e493b.jpg",
+          "source": "school",
+          "page_cer": 0.10714285714285714,
+          "gt_chars": 224,
+          "pred_chars": 227,
+          "gt_regions": 9,
+          "pred_regions": 9
+        },
+        {
+          "image": "images/a1055d8e-925d-4d51-86ce-b5dc3252df78.jpg",
+          "source": "dictation",
+          "page_cer": 0.10610465116279069,
+          "gt_chars": 688,
+          "pred_chars": 690,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/1a08aa19-6b02-4d80-9977-9932971e930f.jpg",
+          "source": "dictation",
+          "page_cer": 0.10610079575596817,
+          "gt_chars": 754,
+          "pred_chars": 773,
+          "gt_regions": 25,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/d1988833-b296-594a-bf4c-455669aec004.jpg",
+          "source": "school",
+          "page_cer": 0.10455764075067024,
+          "gt_chars": 373,
+          "pred_chars": 366,
+          "gt_regions": 19,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/93b9e5e7-c844-4abf-8cce-87c2d3e99f4d.jpg",
+          "source": "dictation",
+          "page_cer": 0.0840764331210191,
+          "gt_chars": 785,
+          "pred_chars": 801,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/77735e58-463f-4283-ba61-21dd3177d187.jpg",
+          "source": "archive",
+          "page_cer": 0.057971014492753624,
+          "gt_chars": 414,
+          "pred_chars": 414,
+          "gt_regions": 12,
+          "pred_regions": 12
+        },
+        {
+          "image": "images/19dd4844-2338-4b7b-aa21-40893c4f96a4.jpg",
+          "source": "dictation",
+          "page_cer": 0.054873054873054876,
+          "gt_chars": 1221,
+          "pred_chars": 1230,
+          "gt_regions": 23,
+          "pred_regions": 23
+        }
+      ],
+      "iou80_overlap_pairs": 93
+    }
+  },
+  "detector": {
+    "analysis": {
+      "completed_pages": 143,
+      "detection": {
+        "true_positive": 2690,
+        "false_positive": 352,
+        "false_negative": 162,
+        "precision": 0.8842866535174227,
+        "recall": 0.9431977559607293,
+        "f1": 0.9127926705123856,
+        "class_accuracy": 0.966914498141264
+      },
+      "by_type": {
+        "annotation": {
+          "gt": 66,
+          "pred": 63,
+          "matched": 50,
+          "class_correct": 40,
+          "false_negative": 16,
+          "false_positive": 18,
+          "recall": 0.7575757575757576,
+          "precision": 0.7352941176470589,
+          "class_accuracy": 0.8,
+          "region_cer": 1.0,
+          "cer_regions": 44
+        },
+        "formula": {
+          "gt": 376,
+          "pred": 492,
+          "matched": 355,
+          "class_correct": 346,
+          "false_negative": 21,
+          "false_positive": 83,
+          "recall": 0.9441489361702128,
+          "precision": 0.8105022831050228,
+          "class_accuracy": 0.9746478873239437,
+          "region_cer": 1.0,
+          "cer_regions": 349
+        },
+        "graph": {
+          "gt": 11,
+          "pred": 8,
+          "matched": 5,
+          "class_correct": 5,
+          "false_negative": 6,
+          "false_positive": 3,
+          "recall": 0.45454545454545453,
+          "precision": 0.625,
+          "class_accuracy": 1.0,
+          "region_cer": null,
+          "cer_regions": 0
+        },
+        "handwritten": {
+          "gt": 2323,
+          "pred": 2400,
+          "matched": 2226,
+          "class_correct": 2160,
+          "false_negative": 97,
+          "false_positive": 220,
+          "recall": 0.9582436504520018,
+          "precision": 0.9100572363041701,
+          "class_accuracy": 0.9703504043126685,
+          "region_cer": 1.0,
+          "cer_regions": 2217
+        },
+        "image": {
+          "gt": 10,
+          "pred": 9,
+          "matched": 6,
+          "class_correct": 5,
+          "false_negative": 4,
+          "false_positive": 4,
+          "recall": 0.6,
+          "precision": 0.6,
+          "class_accuracy": 0.8333333333333334,
+          "region_cer": null,
+          "cer_regions": 0
+        },
+        "printed": {
+          "gt": 53,
+          "pred": 59,
+          "matched": 38,
+          "class_correct": 35,
+          "false_negative": 15,
+          "false_positive": 24,
+          "recall": 0.7169811320754716,
+          "precision": 0.6129032258064516,
+          "class_accuracy": 0.9210526315789473,
+          "region_cer": 1.0,
+          "cer_regions": 37
+        },
+        "table": {
+          "gt": 13,
+          "pred": 11,
+          "matched": 10,
+          "class_correct": 10,
+          "false_negative": 3,
+          "false_positive": 0,
+          "recall": 0.7692307692307693,
+          "precision": 1.0,
+          "class_accuracy": 1.0,
+          "region_cer": 1.0,
+          "cer_regions": 8
+        }
+      },
+      "by_source": {
+        "archive": {
+          "composite_score": 0.20743267509153834,
+          "detection_f1": 0.9498249708284714,
+          "detection_precision": 0.9356321839080459,
+          "detection_recall": 0.9644549763033176,
+          "classification_accuracy": 0.9877149877149877,
+          "region_cer": 1.0,
+          "page_cer": 0.9688536398369635,
+          "n_images": 20,
+          "n_matched_regions": 407,
+          "n_false_positives": 28,
+          "n_false_negatives": 15
+        },
+        "dictation": {
+          "composite_score": 0.20738509254021484,
+          "detection_f1": 0.9593199757134184,
+          "detection_precision": 0.9645909645909646,
+          "detection_recall": 0.9541062801932367,
+          "classification_accuracy": 0.9886075949367089,
+          "region_cer": 1.0,
+          "page_cer": 0.9718865671272667,
+          "n_images": 35,
+          "n_matched_regions": 790,
+          "n_false_positives": 29,
+          "n_false_negatives": 38
+        },
+        "school": {
+          "composite_score": 0.20609780603936936,
+          "detection_f1": 0.8878260869565217,
+          "detection_precision": 0.8466003316749585,
+          "detection_recall": 0.93327239488117,
+          "classification_accuracy": 0.9618021547502449,
+          "region_cer": 1.0,
+          "page_cer": 0.9503324294832423,
+          "n_images": 68,
+          "n_matched_regions": 1021,
+          "n_false_positives": 185,
+          "n_false_negatives": 73
+        },
+        "university": {
+          "composite_score": 0.19199868056006164,
+          "detection_f1": 0.8660550458715597,
+          "detection_precision": 0.8109965635738832,
+          "detection_recall": 0.9291338582677166,
+          "classification_accuracy": 0.923728813559322,
+          "region_cer": 1.0,
+          "page_cer": 0.9681920339972768,
+          "n_images": 20,
+          "n_matched_regions": 472,
+          "n_false_positives": 110,
+          "n_false_negatives": 36
+        }
+      },
+      "by_text_length": {
+        "0-15": {
+          "n": 664,
+          "region_cer": 1.0
+        },
+        "16-40": {
+          "n": 1316,
+          "region_cer": 1.0
+        },
+        "41-96": {
+          "n": 671,
+          "region_cer": 1.0
+        },
+        "97-180": {
+          "n": 4,
+          "region_cer": 1.0
+        }
+      },
+      "by_crop_height": {
+        "129-256": {
+          "n": 1003,
+          "region_cer": 1.0
+        },
+        "65-128": {
+          "n": 1117,
+          "region_cer": 1.0
+        },
+        "33-64": {
+          "n": 253,
+          "region_cer": 1.0
+        },
+        "257+": {
+          "n": 277,
+          "region_cer": 1.0
+        },
+        "0-32": {
+          "n": 5,
+          "region_cer": 1.0
+        }
+      },
+      "confusion": [
+        {
+          "gt": "handwritten",
+          "pred": "handwritten",
+          "n": 2160
+        },
+        {
+          "gt": "formula",
+          "pred": "formula",
+          "n": 346
+        },
+        {
+          "gt": "handwritten",
+          "pred": "formula",
+          "n": 62
+        },
+        {
+          "gt": "annotation",
+          "pred": "annotation",
+          "n": 40
+        },
+        {
+          "gt": "printed",
+          "pred": "printed",
+          "n": 35
+        },
+        {
+          "gt": "table",
+          "pred": "table",
+          "n": 10
+        },
+        {
+          "gt": "annotation",
+          "pred": "handwritten",
+          "n": 9
+        },
+        {
+          "gt": "formula",
+          "pred": "handwritten",
+          "n": 8
+        },
+        {
+          "gt": "image",
+          "pred": "image",
+          "n": 5
+        },
+        {
+          "gt": "graph",
+          "pred": "graph",
+          "n": 5
+        },
+        {
+          "gt": "handwritten",
+          "pred": "annotation",
+          "n": 4
+        },
+        {
+          "gt": "printed",
+          "pred": "handwritten",
+          "n": 2
+        },
+        {
+          "gt": "printed",
+          "pred": "annotation",
+          "n": 1
+        },
+        {
+          "gt": "image",
+          "pred": "handwritten",
+          "n": 1
+        },
+        {
+          "gt": "annotation",
+          "pred": "formula",
+          "n": 1
+        },
+        {
+          "gt": "formula",
+          "pred": "table",
+          "n": 1
+        }
+      ],
+      "page_errors": [
+        {
+          "image": "images/195812b7-a9bc-4cb1-b688-4d13261acc7a.jpg",
+          "source": "university",
+          "page_cer": 0.9856278366111951,
+          "gt_chars": 1322,
+          "pred_chars": 35,
+          "gt_regions": 20,
+          "pred_regions": 36
+        },
+        {
+          "image": "images/86b4010b-2b26-43b0-8c8f-8f1a1b67f28f.jpg",
+          "source": "university",
+          "page_cer": 0.9853603603603603,
+          "gt_chars": 1776,
+          "pred_chars": 26,
+          "gt_regions": 30,
+          "pred_regions": 27
+        },
+        {
+          "image": "images/67a83f64-6e33-5a4a-9546-25a0cc2994f3.jpg",
+          "source": "school",
+          "page_cer": 0.9848484848484849,
+          "gt_chars": 66,
+          "pred_chars": 2,
+          "gt_regions": 2,
+          "pred_regions": 3
+        },
+        {
+          "image": "images/73dacade-f753-49e4-a25a-c61472b9a638.jpg",
+          "source": "archive",
+          "page_cer": 0.9831246597713663,
+          "gt_chars": 1837,
+          "pred_chars": 32,
+          "gt_regions": 32,
+          "pred_regions": 33
+        },
+        {
+          "image": "images/1aab36d0-c219-42ec-b70b-38c177c48405.jpg",
+          "source": "dictation",
+          "page_cer": 0.983026874115983,
+          "gt_chars": 1414,
+          "pred_chars": 24,
+          "gt_regions": 26,
+          "pred_regions": 26
+        },
+        {
+          "image": "images/8c725fca-e2d3-41b9-884d-3885014c0573.jpg",
+          "source": "university",
+          "page_cer": 0.9826302729528535,
+          "gt_chars": 403,
+          "pred_chars": 9,
+          "gt_regions": 9,
+          "pred_regions": 11
+        },
+        {
+          "image": "images/19dd4844-2338-4b7b-aa21-40893c4f96a4.jpg",
+          "source": "dictation",
+          "page_cer": 0.9819819819819819,
+          "gt_chars": 1221,
+          "pred_chars": 22,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/a148fed5-320e-59bc-a30d-12324def3390.jpg",
+          "source": "school",
+          "page_cer": 0.9818562456385206,
+          "gt_chars": 1433,
+          "pred_chars": 26,
+          "gt_regions": 27,
+          "pred_regions": 27
+        },
+        {
+          "image": "images/7bd45413-5209-4283-9bfe-119eadcf9f48.jpg",
+          "source": "university",
+          "page_cer": 0.9817518248175182,
+          "gt_chars": 1096,
+          "pred_chars": 28,
+          "gt_regions": 22,
+          "pred_regions": 30
+        },
+        {
+          "image": "images/37fd383e-3408-4f3f-a293-2bb95b3488f2.jpg",
+          "source": "dictation",
+          "page_cer": 0.9815181518151815,
+          "gt_chars": 1515,
+          "pred_chars": 28,
+          "gt_regions": 29,
+          "pred_regions": 29
+        },
+        {
+          "image": "images/23cbc409-0a74-4cd0-a211-1a6d655747a4.jpg",
+          "source": "university",
+          "page_cer": 0.9806451612903225,
+          "gt_chars": 1240,
+          "pred_chars": 24,
+          "gt_regions": 25,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/29809bc1-15a1-4943-ba8b-17ef7f9a4c91.jpg",
+          "source": "archive",
+          "page_cer": 0.9796686746987951,
+          "gt_chars": 1328,
+          "pred_chars": 29,
+          "gt_regions": 28,
+          "pred_regions": 30
+        },
+        {
+          "image": "images/e3404a2e-fe10-405c-a8ee-d5136d1a6da6.jpg",
+          "source": "archive",
+          "page_cer": 0.9796416938110749,
+          "gt_chars": 1228,
+          "pred_chars": 27,
+          "gt_regions": 26,
+          "pred_regions": 28
+        },
+        {
+          "image": "images/3dd87640-0760-48cd-900c-a10d930b497b.jpg",
+          "source": "dictation",
+          "page_cer": 0.9791526563550773,
+          "gt_chars": 1487,
+          "pred_chars": 31,
+          "gt_regions": 37,
+          "pred_regions": 32
+        },
+        {
+          "image": "images/46220e58-94d4-4c00-84a9-f5bed67f92bb.jpg",
+          "source": "dictation",
+          "page_cer": 0.9783783783783784,
+          "gt_chars": 1480,
+          "pred_chars": 32,
+          "gt_regions": 33,
+          "pred_regions": 33
+        },
+        {
+          "image": "images/77735e58-463f-4283-ba61-21dd3177d187.jpg",
+          "source": "archive",
+          "page_cer": 0.9782608695652174,
+          "gt_chars": 414,
+          "pred_chars": 9,
+          "gt_regions": 12,
+          "pred_regions": 12
+        },
+        {
+          "image": "images/5bbc8721-d32e-41ac-b1f6-5d452b3c3698.jpg",
+          "source": "dictation",
+          "page_cer": 0.9780876494023905,
+          "gt_chars": 1506,
+          "pred_chars": 33,
+          "gt_regions": 38,
+          "pred_regions": 34
+        },
+        {
+          "image": "images/40cbd188-3b8c-4adb-afd0-cfce1bf2b88f.jpg",
+          "source": "dictation",
+          "page_cer": 0.9778254649499285,
+          "gt_chars": 1398,
+          "pred_chars": 31,
+          "gt_regions": 33,
+          "pred_regions": 33
+        },
+        {
+          "image": "images/18af2afd-4107-4598-b314-93c6af313422.jpg",
+          "source": "dictation",
+          "page_cer": 0.9777942264988897,
+          "gt_chars": 1351,
+          "pred_chars": 30,
+          "gt_regions": 37,
+          "pred_regions": 31
+        },
+        {
+          "image": "images/39c3eda8-e5d0-4566-a036-f002e92a91c6.jpg",
+          "source": "dictation",
+          "page_cer": 0.9775280898876404,
+          "gt_chars": 1246,
+          "pred_chars": 28,
+          "gt_regions": 29,
+          "pred_regions": 29
+        },
+        {
+          "image": "images/3505c735-4f78-482a-9685-699889340d84.jpg",
+          "source": "dictation",
+          "page_cer": 0.9773333333333334,
+          "gt_chars": 750,
+          "pred_chars": 17,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/16e67602-0607-4afa-8c48-97e043292775.jpg",
+          "source": "archive",
+          "page_cer": 0.9771729587357331,
+          "gt_chars": 1139,
+          "pred_chars": 27,
+          "gt_regions": 27,
+          "pred_regions": 28
+        },
+        {
+          "image": "images/0c239b26-b0fb-418f-b246-0d21b7f2276d.jpg",
+          "source": "dictation",
+          "page_cer": 0.97677793904209,
+          "gt_chars": 689,
+          "pred_chars": 16,
+          "gt_regions": 17,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/127c0dd2-85ab-53bb-b492-51058f15422c.jpg",
+          "source": "school",
+          "page_cer": 0.9766355140186916,
+          "gt_chars": 428,
+          "pred_chars": 10,
+          "gt_regions": 11,
+          "pred_regions": 11
+        },
+        {
+          "image": "images/5ee2046f-1a0d-58b2-8997-ef1e17ba3f14.jpg",
+          "source": "school",
+          "page_cer": 0.9763779527559056,
+          "gt_chars": 254,
+          "pred_chars": 19,
+          "gt_regions": 8,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/1063ccb6-122f-4f58-8ca4-34898a45d2dd.jpg",
+          "source": "archive",
+          "page_cer": 0.9763374485596708,
+          "gt_chars": 972,
+          "pred_chars": 23,
+          "gt_regions": 24,
+          "pred_regions": 24
+        },
+        {
+          "image": "images/6f63c9f2-c961-5562-af68-5a96bd8614d8.jpg",
+          "source": "school",
+          "page_cer": 0.9761388286334056,
+          "gt_chars": 922,
+          "pred_chars": 28,
+          "gt_regions": 24,
+          "pred_regions": 29
+        },
+        {
+          "image": "images/3440f410-c95a-4624-90f0-d9c1a96cfaec.jpg",
+          "source": "university",
+          "page_cer": 0.975968992248062,
+          "gt_chars": 1290,
+          "pred_chars": 34,
+          "gt_regions": 29,
+          "pred_regions": 35
+        },
+        {
+          "image": "images/d0273ef9-34ef-502b-b2b8-4dcc9992ca5e.jpg",
+          "source": "school",
+          "page_cer": 0.9759206798866855,
+          "gt_chars": 706,
+          "pred_chars": 23,
+          "gt_regions": 18,
+          "pred_regions": 24
+        },
+        {
+          "image": "images/17b5697c-80bd-48c4-94aa-df6942cdc6a0.jpg",
+          "source": "dictation",
+          "page_cer": 0.9753086419753086,
+          "gt_chars": 648,
+          "pred_chars": 16,
+          "gt_regions": 19,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/26e0c337-b806-4a49-b9c2-456fb67708aa.jpg",
+          "source": "university",
+          "page_cer": 0.9751693002257337,
+          "gt_chars": 443,
+          "pred_chars": 15,
+          "gt_regions": 13,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/d969e0e1-a6a2-45d4-9d18-362f8106ecb8.jpg",
+          "source": "dictation",
+          "page_cer": 0.9750972762645914,
+          "gt_chars": 1285,
+          "pred_chars": 32,
+          "gt_regions": 33,
+          "pred_regions": 33
+        },
+        {
+          "image": "images/92e591b7-35ce-5c36-81fa-fc57b6a5be58.jpg",
+          "source": "school",
+          "page_cer": 0.9749687108886108,
+          "gt_chars": 799,
+          "pred_chars": 20,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/3718ed45-c8ad-409b-b174-7e90c05b5c3f.jpg",
+          "source": "dictation",
+          "page_cer": 0.9748148148148148,
+          "gt_chars": 675,
+          "pred_chars": 17,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/2bb89da4-f8e8-4726-afe1-a654976af35a.jpg",
+          "source": "archive",
+          "page_cer": 0.9744597249508841,
+          "gt_chars": 1018,
+          "pred_chars": 26,
+          "gt_regions": 28,
+          "pred_regions": 27
+        },
+        {
+          "image": "images/2d396e4b-5b55-4e86-a382-30c074ce4fd1.jpg",
+          "source": "archive",
+          "page_cer": 0.9744075829383886,
+          "gt_chars": 1055,
+          "pred_chars": 28,
+          "gt_regions": 28,
+          "pred_regions": 29
+        },
+        {
+          "image": "images/3d0acb86-1ebf-5ab8-882c-b9ce02d0f95b.jpg",
+          "source": "school",
+          "page_cer": 0.9738675958188153,
+          "gt_chars": 574,
+          "pred_chars": 15,
+          "gt_regions": 16,
+          "pred_regions": 16
+        },
+        {
+          "image": "images/629c5464-2f1a-4405-975c-b7111ba3eb99.jpg",
+          "source": "archive",
+          "page_cer": 0.9737991266375546,
+          "gt_chars": 229,
+          "pred_chars": 6,
+          "gt_regions": 8,
+          "pred_regions": 7
+        },
+        {
+          "image": "images/4bb39692-5b12-545b-b505-921c9bd80afd.jpg",
+          "source": "school",
+          "page_cer": 0.9736456808199122,
+          "gt_chars": 683,
+          "pred_chars": 20,
+          "gt_regions": 19,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/17cf22da-c437-4257-8d87-36586d20d127.jpg",
+          "source": "dictation",
+          "page_cer": 0.9735894357743097,
+          "gt_chars": 833,
+          "pred_chars": 22,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/35fd36d5-b0a5-41a3-a311-e439d73f451b.jpg",
+          "source": "university",
+          "page_cer": 0.9733924611973392,
+          "gt_chars": 902,
+          "pred_chars": 35,
+          "gt_regions": 26,
+          "pred_regions": 36
+        },
+        {
+          "image": "images/1f58c72c-4616-4719-a4d3-bf1c6140eb08.jpg",
+          "source": "archive",
+          "page_cer": 0.9732142857142857,
+          "gt_chars": 112,
+          "pred_chars": 8,
+          "gt_regions": 5,
+          "pred_regions": 9
+        },
+        {
+          "image": "images/a1055d8e-925d-4d51-86ce-b5dc3252df78.jpg",
+          "source": "dictation",
+          "page_cer": 0.9723837209302325,
+          "gt_chars": 688,
+          "pred_chars": 19,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/45d38ca7-ae56-4613-88a4-9fcbd232d160.jpg",
+          "source": "dictation",
+          "page_cer": 0.9721792890262752,
+          "gt_chars": 647,
+          "pred_chars": 18,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/1a08aa19-6b02-4d80-9977-9932971e930f.jpg",
+          "source": "dictation",
+          "page_cer": 0.9721485411140584,
+          "gt_chars": 754,
+          "pred_chars": 22,
+          "gt_regions": 25,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/beee85cf-3272-5dd4-b644-9ae6e0e829ae.jpg",
+          "source": "school",
+          "page_cer": 0.9720149253731343,
+          "gt_chars": 536,
+          "pred_chars": 16,
+          "gt_regions": 16,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/93b9e5e7-c844-4abf-8cce-87c2d3e99f4d.jpg",
+          "source": "dictation",
+          "page_cer": 0.9719745222929936,
+          "gt_chars": 785,
+          "pred_chars": 22,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/5656dd23-484d-5120-ae78-e4b59997b416.jpg",
+          "source": "school",
+          "page_cer": 0.9718518518518519,
+          "gt_chars": 675,
+          "pred_chars": 19,
+          "gt_regions": 25,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/55f4b72f-65f6-54e4-8b3f-6419542eaa37.jpg",
+          "source": "school",
+          "page_cer": 0.9716981132075472,
+          "gt_chars": 106,
+          "pred_chars": 3,
+          "gt_regions": 4,
+          "pred_regions": 6
+        },
+        {
+          "image": "images/52bcd529-dde6-50bf-aa85-0cd0d54c6d5b.jpg",
+          "source": "school",
+          "page_cer": 0.9713701431492843,
+          "gt_chars": 489,
+          "pred_chars": 14,
+          "gt_regions": 18,
+          "pred_regions": 15
+        },
+        {
+          "image": "images/485bdee9-b370-59ba-bc17-0eee547ffe6d.jpg",
+          "source": "school",
+          "page_cer": 0.9712351945854484,
+          "gt_chars": 591,
+          "pred_chars": 21,
+          "gt_regions": 18,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/8b77afde-ad27-4d1a-bd2e-dc5c5138edc4.jpg",
+          "source": "archive",
+          "page_cer": 0.9708333333333333,
+          "gt_chars": 480,
+          "pred_chars": 14,
+          "gt_regions": 15,
+          "pred_regions": 15
+        },
+        {
+          "image": "images/3f332428-607c-4a8a-9e95-5fbc658a0d25.jpg",
+          "source": "dictation",
+          "page_cer": 0.9708265802269044,
+          "gt_chars": 617,
+          "pred_chars": 18,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/b8bba564-71d9-57bf-8f90-d73373b47282.jpg",
+          "source": "school",
+          "page_cer": 0.9708029197080292,
+          "gt_chars": 137,
+          "pred_chars": 4,
+          "gt_regions": 7,
+          "pred_regions": 5
+        },
+        {
+          "image": "images/0f920fea-18c9-4fb7-b520-b57c73fa6ca7.jpg",
+          "source": "dictation",
+          "page_cer": 0.9707401032702238,
+          "gt_chars": 581,
+          "pred_chars": 17,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/c30c3eba-5005-4a9b-9ebc-3c18d1d601d3.jpg",
+          "source": "university",
+          "page_cer": 0.9704684317718941,
+          "gt_chars": 982,
+          "pred_chars": 30,
+          "gt_regions": 30,
+          "pred_regions": 31
+        },
+        {
+          "image": "images/c419ef79-92fc-4a03-be87-0a9b2f83efba.jpg",
+          "source": "archive",
+          "page_cer": 0.970013037809648,
+          "gt_chars": 767,
+          "pred_chars": 24,
+          "gt_regions": 24,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/ca71bae8-a3ad-5472-86fe-659782a0e6ef.jpg",
+          "source": "school",
+          "page_cer": 0.9694915254237289,
+          "gt_chars": 295,
+          "pred_chars": 9,
+          "gt_regions": 13,
+          "pred_regions": 11
+        },
+        {
+          "image": "images/56b12561-08a8-43c4-b1af-afedede4127a.jpg",
+          "source": "dictation",
+          "page_cer": 0.969335604770017,
+          "gt_chars": 587,
+          "pred_chars": 19,
+          "gt_regions": 19,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/22bc6edb-5bc7-4b39-a700-1f5e906ae7fd.jpg",
+          "source": "university",
+          "page_cer": 0.9692307692307692,
+          "gt_chars": 650,
+          "pred_chars": 20,
+          "gt_regions": 17,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/b4e58ddb-3001-5a39-9596-845074add672.jpg",
+          "source": "school",
+          "page_cer": 0.9690721649484536,
+          "gt_chars": 194,
+          "pred_chars": 6,
+          "gt_regions": 7,
+          "pred_regions": 7
+        },
+        {
+          "image": "images/98ee683c-efa8-5bf0-8dc5-4a1417535b83.jpg",
+          "source": "school",
+          "page_cer": 0.968944099378882,
+          "gt_chars": 161,
+          "pred_chars": 7,
+          "gt_regions": 7,
+          "pred_regions": 9
+        },
+        {
+          "image": "images/07c60185-8c2a-40a2-95ef-e5c97ce611a1.jpg",
+          "source": "dictation",
+          "page_cer": 0.9688581314878892,
+          "gt_chars": 578,
+          "pred_chars": 18,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/eb2163e8-34c6-4ae0-bcef-1bf937225449.jpg",
+          "source": "archive",
+          "page_cer": 0.9687875150060024,
+          "gt_chars": 833,
+          "pred_chars": 26,
+          "gt_regions": 27,
+          "pred_regions": 27
+        },
+        {
+          "image": "images/19e05d79-f994-4046-927b-ea43cbab55dd.jpg",
+          "source": "dictation",
+          "page_cer": 0.96875,
+          "gt_chars": 704,
+          "pred_chars": 22,
+          "gt_regions": 26,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/7a719234-cf2c-5a07-9986-c134871da299.jpg",
+          "source": "school",
+          "page_cer": 0.968705547652916,
+          "gt_chars": 703,
+          "pred_chars": 22,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/cada39de-727c-5969-a47b-0aa0a9323ae4.jpg",
+          "source": "school",
+          "page_cer": 0.968705547652916,
+          "gt_chars": 703,
+          "pred_chars": 22,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/4b35c5a4-d99d-526b-85ef-ac8f172cc88a.jpg",
+          "source": "school",
+          "page_cer": 0.9686468646864687,
+          "gt_chars": 606,
+          "pred_chars": 22,
+          "gt_regions": 20,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/de44686f-e2ab-4e43-aefd-59d91f2fead2.jpg",
+          "source": "archive",
+          "page_cer": 0.967687074829932,
+          "gt_chars": 588,
+          "pred_chars": 19,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/e53dd9eb-c642-527b-b90b-e63b9da07d5e.jpg",
+          "source": "school",
+          "page_cer": 0.967391304347826,
+          "gt_chars": 184,
+          "pred_chars": 6,
+          "gt_regions": 7,
+          "pred_regions": 7
+        },
+        {
+          "image": "images/e0908a97-d067-4b38-aa98-dfbf98d476af.jpg",
+          "source": "dictation",
+          "page_cer": 0.9672514619883041,
+          "gt_chars": 855,
+          "pred_chars": 28,
+          "gt_regions": 29,
+          "pred_regions": 29
+        },
+        {
+          "image": "images/0a2dc009-ac8e-4026-8f37-81366481235f.jpg",
+          "source": "dictation",
+          "page_cer": 0.967016491754123,
+          "gt_chars": 667,
+          "pred_chars": 24,
+          "gt_regions": 23,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/4e6b7184-8337-4523-82c4-bfe7fe5cd7cf.jpg",
+          "source": "dictation",
+          "page_cer": 0.9668615984405458,
+          "gt_chars": 513,
+          "pred_chars": 17,
+          "gt_regions": 18,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/32c40092-d3f2-4ccb-9508-abdb797f990b.jpg",
+          "source": "dictation",
+          "page_cer": 0.9665871121718377,
+          "gt_chars": 419,
+          "pred_chars": 14,
+          "gt_regions": 15,
+          "pred_regions": 15
+        },
+        {
+          "image": "images/af654da4-c9e3-472e-bcba-c4e9b7cf0b2f.jpg",
+          "source": "university",
+          "page_cer": 0.9664804469273743,
+          "gt_chars": 895,
+          "pred_chars": 30,
+          "gt_regions": 31,
+          "pred_regions": 31
+        },
+        {
+          "image": "images/d2df1b5e-ca2f-47a2-90cb-3d93a05b6efd.jpg",
+          "source": "dictation",
+          "page_cer": 0.9658886894075404,
+          "gt_chars": 557,
+          "pred_chars": 20,
+          "gt_regions": 21,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/bd13454a-6174-54b2-94f7-87e8542d543d.jpg",
+          "source": "school",
+          "page_cer": 0.9652042360060514,
+          "gt_chars": 661,
+          "pred_chars": 23,
+          "gt_regions": 27,
+          "pred_regions": 24
+        },
+        {
+          "image": "images/78327536-7faf-531b-bbad-7365b3795bea.jpg",
+          "source": "school",
+          "page_cer": 0.9651162790697675,
+          "gt_chars": 86,
+          "pred_chars": 3,
+          "gt_regions": 4,
+          "pred_regions": 4
+        },
+        {
+          "image": "images/a111d6d7-056b-5bd7-b359-c457ae1e4f7b.jpg",
+          "source": "school",
+          "page_cer": 0.9649122807017544,
+          "gt_chars": 399,
+          "pred_chars": 22,
+          "gt_regions": 15,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/aaa48dd7-a21e-5e25-acae-cfa0f05e2eb6.jpg",
+          "source": "school",
+          "page_cer": 0.9649122807017544,
+          "gt_chars": 513,
+          "pred_chars": 21,
+          "gt_regions": 19,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/1577fab4-e890-5825-90bb-390e8e7e493b.jpg",
+          "source": "school",
+          "page_cer": 0.9642857142857143,
+          "gt_chars": 224,
+          "pred_chars": 8,
+          "gt_regions": 9,
+          "pred_regions": 9
+        },
+        {
+          "image": "images/527f12c0-43dc-5593-8b4b-426229bf482f.jpg",
+          "source": "school",
+          "page_cer": 0.9642857142857143,
+          "gt_chars": 28,
+          "pred_chars": 2,
+          "gt_regions": 5,
+          "pred_regions": 7
+        },
+        {
+          "image": "images/fb9043c7-a06a-4fb7-a745-e6913b17cfc6.jpg",
+          "source": "university",
+          "page_cer": 0.96415770609319,
+          "gt_chars": 279,
+          "pred_chars": 14,
+          "gt_regions": 12,
+          "pred_regions": 16
+        },
+        {
+          "image": "images/4a6a960a-3951-436d-a4c9-67b17b162db0.jpg",
+          "source": "university",
+          "page_cer": 0.9640151515151515,
+          "gt_chars": 528,
+          "pred_chars": 19,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/904167a5-9215-4b8a-99ca-a61d20402f31.jpg",
+          "source": "dictation",
+          "page_cer": 0.9637404580152672,
+          "gt_chars": 524,
+          "pred_chars": 19,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/1809c0e4-44ed-4b0f-b905-5e99dc7a43cd.jpg",
+          "source": "dictation",
+          "page_cer": 0.9635627530364372,
+          "gt_chars": 494,
+          "pred_chars": 18,
+          "gt_regions": 19,
+          "pred_regions": 19
+        },
+        {
+          "image": "images/9ccd6671-4059-52cc-9000-bf3376738fc5.jpg",
+          "source": "school",
+          "page_cer": 0.9632352941176471,
+          "gt_chars": 272,
+          "pred_chars": 13,
+          "gt_regions": 12,
+          "pred_regions": 14
+        },
+        {
+          "image": "images/019035a0-682b-409a-9951-ed2af6555213.jpg",
+          "source": "dictation",
+          "page_cer": 0.9631578947368421,
+          "gt_chars": 570,
+          "pred_chars": 25,
+          "gt_regions": 22,
+          "pred_regions": 26
+        },
+        {
+          "image": "images/bae2015b-821a-4a69-9fd5-1ae270ec6941.jpg",
+          "source": "dictation",
+          "page_cer": 0.9630350194552529,
+          "gt_chars": 514,
+          "pred_chars": 19,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/9ec4b2b0-d4d9-4024-8c30-7c648459e905.jpg",
+          "source": "dictation",
+          "page_cer": 0.9622266401590457,
+          "gt_chars": 503,
+          "pred_chars": 19,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/2f0840d4-76b7-5436-8a0a-4d75262718c8.jpg",
+          "source": "school",
+          "page_cer": 0.9619047619047619,
+          "gt_chars": 210,
+          "pred_chars": 8,
+          "gt_regions": 9,
+          "pred_regions": 9
+        },
+        {
+          "image": "images/e51d2dd2-94a6-4bfb-81a4-a68ec2299724.jpg",
+          "source": "university",
+          "page_cer": 0.9613733905579399,
+          "gt_chars": 233,
+          "pred_chars": 16,
+          "gt_regions": 10,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/cd4c4615-e65b-49d1-b29f-468aecff214e.jpg",
+          "source": "dictation",
+          "page_cer": 0.9612903225806452,
+          "gt_chars": 465,
+          "pred_chars": 21,
+          "gt_regions": 19,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/f0150ca6-0a33-5abe-89b1-22203a0d581b.jpg",
+          "source": "school",
+          "page_cer": 0.9606741573033708,
+          "gt_chars": 178,
+          "pred_chars": 9,
+          "gt_regions": 8,
+          "pred_regions": 10
+        },
+        {
+          "image": "images/2a40e968-9d79-5272-9e10-4c3d1eeabcd6.jpg",
+          "source": "school",
+          "page_cer": 0.9598393574297188,
+          "gt_chars": 249,
+          "pred_chars": 10,
+          "gt_regions": 11,
+          "pred_regions": 11
+        },
+        {
+          "image": "images/4147d461-2a04-4ed2-864c-10c9dc7c7092.jpg",
+          "source": "archive",
+          "page_cer": 0.9596977329974811,
+          "gt_chars": 397,
+          "pred_chars": 16,
+          "gt_regions": 22,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/155d7cae-48e4-534f-8711-20ce357d6e9d.jpg",
+          "source": "school",
+          "page_cer": 0.9596412556053812,
+          "gt_chars": 446,
+          "pred_chars": 20,
+          "gt_regions": 19,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/33b81934-8670-4bcd-8173-f8aa4eaf811f.jpg",
+          "source": "university",
+          "page_cer": 0.9590643274853801,
+          "gt_chars": 513,
+          "pred_chars": 22,
+          "gt_regions": 24,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/d99d27db-5b8b-59a5-96d0-d6ea61ce9c22.jpg",
+          "source": "school",
+          "page_cer": 0.9588336192109777,
+          "gt_chars": 583,
+          "pred_chars": 24,
+          "gt_regions": 25,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/3279216f-a680-446e-9e13-14cd3618f718.jpg",
+          "source": "university",
+          "page_cer": 0.9584221748400853,
+          "gt_chars": 938,
+          "pred_chars": 39,
+          "gt_regions": 35,
+          "pred_regions": 40
+        },
+        {
+          "image": "images/07943539-2b53-4dae-8214-66907705e691.jpg",
+          "source": "university",
+          "page_cer": 0.9581218274111675,
+          "gt_chars": 788,
+          "pred_chars": 33,
+          "gt_regions": 31,
+          "pred_regions": 34
+        },
+        {
+          "image": "images/4409e959-0539-5c8e-a7e3-9718b5cc39f2.jpg",
+          "source": "school",
+          "page_cer": 0.957983193277311,
+          "gt_chars": 476,
+          "pred_chars": 20,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/4d42c64b-69a6-48b0-bf22-d25d16ee5848.jpg",
+          "source": "archive",
+          "page_cer": 0.9571045576407506,
+          "gt_chars": 373,
+          "pred_chars": 16,
+          "gt_regions": 19,
+          "pred_regions": 18
+        },
+        {
+          "image": "images/8773aeed-1297-5372-b537-1097a2030e26.jpg",
+          "source": "school",
+          "page_cer": 0.9567567567567568,
+          "gt_chars": 185,
+          "pred_chars": 13,
+          "gt_regions": 12,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/2c057dba-42fe-4363-bf3d-22dbef451437.jpg",
+          "source": "archive",
+          "page_cer": 0.9560229445506692,
+          "gt_chars": 523,
+          "pred_chars": 24,
+          "gt_regions": 22,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/97a3c3d2-a680-5e95-9517-c7a2a8c19cab.jpg",
+          "source": "school",
+          "page_cer": 0.9552,
+          "gt_chars": 625,
+          "pred_chars": 28,
+          "gt_regions": 28,
+          "pred_regions": 30
+        },
+        {
+          "image": "images/08fbeebf-6111-4743-bfcf-9d01c11f1f7a.jpg",
+          "source": "archive",
+          "page_cer": 0.954653937947494,
+          "gt_chars": 419,
+          "pred_chars": 20,
+          "gt_regions": 20,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/085b57e6-54e9-5fd0-99d0-d260c08bd9b9.jpg",
+          "source": "school",
+          "page_cer": 0.9545454545454546,
+          "gt_chars": 66,
+          "pred_chars": 3,
+          "gt_regions": 8,
+          "pred_regions": 8
+        },
+        {
+          "image": "images/15060d60-be4c-4c24-a1c6-59df4b55af4c.jpg",
+          "source": "archive",
+          "page_cer": 0.9538461538461539,
+          "gt_chars": 390,
+          "pred_chars": 19,
+          "gt_regions": 19,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/2205e385-71e3-4bae-a1b5-120af952ce97.jpg",
+          "source": "university",
+          "page_cer": 0.9535759096612296,
+          "gt_chars": 797,
+          "pred_chars": 37,
+          "gt_regions": 38,
+          "pred_regions": 39
+        },
+        {
+          "image": "images/ec9dd609-3242-59f9-9403-0dcc1d1eea4c.jpg",
+          "source": "school",
+          "page_cer": 0.9534883720930233,
+          "gt_chars": 430,
+          "pred_chars": 20,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/c99bbe02-7960-5bab-98d8-6cc1033a489d.jpg",
+          "source": "school",
+          "page_cer": 0.9528985507246377,
+          "gt_chars": 276,
+          "pred_chars": 13,
+          "gt_regions": 16,
+          "pred_regions": 14
+        },
+        {
+          "image": "images/410d65cc-de2e-5c29-acf8-015f0f2a57a4.jpg",
+          "source": "school",
+          "page_cer": 0.9523809523809523,
+          "gt_chars": 42,
+          "pred_chars": 2,
+          "gt_regions": 3,
+          "pred_regions": 3
+        },
+        {
+          "image": "images/c7f116b6-f582-5d98-ba13-f23590079de8.jpg",
+          "source": "school",
+          "page_cer": 0.9523809523809523,
+          "gt_chars": 231,
+          "pred_chars": 12,
+          "gt_regions": 12,
+          "pred_regions": 13
+        },
+        {
+          "image": "images/e1808133-425d-50ee-8461-fb18ba92a47d.jpg",
+          "source": "school",
+          "page_cer": 0.9520295202952029,
+          "gt_chars": 542,
+          "pred_chars": 43,
+          "gt_regions": 27,
+          "pred_regions": 44
+        },
+        {
+          "image": "images/d1988833-b296-594a-bf4c-455669aec004.jpg",
+          "source": "school",
+          "page_cer": 0.9517426273458445,
+          "gt_chars": 373,
+          "pred_chars": 19,
+          "gt_regions": 19,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/e28a17e5-7c12-5ed5-8841-c16e389943d7.jpg",
+          "source": "school",
+          "page_cer": 0.9513677811550152,
+          "gt_chars": 329,
+          "pred_chars": 16,
+          "gt_regions": 18,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/2d890d11-0e5d-4b5b-81e9-30d3359f36ef.jpg",
+          "source": "university",
+          "page_cer": 0.9504504504504504,
+          "gt_chars": 444,
+          "pred_chars": 23,
+          "gt_regions": 24,
+          "pred_regions": 25
+        },
+        {
+          "image": "images/276f9e4a-cd02-5eac-b578-b8eeae89d4c9.jpg",
+          "source": "school",
+          "page_cer": 0.948943661971831,
+          "gt_chars": 568,
+          "pred_chars": 35,
+          "gt_regions": 30,
+          "pred_regions": 37
+        },
+        {
+          "image": "images/e1d69a70-82f3-43a5-aab6-ceb3351bd95a.jpg",
+          "source": "archive",
+          "page_cer": 0.948339483394834,
+          "gt_chars": 271,
+          "pred_chars": 14,
+          "gt_regions": 15,
+          "pred_regions": 15
+        },
+        {
+          "image": "images/d161bcc4-6e95-5dca-815a-1da1b06e87e5.jpg",
+          "source": "school",
+          "page_cer": 0.9480968858131488,
+          "gt_chars": 289,
+          "pred_chars": 15,
+          "gt_regions": 16,
+          "pred_regions": 16
+        },
+        {
+          "image": "images/321cd11f-a645-4801-8b60-2bdd44a33831.jpg",
+          "source": "university",
+          "page_cer": 0.9479338842975207,
+          "gt_chars": 1210,
+          "pred_chars": 63,
+          "gt_regions": 61,
+          "pred_regions": 64
+        },
+        {
+          "image": "images/4c530cdc-c0bf-5929-ab70-eaaaa2be2edf.jpg",
+          "source": "school",
+          "page_cer": 0.9466019417475728,
+          "gt_chars": 412,
+          "pred_chars": 22,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/3f4abc35-7daa-53b2-8bc8-9f57bdcd390e.jpg",
+          "source": "school",
+          "page_cer": 0.9444444444444444,
+          "gt_chars": 108,
+          "pred_chars": 27,
+          "gt_regions": 1,
+          "pred_regions": 28
+        },
+        {
+          "image": "images/796420e3-566e-5f11-ae05-43b8e3d8792b.jpg",
+          "source": "school",
+          "page_cer": 0.9432624113475178,
+          "gt_chars": 141,
+          "pred_chars": 8,
+          "gt_regions": 9,
+          "pred_regions": 9
+        },
+        {
+          "image": "images/e02c002f-a328-5fbe-adea-07157c6a977a.jpg",
+          "source": "school",
+          "page_cer": 0.9425587467362925,
+          "gt_chars": 383,
+          "pred_chars": 22,
+          "gt_regions": 23,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/c6279118-6e4d-53ef-9364-d765d9115e82.jpg",
+          "source": "school",
+          "page_cer": 0.9415204678362573,
+          "gt_chars": 342,
+          "pred_chars": 21,
+          "gt_regions": 22,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/b5222cba-efbf-5688-9d9f-12936599ee38.jpg",
+          "source": "school",
+          "page_cer": 0.9375,
+          "gt_chars": 224,
+          "pred_chars": 20,
+          "gt_regions": 15,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/89548c27-a828-51d2-afdb-6f84ae2c7988.jpg",
+          "source": "school",
+          "page_cer": 0.9369482976040353,
+          "gt_chars": 793,
+          "pred_chars": 50,
+          "gt_regions": 51,
+          "pred_regions": 51
+        },
+        {
+          "image": "images/b27814b0-272d-51b9-aaed-c88c345c208a.jpg",
+          "source": "school",
+          "page_cer": 0.9367088607594937,
+          "gt_chars": 79,
+          "pred_chars": 5,
+          "gt_regions": 8,
+          "pred_regions": 6
+        },
+        {
+          "image": "images/511d1cef-ff01-5043-8449-bc6badcb3d05.jpg",
+          "source": "school",
+          "page_cer": 0.9366197183098591,
+          "gt_chars": 284,
+          "pred_chars": 19,
+          "gt_regions": 19,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/a7964907-f53d-5851-9d7e-397bd8b1c542.jpg",
+          "source": "school",
+          "page_cer": 0.9344262295081968,
+          "gt_chars": 305,
+          "pred_chars": 20,
+          "gt_regions": 22,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/b1f7c6b6-29dc-5692-905d-b9e4386d1c9f.jpg",
+          "source": "school",
+          "page_cer": 0.9295302013422819,
+          "gt_chars": 298,
+          "pred_chars": 21,
+          "gt_regions": 23,
+          "pred_regions": 22
+        },
+        {
+          "image": "images/dbd41bf6-ac5e-5382-a0f9-07c323f10d13.jpg",
+          "source": "school",
+          "page_cer": 0.9290322580645162,
+          "gt_chars": 310,
+          "pred_chars": 22,
+          "gt_regions": 24,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/84146287-d4b4-5e09-bba8-12a933148178.jpg",
+          "source": "school",
+          "page_cer": 0.9210526315789473,
+          "gt_chars": 380,
+          "pred_chars": 32,
+          "gt_regions": 31,
+          "pred_regions": 33
+        },
+        {
+          "image": "images/8a8a6dd9-1040-5b11-9c3c-848571dfc1cd.jpg",
+          "source": "school",
+          "page_cer": 0.9130434782608695,
+          "gt_chars": 23,
+          "pred_chars": 2,
+          "gt_regions": 3,
+          "pred_regions": 3
+        },
+        {
+          "image": "images/e1b0696e-ca2d-5fb9-a470-c1e3c5dd4ff3.jpg",
+          "source": "school",
+          "page_cer": 0.9074074074074074,
+          "gt_chars": 54,
+          "pred_chars": 5,
+          "gt_regions": 6,
+          "pred_regions": 6
+        },
+        {
+          "image": "images/b9caccf5-35e9-547a-ba85-c264360317c7.jpg",
+          "source": "school",
+          "page_cer": 0.9040404040404041,
+          "gt_chars": 198,
+          "pred_chars": 19,
+          "gt_regions": 20,
+          "pred_regions": 20
+        },
+        {
+          "image": "images/fe9ae2cf-47a3-5509-9d0e-68e518df903d.jpg",
+          "source": "school",
+          "page_cer": 0.898876404494382,
+          "gt_chars": 89,
+          "pred_chars": 16,
+          "gt_regions": 10,
+          "pred_regions": 17
+        },
+        {
+          "image": "images/2cca6e5a-ae96-518b-82c7-4698dc4f0926.jpg",
+          "source": "school",
+          "page_cer": 0.8958333333333334,
+          "gt_chars": 192,
+          "pred_chars": 20,
+          "gt_regions": 21,
+          "pred_regions": 21
+        },
+        {
+          "image": "images/76f39d4a-393a-5ad8-9435-8547c9072f7f.jpg",
+          "source": "school",
+          "page_cer": 0.8813559322033898,
+          "gt_chars": 177,
+          "pred_chars": 22,
+          "gt_regions": 22,
+          "pred_regions": 23
+        },
+        {
+          "image": "images/1b6d4d18-3861-5695-8e46-0f54babe1662.jpg",
+          "source": "school",
+          "page_cer": 0.868421052631579,
+          "gt_chars": 38,
+          "pred_chars": 5,
+          "gt_regions": 6,
+          "pred_regions": 6
+        },
+        {
+          "image": "images/a347eb41-ddcd-51b0-b83e-0a3f9d91a5c7.jpg",
+          "source": "school",
+          "page_cer": 0.8285714285714286,
+          "gt_chars": 35,
+          "pred_chars": 6,
+          "gt_regions": 7,
+          "pred_regions": 7
+        }
+      ],
+      "iou80_overlap_pairs": 93
+    }
+  }
+}

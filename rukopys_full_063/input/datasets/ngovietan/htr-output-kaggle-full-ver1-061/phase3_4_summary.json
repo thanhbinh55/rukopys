@@ -1,0 +1,17 @@
+{
+  "run_phase3": false,
+  "run_phase4": true,
+  "time_budget_hours": 11.0,
+  "phase3": {
+    "conf": 0.2,
+    "iou": 0.45,
+    "quick_grid": false
+  },
+  "phase4": {
+    "processed_images": 385,
+    "target_images": 385,
+    "complete": true,
+    "submission_csv": "/kaggle/working/submission.csv",
+    "elapsed_sec": 14540.8
+  }
+}
