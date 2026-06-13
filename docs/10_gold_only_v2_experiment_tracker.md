@@ -142,7 +142,7 @@ Status values: `[ ] pending`, `[~] running`, `[x] passed`, `[!] blocked`,
   - Implementation prepared with environment-controlled probability/size.
 - [x] C9. Add unit/regression tests for all contracts.
   - Seven local contract tests pass.
-- [ ] C10. Run no-training ablation on baseline checkpoint.
+- [x] C10. Run no-training ablation on baseline checkpoint.
   - Compare old vs V2 inference on the same cached validation set.
   - This measures prompt/preprocessing/generation changes before training.
 
@@ -187,6 +187,7 @@ Status values: `[ ] pending`, `[~] running`, `[x] passed`, `[!] blocked`,
 | 2026-06-12 | Baseline diagnostic launch | Kaggle commit `9c5897d` | Running on `bnthanh/htr-full-validation-diagnostic` | Do not interpret V2 changes until baseline report completes |
 | 2026-06-12 | Recognizer V2 contract tests | Local pure-Python tests | 7/7 passed | Proceed to GPU ablation after baseline report |
 | 2026-06-13 | Baseline diagnostic report | Kaggle commit `9c5897d` | E2E Composite: 0.709221, GT Region CER: 0.331693 | Prioritize Recognizer V2; next is Stage 1 V2 ablation |
+| 2026-06-13 | Stage 1 V2 Ablation | scripts/13_run_v2_ablation.sh | E2E Composite: 0.717325 (+0.0081), GT Region CER: 0.315469 (-0.0162) | Prompts and repetition penalty improved handwritten and printed text; proceed to Stage 2 continuation training. |
 
 ## Result Template For Each New Run
 
@@ -234,4 +235,49 @@ The primary bottleneck is the recognizer (GT Region CER is 0.331693, far from ta
 Detector class confusion (e.g. formula vs handwritten) and duplicate box overlaps (93 overlap pairs) also degrade PageCER.
 Pass/fail: Pass (baseline set)
 Next decision: Proceed to Stage 1 No-Training V2 Ablation on Kaggle to evaluate prompt/preprocessing/generation config improvements before training.
+```
+
+```text
+Experiment ID: EXP-02-V2-ABLATION
+Purpose: Stage 1 No-Training V2 Ablation to evaluate V2 prompts, generation token budgets, preprocessing, and repetition penalty on 143 validation pages.
+Checkpoint/source revision: 70b0151
+Changed variables: MAX_TOKENS_*, NATURAL_REPETITION_PENALTY=1.05, type-aware prompts, image-only preprocessor resize
+Fixed variables: baseline detector models and recognizer weights, YOLO thresholds (conf=0.20, iou=0.45)
+Input artifacts:
+  - bnthanh/rukopys-dataset
+  - bnthanh/htr-01-train-detector-output (detector)
+  - ngovietan/htr-02-train-recognizer (recognizer weights)
+Runtime/hardware: Kaggle GPU T4 x2
+Completion: Completed successfully (143/143 pages for detector, gt_ocr, e2e)
+
+Composite: 0.717325 (E2E) / 0.769581 (GT-box OCR)
+Detector F1 / precision / recall: 0.912793 / 0.884287 / 0.943198 (same)
+Class accuracy: 0.966914 (same)
+Region CER: 0.310921 (E2E) / 0.315469 (GT-box OCR)
+Page CER: 0.349327 (E2E) / 0.271557 (GT-box OCR)
+
+Per-type Region CER (GT-box OCR / E2E):
+- handwritten: 0.3167 / 0.3150
+- formula: 0.2943 / 0.2447
+- annotation: 0.5417 / 0.5179
+- printed: 0.1608 / 0.4564
+- table: 0.2466 / 0.2583
+
+Per-source PageCER (GT-box OCR / E2E):
+- archive: 0.3335 / 0.3984
+- dictation: 0.2538 / 0.2412
+- school: 0.2483 / 0.3422
+- university: 0.3198 / 0.5137
+
+Failure examples:
+- images/195812b7-a9bc-4cb1-b688-4d13261acc7a.jpg (university, E2E PageCER=1.3253, predicted regions=36/20)
+- images/3dd87640-0760-48cd-900c-a10d930b497b.jpg (dictation, GT-box PageCER=0.7794, E2E PageCER=1.0047)
+Runtime: ~2.5 hours total execution
+Disk/VRAM peak: Normal, within constraints
+
+Conclusion:
+Prompt optimizations and repetition penalty reduced Region CER in handwritten and printed classes.
+Formula/table experienced minor regression because the baseline model was trained under V1 rules which flattened formulas/tables and used standard handwritten prompts. Training under V2 rules is required to correct this.
+Pass/fail: Pass
+Next decision: Commit script fixes and proceed to Stage 2 Gold-Only Continuation Training on Kaggle.
 ```
